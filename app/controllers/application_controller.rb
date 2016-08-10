@@ -13,13 +13,14 @@ class ApplicationController < ActionController::Base
 
     def team_user_create(team_params)
       team_avatar = team_params[:avatar]
-      # @team.avatar = team_avatar
       @team = Team.new(team_params)
       @team.save
       u_params = (team_params[:users_attributes]["0"])
       @user = @team.users.build(u_params)
+
       if @user.save
-        @user.update(role: 1)
+        @user.set_default_role
+        @user.create_all_tasks_list
         UserMailer.account_activation(@user).deliver_now
         flash[:info] = "Please check your email to activate your account."
         redirect_to root_path

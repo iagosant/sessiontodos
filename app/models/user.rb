@@ -32,6 +32,10 @@ class User < ActiveRecord::Base
     self.role ||= :employee
   end
 
+  def create_all_tasks_list
+    self.created_lists << self.created_lists.create(name: "All Tasks")
+  end
+
   # Returns true if the given token matches the digest.
   def authenticated?(attribute, token)
     digest = send("#{attribute}_digest")
