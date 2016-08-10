@@ -18,6 +18,16 @@ class User < ActiveRecord::Base
   before_save :downcase_email
   before_create :create_activation_digest
 
+  #Migrations for USER INTERFACE
+  has_many :created_lists, class_name: "List"
+
+  has_many :collaborations
+  has_many :collaboration_lists, through: :collaborations, :source => :list
+
+  has_many :tasks
+  has_many :collaboration_tasks, through: :collaboration_lists, :source => :tasks
+  has_many :my_tasks, through: :created_lists, :source => :tasks
+
   def set_default_role
     self.role ||= :employee
   end
@@ -56,7 +66,7 @@ class User < ActiveRecord::Base
   def send_password_reset_email
     UserMailer.password_reset(self).deliver_now
   end
-  
+
 
   # Forgets a user.
   def forget
