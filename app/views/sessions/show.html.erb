@@ -41,7 +41,7 @@
                           <% end %>
                         </td>
                         <td><% @session_blockers.where(user_id: user.id, session_id: @session.id).each do |blocker| %>
-                          <ul> <%= blocker.id %>
+                          <ul> 
                             <li><%= render partial:'blockers/form', locals: {blocker: blocker} %></li>
                           </ul>
                           <% end %>

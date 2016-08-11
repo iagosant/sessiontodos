@@ -8,6 +8,7 @@ class TeamsController < ApplicationController
   end
 
   def create
+    byebug
     team_user_create(team_params)
   end
 
