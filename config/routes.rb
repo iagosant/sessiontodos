@@ -52,6 +52,14 @@ Rails.application.routes.draw do
   # end
   resources :sessions
   resources :users
+  resources :lists do
+    resources :tasks do
+      member do
+        patch :complete
+      end
+    end
+  end
+
   resources :account_activations, only: [:edit]
 
   resources :password_resets, only: [:new, :create, :edit, :update]

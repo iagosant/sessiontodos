@@ -1,24 +1,36 @@
 class User < ActiveRecord::Base
+
+  before_save :downcase_email
+  validates :first_name, presence: true, length: { maximum: 50 }
+  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+  validates :email, presence: true, length: { maximum: 255 },
+  format: { with: VALID_EMAIL_REGEX },
+  uniqueness: { case_sensitive: false }
   has_secure_password
-
-  belongs_to :team
-  has_many :sessions
-  has_many :wips
-  has_many :completeds
-  has_many :blockers, dependent: :destroy
-
+  validates :password, length: { minimum: 6 }
   validates_confirmation_of :password
   validates_presence_of :password, :on => :create
   validates_presence_of :email
-  validates_presence_of :team_id
+  # validates_presence_of :team_id
+
+  # belongs_to :team
+  has_many :sessions
+  has_many :wips
+  has_many :completeds
+  # has_many :blockers, dependent: :destroy
+
 
   enum role: [:master, :admin, :manager, :employee]
   after_initialize :set_default_role, :if => :new_record?
   attr_accessor :remember_token, :activation_token, :reset_token
-  before_save :downcase_email
   before_create :create_activation_digest
 
+
   #Migrations for USER INTERFACE
+  has_attached_file :avatar,
+                    styles: { :medium => "200x200>", :thumb => "100x100>" }
+  validates_attachment_content_type :avatar, :content_type => /^image\/(png|gif|jpeg|jpg)/
+
   has_many :created_lists, class_name: "List"
 
   has_many :collaborations

@@ -4,10 +4,10 @@ class UsersController < ApplicationController
   attr_accessor :email, :name, :password, :password_confirmation
 
   def index
-    this_user = User.find(session[:user_id])
-    authorize this_user
-    @team = Team.find(session[:team_id])
-    @users = @team.users.all
+    # this_user = User.find(session[:user_id])
+    # authorize this_user
+    # @team = Team.find(session[:team_id])
+    # @users = @team.users.all
   end
 
   def roleUpdate
@@ -27,29 +27,32 @@ class UsersController < ApplicationController
   end
 
   def new
-    user = User.find(session[:user_id])
-    authorize user
+    # user = User.find(session[:user_id])
+    # authorize user
     @user = User.new
   end
 
   def edit
-    authorize @user
+    # authorize @user
     @user = User.find(params[:id])
   end
 
   def create
-    user = User.find(session[:user_id])
-    authorize user
-    user_info = user_params
-    temp_password = SecureRandom.hex(8)
-    user_info[:password] = temp_password
-    user_info[:password_confirmation] = temp_password
-    @team = Team.find(session[:team_id])
-    @user = @team.users.build(user_info)
-    @user.save
-    UserMailer.team_user(@user, temp_password).deliver_now
-    flash[:info] = "Please check your email to activate your account."
-    redirect_to sessions_path
+    # user = User.find(session[:user_id])
+    # authorize user
+    # user_info = user_params
+    # temp_password = SecureRandom.hex(8)
+    # user_info[:password] = temp_password
+    # user_info[:password_confirmation] = temp_password
+    # @team = Team.find(session[:team_id])
+    byebug
+    @user = User.create(user_params)
+    if @user.save
+      UserMailer.account_activation(@user).deliver_now
+      flash[:info] = "Please check your email to activate your account."
+      redirect_to root_path
+
+    end
   end
 
   def update
@@ -94,7 +97,7 @@ class UsersController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :role)
+    params.require(:user).permit(:first_name, :last_name, :avatar, :email, :password, :password_confirmation, :role)
   end
   # Remembers a user in the database for use in persistent sessions.
   def remember

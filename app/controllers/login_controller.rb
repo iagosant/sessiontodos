@@ -5,13 +5,14 @@ class LoginController < ApplicationController
   end
 
   def create
-      user = User.find_by_email(params[:email])
+      user = User.find_by_email(params[:session][:email].downcase)
       # If the user exists AND the password entered is correct.
-      if user && user.authenticate(params[:password]) && user.activated
+      if user && user.authenticate(params[:session][:password]) && user.activated
         # Save the user id inside the browser cookie. This is how we keep the user
         # logged in when they navigate around our website.
         log_in user
-        redirect_to '/sessions'
+        remember user
+        redirect_to '/lists'
       else
       # If user's login doesn't work, send them back to the login form.
         flash.now[:danger] = 'Invalid email/password combination'

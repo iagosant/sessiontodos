@@ -1,0 +1,19 @@
+<% @lists.each do |list| %>
+  <div class="index_row clearfix">
+    <h2 class="list_name"><%= link_to list.name, list %></h2>
+    <p class="todo_list_sub_title"><%= list.description %></p>
+  </div>
+<% end %>
+
+<div class="links">
+  <%= link_to "New Todo List", new_list_path %>
+</div>
+<% if (!@collaboration_lists.empty?) %>
+  <p>Collaboration Lists 11 <%= (@collaboration_lists.count) %></p>
+  <% @collaboration_lists.each do |l| %>
+    <div class="index_row clearfix">
+      <h2 class="list_name"><%= link_to l.name, l %></h2>
+      <p class="todo_list_sub_title"><%= l.description %></p>
+    </div>
+  <% end %>
+<% end %>
