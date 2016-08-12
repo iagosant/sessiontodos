@@ -52,6 +52,7 @@ table {
   border-spacing: 0;
 }
 
+
 /*#user_nav_partial {
 padding-left: 0px !important;
 padding-right: 0px !important;
@@ -232,6 +233,10 @@ div .card{
 .container input[type=search]:focus:not([readonly]) + label,
 .container textarea.materialize-textarea:focus:not([readonly]) + label {
   color: #12aaeb;
+}
+.container [type="checkbox"]:checked+label:before {
+  border-right: 2px solid #12aaeb;
+  border-bottom: 2px solid #12aaeb;
 }
 .container .input-field .prefix.active {
   color: #12aaeb;

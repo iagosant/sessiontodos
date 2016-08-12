@@ -4,7 +4,7 @@
       <div class="card">
         <div class="card-title">
           <div class="row">
-            <div class="col s12 m9"><h1><%= @team.team_name %></h1></div>
+            <div class="col s12 m9"><h1></h1></div>
             <div class="col s12 m3"><i class="material-icons large">portrait</i></div>
           </div>
         </div>
@@ -26,7 +26,7 @@
                 <%= form_for user do |u|%>
                  <td data='<%= user.id %>' id='roleUpdate' class='selected_role'>
                   <div class="input-field" >
-                    <%= u.select :role, id: role, options_for_select([['admin', 'admin'], ['manager', 'manager'], ['employee', 'employee']], :selected => user.role), :id => user.id %>
+
                   </div>
                 </td>
                 <td><%= u.submit 'Save' %></td>

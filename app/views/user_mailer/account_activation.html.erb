@@ -2,9 +2,8 @@
 
 <p>Hi <%= @user.first_name %>,</p>
 
-<p>
-You created an account for <%= @user.team.team_name %>.
-Click on the link below to activate your account:
+<p>You created an account for Session To do App.</p>
+<p>Click on the link below to activate your account:</p>
 </p>
 
 <%= link_to "Activate", edit_account_activation_url(@user.activation_token,email: @user.email) %>
