@@ -64,7 +64,17 @@
 #ms-reset-password .su-btn.btn-flat.submit{
   margin-top: 25px;
 }
-
+#ms-login [type="checkbox"]+label {
+    padding-left: 30px;
+    line-height: 20px;
+}
+#ms-login [type="checkbox"]+label:before, #ms-login [type="checkbox"]:not(.filled-in)+label:after {
+    width: 15px;
+    height: 15px;
+}
+#ms-login [type="checkbox"]:checked+label:before {
+    width: 12px;
+  }
 @media only screen and (max-width: 1200px){
   #ms-login .card, #ms-reset-password .card {
     width: 90%;

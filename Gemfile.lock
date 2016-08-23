@@ -145,6 +145,8 @@ GEM
       ruby-graphviz (~> 1.2)
     rails-html-sanitizer (1.0.3)
       loofah (~> 2.0)
+    rails_autolink (1.1.6)
+      rails (> 3.1)
     railties (4.2.6)
       actionpack (= 4.2.6)
       activesupport (= 4.2.6)
@@ -181,6 +183,9 @@ GEM
     sdoc (0.4.1)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
+    simple_form (3.1.1)
+      actionpack (~> 4.0)
+      activemodel (~> 4.0)
     spring (1.7.2)
     sprockets (3.7.0)
       concurrent-ruby (~> 1.0)
@@ -231,9 +236,11 @@ DEPENDENCIES
   pundit
   rails (= 4.2.6)
   rails-erd
+  rails_autolink
   rspec-rails
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
+  simple_form
   spring
   sqlite3
   turbolinks
@@ -242,4 +249,4 @@ DEPENDENCIES
   whenever
 
 BUNDLED WITH
-   1.12.4
+   1.12.5

@@ -5,4 +5,7 @@ class List < ActiveRecord::Base
   has_many :collaborations
   has_many :collaboration_users, through: :collaborations, :source => :user
 
+  def completed_tasks
+     tasks.where.not(completed_at: nil).order("updated_at DESC")
+  end
 end
