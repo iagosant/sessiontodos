@@ -1,19 +1,60 @@
-<% @lists.each do |list| %>
-  <div class="index_row clearfix">
-    <h2 class="list_name"><%= link_to list.name, list %></h2>
-    <p class="todo_list_sub_title"><%= list.description %></p>
+<div class="row">
+  <div class="col s12 m4 l3"> <!-- Note that "m4 l3" was added -->
+    <ul>
+    <% @lists.each do |list| %>
+        <li>
+          <div class="index_row clearfix">
+            <h4 class="list_name"><%= link_to list.name, list, remote: true %></h4>
+          </div>
+        </li>
+    <% end %>
+        <li>
+          <div class="index_row clearfix">
+              <h4 class="list_name"><%= link_to 'Add List +', new_list_path %></h4>
+          </div>
+        </li
+      </ul>
   </div>
-<% end %>
+  <div class="col s12 m8 l9"> <!-- Note that "m8 l9" was added -->
 
-<div class="links">
-  <%= link_to "New Todo List", new_list_path %>
-</div>
-<% if (!@collaboration_lists.empty?) %>
-  <p>Collaboration Lists 11 <%= (@collaboration_lists.count) %></p>
-  <% @collaboration_lists.each do |l| %>
-    <div class="index_row clearfix">
-      <h2 class="list_name"><%= link_to l.name, l %></h2>
-      <p class="todo_list_sub_title"><%= l.description %></p>
+    <div class="new-task">
+    	<%= render partial: 'tasks/form' %>
     </div>
-  <% end %>
-<% end %>
+    <% unless @list.tasks.empty? %>
+    		<h6>Incomplete Tasks</h6>
+    		<div class="tasks" id="incomplete_tasks">
+    		  <%= render @incomplete_tasks %>
+    		</div>
+
+    		<h6>Comlpete Tasks</h6>
+    		<div class="tasks" id="complete_tasks">
+    		  <%= render @complete_tasks %>
+    		</div>
+    <% end %>
+
+
+        <h4>List Delete</h4>
+     		<p class="delete-list">
+     		    <%= link_to 'Delete this list', @list, :confirm => 'Are you sure?', :method => :delete %>
+     		</p>
+
+  </div>
+</div>
+<!-- <div class="row">
+  <div id="tabs-new-list">
+      <h2>Add a New Task List</h2>
+   <%= render :partial => 'form' %>
+  </div>
+</div> -->
+
+
+ <!-- Modal Structure -->
+ <div id="modal1" class="modal">
+   <div class="modal-content">
+     <h4>Modal Header</h4>
+     <p>A bunch of text</p>
+   </div>
+   <div class="modal-footer">
+     <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+   </div>
+ </div>

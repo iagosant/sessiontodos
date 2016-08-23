@@ -19,32 +19,32 @@ Rails.application.routes.draw do
   post '/login' => 'login#create'
   get '/logout' => 'login#destroy'
 
-  get 'sessions' => 'sessions#index'
-  get 'sessions/new' => 'sessions#new'
-  get 'sessions/:id' => 'sessions#show'
-  post 'sessions/deleteSession/:id' => 'sessions#deleteSession'
-  get 'sessions/:session_id/blockers' => 'blockers#index'
-  get 'sessions/:session_id/completeds' => 'completeds#index'
-  get 'sessions/:session_id/wips' => 'wips#index'
+  # get 'sessions' => 'sessions#index'
+  # get 'sessions/new' => 'sessions#new'
+  # get 'sessions/:id' => 'sessions#show'
+  # post 'sessions/deleteSession/:id' => 'sessions#deleteSession'
+  # get 'sessions/:session_id/blockers' => 'blockers#index'
+  # get 'sessions/:session_id/completeds' => 'completeds#index'
+  # get 'sessions/:session_id/wips' => 'wips#index'
 
   post 'users/roleUpdate' => 'users#roleUpdate'
   post 'users/resend_activation' => 'users#resend_activation'
 
-  post 'sessions/:session_id/wips/:id/update' => 'wips#update'
-  post 'sessions/:session_id/completeds/:id/update' => 'completeds#update'
-  post 'sessions/:session_id/blockers/:id/update' => 'blockers#update'
+  # post 'sessions/:session_id/wips/:id/update' => 'wips#update'
+  # post 'sessions/:session_id/completeds/:id/update' => 'completeds#update'
+  # post 'sessions/:session_id/blockers/:id/update' => 'blockers#update'
 
   # get the date from sessions index jquery-ui datepicker
-  post 'sessions/cleanDate' => 'sessions#cleanDate'
-  post 'teams/users' => 'teams#show_users'
-  post 'sessions/searchByUser' => 'sessions#searchByUser'
-  post 'sessions/:session_id/removeUser' => 'sessions#removeUser'
-  post 'sessions/:session_id/addUser' => 'sessions#addUser'
+  # post 'sessions/cleanDate' => 'sessions#cleanDate'
+  # post 'teams/users' => 'teams#show_users'
+  # post 'sessions/searchByUser' => 'sessions#searchByUser'
+  # post 'sessions/:session_id/removeUser' => 'sessions#removeUser'
+  # post 'sessions/:session_id/addUser' => 'sessions#addUser'
   # get 'user/:id' => 'users#edit'
 
-  resources :completeds
-  resources :blockers
-  resources :wips
+  # resources :completeds
+  # resources :blockers
+  # resources :wips
   # resources :sessions do
   #   resources :wips
   #   resources :completeds
@@ -53,17 +53,24 @@ Rails.application.routes.draw do
   resources :sessions
   resources :users
   resources :lists do
-    resources :tasks do
-      member do
-        patch :complete
-      end
-    end
+    resources :tasks , only: [:new, :create, :edit ]
   end
+  resources :tasks do
+    member do
+      patch :complete
+    end
+    resources :t_blockers, :controller => 'tasks', :defaults => {:type => 'blocker'}
+  end
+
+  # resources :applications do
+  #   resource :owner, :controller => 'people', :defaults => {:type => 'owner'}
+  #   resource :manager, :controller => 'people', :defaults => {:type => 'manager'}
+  # end
 
   resources :account_activations, only: [:edit]
 
   resources :password_resets, only: [:new, :create, :edit, :update]
-  resources :teams
+  # resources :teams
   # get 'new_session' => 'sessions#new', as: 'new_session'
   # <%= link_to "New Session", new_session_path %>
 
