@@ -2,7 +2,10 @@ module LoginHelper
 
   def log_in(user)
     session[:user_id] = user.id
-    session[:team_id] = user.team_id
+    all_task_list = current_user.created_lists.find_by(name: 'All Tasks')
+    all_task_list = (all_task_list.nil?) ? current_user.created_lists.create(name: "All Tasks") : all_task_list
+    session[:all_tasks_id] = all_task_list.id
+    # session[:team_id] = user.team_id
   end
 
   def current_user
@@ -18,6 +21,18 @@ module LoginHelper
         log_in user
         @current_user = user
       end
+    end
+  end
+
+  def current_all_lists
+      @lists = current_user.created_lists.all.order('created_at')
+      @collaboration_lists = current_user.collaboration_lists.all
+      @current_all_lists ||= @lists + @collaboration_lists
+  end
+
+  def current_all_tasks
+    if (all_tasks_id = session[:all_tasks_id])
+      @current_all_tasks ||= List.find_by(id: all_tasks_id)
     end
   end
 

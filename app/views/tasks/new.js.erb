@@ -1,0 +1,10 @@
+// $('#new_blocker').hide().after('<%= j render partial: "formBlocker" %>');
+// '<%= j render partial: "formBlocker" %>'
+ $blockers = $('#blockers');
+ $new_blocker = $('#show_blockers_<%= @task.id%>');
+
+ $new_blocker.slideToggle( 500, "easeOutSine",function(){
+     $('#show_blockers_<%= @task.id%> #new_blocker').remove();
+     $blockers.before('<%= j render partial: "formBlocker" %>');
+     
+   });
