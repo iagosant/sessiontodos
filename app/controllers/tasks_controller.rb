@@ -26,7 +26,6 @@ class TasksController < ApplicationController
    end
 
    def update
-    byebug
     @task.update_attributes!(task_params)
     respond_to do |format|
       format.html { redirect_to @list }

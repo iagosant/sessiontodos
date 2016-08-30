@@ -45,7 +45,6 @@ class UsersController < ApplicationController
     # user_info[:password] = temp_password
     # user_info[:password_confirmation] = temp_password
     # @team = Team.find(session[:team_id])
-    byebug
     @user = User.create(user_params)
     if @user.save
       UserMailer.account_activation(@user).deliver_now

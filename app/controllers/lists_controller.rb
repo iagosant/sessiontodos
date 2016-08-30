@@ -55,7 +55,6 @@ class ListsController < ApplicationController
 
     respond_to do |format|
       if @list.save
-        byebug
         @lists = current_user.created_lists.all
         set_task_per_list
         format.html{ render :index }

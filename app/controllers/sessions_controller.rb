@@ -61,10 +61,8 @@ class SessionsController < ApplicationController
     new_users = userFinder(new_user_array)
     session.update(users: new_users)
     #Only works when remove user is done one at a time
-    # byebug
     Wip.where(user_id: params[:userId], session_id: params[:sessionId]).destroy_all
     Wip.reset_pk_sequence
-    # byebug
     Completed.where(user_id: params[:userId], session_id: params[:sessionId]).destroy_all
     Completed.reset_pk_sequence
     Blocker.where(user_id: params[:userId], session_id: params[:sessionId]).destroy_all
@@ -131,7 +129,6 @@ class SessionsController < ApplicationController
     @users = Session.get_users(params[:user_ids].map{|i| i.to_i})
     @session = Session.create(users: @users, team_id: @team.id)
     @session.tag_list = get_user_first_names(@users)
-    # byebug
     @session.tag_list
     respond_to do |format|
       if @session.save

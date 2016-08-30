@@ -37,7 +37,6 @@ class BlockersController < ApplicationController
     @team = Team.find(session[:team_id])
     @users = Session.get_users(params[:user_ids].map{|i| i.to_i})
     @session.tag_list = get_user_first_names(@users)
-    byebug
     respond_to do |format|
       if @blocker.save
         format.html { redirect_to @blocker, notice: 'Blocker was successfully created.' }
