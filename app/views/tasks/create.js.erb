@@ -1,3 +1,11 @@
-$('#incomplete_tasks').append('<%= j render(@task) %>')
-$('#detail').val('');
-$('#edit_task_<%= @task.id %>').submitOnCheck();
+
+<% if params[:type].present? %>
+   
+   $('.new_blocker').append('<%= j render(@blocker) %>');
+   $('#edit_task_<%= @blocker.id %>').submitOnCheck();
+   $('.new_blocker #detail').val('');
+<% else %>
+  $('#incomplete_tasks').append('<%= j render(@task) %>');
+  $('#edit_task_<%= @task.id %>').submitOnCheck();
+  $('.new_task #detail').val('');
+<% end %>

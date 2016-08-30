@@ -24,7 +24,7 @@ class User < ActiveRecord::Base
   after_initialize :set_default_role, :if => :new_record?
   attr_accessor :remember_token, :activation_token, :reset_token
   before_create :create_activation_digest
-
+  after_create :create_all_tasks_list
 
   #Migrations for USER INTERFACE
   has_attached_file :avatar,

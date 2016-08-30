@@ -1,3 +1,34 @@
 // Place all the styles related to the lists controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.dropdown-list{
+    background-color: #FFFFFF;
+    margin: 0;
+    display: none;
+    min-width: 300px; /* Changed this to accomodate content width */
+    max-height: auto;
+  	margin-left: -1px; /* Add this to keep dropdown in line with edge of navbar */
+    overflow: hidden; /* Changed this from overflow-y:auto; to overflow:hidden; */
+    opacity: 0;
+    position: absolute;
+    white-space: nowrap;
+    z-index: 1;
+    will-change: width, height;
+
+}
+.dropdown-list ul li{
+  padding: 5px 10px;
+}
+#nav-option{
+
+}
+
+// @media only screen and (min-width: 601px){
+// #stand-up nav.task-option,
+// #stand-up nav.task-option .nav-wrapper i,
+// #stand-up nav.task-option a.button-collapse,
+// #stand-up nav.task-option a.button-collapse i {
+//     height: 35px;
+//     line-height: 35px;
+// }
+// }

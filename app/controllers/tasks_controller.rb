@@ -1,38 +1,42 @@
 class TasksController < ApplicationController
-  before_action :set_list, only: [:new, :create, :edit ]
-  before_action :set_task, except: [:create]
+  before_action :set_list, only: [:new, :create, :edit ], if: -> { params[:type].blank? }
+  before_action :set_task, except: [:new, :create]
+  skip_before_filter :verify_authenticity_token
 
   def new
     if params[:type]== 'blocker'
-        @blocker = @task.t_blockers.new()
-    end
+       @task = Task.find(params[:task_id])
+       @blockers = @task.t_blockers
+       @blocker = @task.t_blockers.new
+     end
   end
-   def create
 
+  def create
      task_info = task_params
      task_info[:user_id] = current_user.id
-     if params[:type]== 'blocker'
-       task_info[:parent_task_id] = params[:task_id]
-       @blocker = @task.t_blockers.create(task_info)
+
+     if params[:type].present?
+       @task = Task.find(params[:task_id])
+       @list = List.find(@task.list_id)
+       @blocker = @task.t_blockers.create(task_params)
      else
        @task = @list.tasks.create(task_info)
-
      end
 
      respond_to do |format|
-       format.html{ redirect_to @list }
-       format.js
-    end
-   end
-
-   def update
-    byebug
-    @task.update_attributes!(task_params)
-    respond_to do |format|
-      format.html { redirect_to @list }
-      format.js
-    end
+       format.html{ redirect_to @list}
+       format.js { render "create", :locals => {:type => params[:type]} }
+     end
   end
+
+  def update
+
+    @task.update_attributes!(task_params)
+      respond_to do |format|
+        format.html { redirect_to @list }
+        format.js
+      end
+    end
 
    def destroy
 
@@ -48,9 +52,19 @@ class TasksController < ApplicationController
    def complete
 
      @task.update_attribute(:completed_at, Time.now)
-    #  @task.complete = true
+     #  @task.complete = true
      respond_to do |format|
        format.html {  redirect_to @list, notice: "Task completed" }
+       format.js
+     end
+
+   end
+
+   def changelist
+
+     @task.update_attribute(:list_id, params[:list_id])
+     respond_to do |format|
+       format.html {  redirect_to @list, notice: "Task changed" }
        format.js
      end
 
@@ -65,19 +79,27 @@ class TasksController < ApplicationController
      end
 
      def set_task
-
+       
        @task = Task.find(params[:id])
-      #  if params[:type]== 'blocker'
-      #      @t_blocker = @list.tasks.find(params[:task_id])
-      #   else
-      #      @task = @list.tasks.find(params[:id])
-      #      @t_blockers = Task.find_by(parent_task_id:params[:id])
-      #   end
+
      end
+
+    #  def set_task(id)
+    #    byebug
+    #    @task = Task.find(id)
+     #
+    #  end
+
 
      def task_params
-       params[:task].permit(:detail, :user_id)
+       if params[:type].present?
+          params[:blocker].permit(:detail, :user_id)
+        else
+          params[:task].permit(:detail, :user_id)
+       end
      end
+
+
 
 
 end

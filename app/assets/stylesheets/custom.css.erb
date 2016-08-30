@@ -126,11 +126,12 @@ h1, h2, h3, h4, h5, h6 {
 #stand-up nav .dropdown-content li > a{
   color: #808080;
 }
-#stand-up nav ul.menu a:hover,
-#stand-up nav .dropdown-content li > a:hover {
+#stand-up nav ul.menu a:not(.active):hover,
+#stand-up nav .dropdown-content li > a:not(.active):hover {
   background-color: none;
-
 }
+
+
 #stand-up nav .avatar-icons{
   display: table;
   height: 70px;
@@ -295,6 +296,15 @@ i.small {
   font-style: italic;
   line-height: 3em;
   color: #f77f5f;
+}
+/*Collection*/
+.collection .collection-item.active {
+    background-color: #fff!important;
+    color: #12aaeb!important;;
+    border: 1px solid #12aaeb!important;
+}
+.collection a.collection-item {
+    color: #12aaeb!important;
 }
 /* MEDIA SCREEN */
 @media only screen and (min-width: 601px){
