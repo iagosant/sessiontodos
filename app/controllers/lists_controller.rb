@@ -1,24 +1,11 @@
 class ListsController < ApplicationController
+
   before_action :set_list, only: [:index, :show, :edit, :update, :destroy]
   before_action :require_logged_in
-  # GET /todo_lists
-  # GET /todo_lists.json
+  before_action :set_task_per_list, only: [:index, :show ]
+
   def index
-    @lists = current_user.created_lists.all
-    @collaboration_lists = current_user.collaboration_lists.all
-    if (params[:id] == nil)
-      @list = @lists.first
-    end
-      set_task_per_list
-      # @tasks = @lists.first
-      # @incomplete_tasks = @tasks.where(:completed_at => nil)
-      # @complete_tasks = @tasks.where.not(:completed_at => nil)
-
-
     @all_tasks   = current_user.tasks.where(:completed_at => nil)
-    # @task   = current_user.tasks.new
-    # @task   = current_user.tasks.new
-    # @list   = current_user.created_lists.new
 
     # respond_to do |format|
     #   format.html
@@ -28,28 +15,22 @@ class ListsController < ApplicationController
     # end
   end
 
-  # GET /todo_lists/1
-  # GET /todo_lists/1.json
   def show
-    @list = List.find(params[:id])
-    set_task_per_list
-    respond_to do |format|
-      format.html{ redirect_to @lists }
-      format.js
-   end
+    # @list = List.find(params[:id])
+    # set_task_per_list
+  #   respond_to do |format|
+  #     format.html{ redirect_to @list }
+  #     format.js
+  #  end
   end
 
-  # GET /todo_lists/new
   def new
     @list = current_user.created_lists.new
   end
 
-  # GET /todo_lists/1/edit
   def edit
   end
 
-  # POST /todo_lists
-  # POST /todo_lists.json
   def create
     @list = current_user.created_lists.new(list_params)
 
@@ -62,12 +43,8 @@ class ListsController < ApplicationController
 
       end
     end
-
-
   end
 
-  # PATCH/PUT /todo_lists/1
-  # PATCH/PUT /todo_lists/1.json
   def update
 
     respond_to do |format|
@@ -81,9 +58,8 @@ class ListsController < ApplicationController
     end
   end
 
-  # DELETE /todo_lists/1
-  # DELETE /todo_lists/1.json
   def destroy
+    byebug
     @list.destroy
     respond_to do |format|
       format.html { redirect_to root_url, notice: 'List was successfully destroyed.' }
@@ -94,7 +70,10 @@ class ListsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_list
-      if (params[:id]!=nil)
+    
+      if (params[:id].nil?)
+        @list = current_all_tasks
+      else
         @list = List.find(params[:id])
       end
     end
@@ -105,6 +84,7 @@ class ListsController < ApplicationController
     end
 
     def set_task_per_list
+
       @tasks = @list.tasks
       @incomplete_tasks = @tasks.where(:completed_at => nil)
       @complete_tasks = @tasks.where.not(:completed_at => nil)

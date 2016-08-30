@@ -6,18 +6,16 @@ jQuery.fn.submitOnCheck = function() {
   return this;
 }
 
-$(function() {
-  $('.edit_task').submitOnCheck();
-});
 $(document).on('turbolinks:load',function(){
-    $('select').material_select();
+
+  $('select').material_select();
   var pgurl = window.location.href.substr(window.location.href.lastIndexOf("/")+1);
   $("#stand-up ul li a").each(function(){
       //  alert($(this).attr("href") );
          if($(this).attr("href") == pgurl || $(this).attr("href") == '' )
          $(this).addClass("active");
-    })
-
+    });
+  
 
   // $("#stand-up ul.menu li a").click(function(){
   //    var link = $(this);

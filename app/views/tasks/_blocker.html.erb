@@ -1,0 +1,14 @@
+	<ul id="menu-option">
+	 <li>
+		<%= form_for task, url: complete_task_path(:id => task.id, :list_id => @list.id), remote: true do |f| %>
+		<%= check_box_tag "completed[#{task.id}]", "#{task.id}", task.completed?, :name => "task_id", disabled: task.completed? %>
+		<%= label_tag "completed_#{task.id}", task.detail %>
+		<%= f.submit "Update" %>
+		<% end %>
+	 </li>
+	 <li>
+			<%= link_to task, method: :delete, data: {confirm: "Are you sure?"}, remote: true do %>
+				 <i class="material-icons">delete</i>
+			<% end %>
+		</li>
+	</ul>

@@ -58,6 +58,7 @@ Rails.application.routes.draw do
   resources :tasks do
     member do
       patch :complete
+      patch :changelist
     end
     resources :t_blockers, :controller => 'tasks', :defaults => {:type => 'blocker'}
   end

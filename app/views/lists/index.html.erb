@@ -1,19 +1,16 @@
+
 <div class="row">
   <div class="col s12 m4 l3"> <!-- Note that "m4 l3" was added -->
-    <ul>
-    <% @lists.each do |list| %>
-        <li>
-          <div class="index_row clearfix">
-            <h4 class="list_name"><%= link_to list.name, list, remote: true %></h4>
-          </div>
-        </li>
-    <% end %>
-        <li>
-          <div class="index_row clearfix">
-              <h4 class="list_name"><%= link_to 'Add List +', new_list_path %></h4>
-          </div>
-        </li
-      </ul>
+
+    <div class="collection">
+      <%= link_to current_all_tasks.name, current_all_tasks, class: "collection-item active", id:"collection-item_#{current_all_tasks.id}", remote: true %>
+      <% current_all_lists.each do |list| %>
+       <% if (current_all_tasks.id != list.id)  %>
+         <%= link_to list.name, list, class: "collection-item",id:"collection-item_#{list.id}", remote: true %>
+        <% end %>
+      <% end %>
+      <%= link_to 'Add List +', new_list_path, class: "collection-item"%>
+    </div>
   </div>
   <div class="col s12 m8 l9"> <!-- Note that "m8 l9" was added -->
 
@@ -31,8 +28,6 @@
     		  <%= render @complete_tasks %>
     		</div>
     <% end %>
-
-
         <h4>List Delete</h4>
      		<p class="delete-list">
      		    <%= link_to 'Delete this list', @list, :confirm => 'Are you sure?', :method => :delete %>
@@ -40,13 +35,6 @@
 
   </div>
 </div>
-<!-- <div class="row">
-  <div id="tabs-new-list">
-      <h2>Add a New Task List</h2>
-   <%= render :partial => 'form' %>
-  </div>
-</div> -->
-
 
  <!-- Modal Structure -->
  <div id="modal1" class="modal">
