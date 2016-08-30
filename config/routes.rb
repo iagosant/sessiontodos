@@ -53,10 +53,11 @@ Rails.application.routes.draw do
   resources :sessions
   resources :users
   resources :lists do
-    resources :tasks , only: [:new, :create, :edit ]
+    resources :tasks , only: [:new, :create, :edit]
   end
   resources :tasks do
     member do
+      patch :add_deadline
       patch :complete
       patch :changelist
     end

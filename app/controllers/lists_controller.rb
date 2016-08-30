@@ -59,7 +59,6 @@ class ListsController < ApplicationController
   end
 
   def destroy
-    byebug
     @list.destroy
     respond_to do |format|
       format.html { redirect_to root_url, notice: 'List was successfully destroyed.' }
@@ -70,7 +69,7 @@ class ListsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_list
-    
+
       if (params[:id].nil?)
         @list = current_all_tasks
       else
@@ -84,7 +83,6 @@ class ListsController < ApplicationController
     end
 
     def set_task_per_list
-
       @tasks = @list.tasks
       @incomplete_tasks = @tasks.where(:completed_at => nil)
       @complete_tasks = @tasks.where.not(:completed_at => nil)

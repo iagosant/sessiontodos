@@ -32,6 +32,11 @@
 				 <i class="material-icons">delete</i>
 			<% end %>
 		</li>
+		<li>
+			<%= link_to add_deadline_task_path(task), method: :patch, data: {confirm: "Are you sure?"}, remote: true do %>
+				 <i class="material-icons">av_timer</i>
+			<% end %>
+		</li>
 	</ul>
 	<div class='show_blockers row' id="show_blockers_<%= task.id%>" style="display:none">
 		<div id= "blockers" >

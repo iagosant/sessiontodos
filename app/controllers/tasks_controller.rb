@@ -1,7 +1,12 @@
 class TasksController < ApplicationController
+  include TasksHelper
   before_action :set_list, only: [:new, :create, :edit ], if: -> { params[:type].blank? }
   before_action :set_task, except: [:new, :create]
   skip_before_filter :verify_authenticity_token
+
+#   def add_deadline
+# byebug
+#   end
 
   def new
     if params[:type]== 'blocker'
@@ -38,7 +43,7 @@ class TasksController < ApplicationController
     end
 
    def destroy
-
+     byebug
      if (@task.destroy)
          respond_to do |format|
            format.html { redirect_to @list }
