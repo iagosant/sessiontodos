@@ -43,20 +43,18 @@ class TasksController < ApplicationController
     end
 
    def destroy
-     byebug
      if (@task.destroy)
          respond_to do |format|
            format.html { redirect_to @list }
            format.js
+           Task.reset_pk_sequence
          end
      end
 
    end
 
    def complete
-
      @task.update_attribute(:completed_at, Time.now)
-     #  @task.complete = true
      respond_to do |format|
        format.html {  redirect_to @list, notice: "Task completed" }
        format.js

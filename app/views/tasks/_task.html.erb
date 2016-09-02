@@ -1,46 +1,54 @@
 
 <ul id="dropdownlist_<%= task.id%>" class="dropdown-list">
 	<% current_all_lists.each do |list| %>
-	    <% if (list.id != @list.id) %>
-			  <li><%= link_to list.name, changelist_task_path(list_id: list.id, id: task.id ), remote: true, :method=> :patch  %></li>
-			<% end %>
+	<% if (list.id != @list.id) %>
+	<li><%= link_to list.name, changelist_task_path(list_id: list.id, id: task.id ), remote: true, :method=> :patch  %></li>
+	<% end %>
 	<% end %>
 </ul>
 
-	<ul id='edit_task_<%= task.id%>' class="menu-option">
-	 <li>
+<ul id='edit_task_<%= task.id%>' class="menu-option">
+	<li>
 		<%= form_for task, url: complete_task_path(:id => task.id, :list_id => @list.id), remote: true do |f| %>
 		<%= check_box_tag "completed[#{task.id}]", "#{task.id}", task.completed?, :name => "task_id", disabled: task.completed? %>
 		<%= label_tag "completed_#{task.id}", task.detail %>
 		<%= f.submit "Update" %>
 		<% end %>
-	 </li>
-	 <li>
-	  	<a class='dropdown-button' data-beloworigin="true" href='#!' data-activates='dropdownlist_<%= task.id%>'>
-				<i class="material-icons">view_list</i>
-			</a>
-	 </li>
-	 <li>
-			<% if !task.completed? %>
-				<%= link_to new_task_t_blocker_path(list_id: @list.id, task_id: task.id), remote: true do %>
-				   <i class="material-icons">warning</i>
-				<% end %>
-			<% end %>
-		</li>
-		<li>
-			<%= link_to task, method: :delete, data: {confirm: "Are you sure?"}, remote: true do %>
-				 <i class="material-icons">delete</i>
-			<% end %>
-		</li>
-		<li>
-			<%= link_to add_deadline_task_path(task), method: :patch, data: {confirm: "Are you sure?"}, remote: true do %>
-				 <i class="material-icons">av_timer</i>
-			<% end %>
-		</li>
-	</ul>
-	<div class='show_blockers row' id="show_blockers_<%= task.id%>" style="display:none">
-		<div id= "blockers" >
-		  <% @blockers = task.t_blockers %>
-      <%= render @blockers %>
-		</div>
-  </div>
+	</li>
+	<li>
+		<a class='dropdown-button' data-beloworigin="true" href='#!' data-activates='dropdownlist_<%= task.id%>'>
+			<i class="material-icons">view_list</i>
+		</a>
+	</li>
+	<li>
+		<% if !task.completed? %>
+		<%= link_to new_task_t_blocker_path(list_id: @list.id, task_id: task.id), remote: true do %>
+		<i class="material-icons">warning</i>
+		<% end %>
+		<% end %>
+	</li>
+	<li>
+		<%= link_to task, method: :delete, data: {confirm: "Are you sure?"}, remote: true do %>
+		<i class="material-icons">delete</i>
+		<% end %>
+	</li>
+	<li>
+		<% if task.deadline? %>
+		<input type="hidden" id="deadlineDate">
+		<label for="select" id="deadline"><i class="material-icons">av_timer</i><%= task.deadline.strftime("%A %d %B") %></label>
+		<input type="text" name="datepicker" class="datepicker">
+		<% else %>
+		<%= form_for task, url: add_deadline_task_path(task), id: task.id, remote: true do |f| %>
+		<input type="hidden" id="deadlineDate">
+		<label for="select" id="deadline"><i class="material-icons">av_timer</i></label>
+		<input type="text" name="datepicker" class="datepicker">
+		<% end %>
+		<% end %>
+	</li>
+</ul>
+<div class='show_blockers row' id="show_blockers_<%= task.id%>" style="display:none">
+	<div id= "blockers" >
+		<% @blockers = task.t_blockers %>
+		<%= render @blockers %>
+	</div>
+</div>

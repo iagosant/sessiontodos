@@ -45,7 +45,7 @@ class User < ActiveRecord::Base
   end
 
   def create_all_tasks_list
-    self.created_lists << self.created_lists.create(name: "All Tasks")
+    self.created_lists << self.created_lists.create(name: "All Tasks", all_tasks: true)
   end
 
   # Returns true if the given token matches the digest.
