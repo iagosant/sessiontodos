@@ -1,4 +1,7 @@
-$('.new-task').html("<%= j render partial: 'tasks/form' %>")
-$('#incomplete_tasks').html("<%= j render @incomplete_tasks %>")
-$('#complete_tasks').html("<%= j render @complete_tasks %>")
+// $('.new-task').html("<%= j render partial: 'tasks/form' %>");
+// $('#incomplete_tasks').html("<%= j render @incomplete_tasks %>");
+// $('#complete_tasks').html("<%= j render @complete_tasks %>");
+
+$('#list').html("<%= j render @list %>");
 $('.edit_task').submitOnCheck();
+console.log('1');

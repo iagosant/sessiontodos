@@ -4,5 +4,5 @@ module UsersHelper
      ['Admin', 'Manager', 'Employee']
   end
 
-
+  
 end

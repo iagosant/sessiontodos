@@ -1,0 +1,88 @@
+
+$(document).on('turbolinks:load',function(){
+  $('.modal-trigger').leanModal();
+  $('.edit_task').submitOnCheck();
+
+  // Add class active to selected list and change form action in datepicker to point to the new list
+  $('.collection-item').click(function(){
+     $('.collection-item').removeClass('active');
+     $(this).addClass('active');
+
+     var id = $('#collection-list a.active').attr('id');
+     $("#form_date").attr('action', '/lists/' + id);
+  });
+
+  // var $input = $('.datepicker').pickadate({
+  //               selectMonths: true, // Creates a dropdown to control month
+  //               selectYears: 15 // Creates a dropdown of 15 years to control year
+  //             });
+  // // Use the picker object directly.
+  // var picker = $input.pickadate('picker');
+
+
+
+  // picker.set('select', d);
+
+  $('.datepicker').datepicker({
+    dateFormat: "yy-mm-dd",
+    onClose: function(dateText,datePickerInstance){
+      var oldValue = $(this).data('oldValue') || "";
+              if (dateText !== oldValue) {
+                  $(this).data('oldValue',dateText);
+                  $(this).trigger('dateupdated');
+              }
+
+
+
+
+      // $.ajax({
+      //   url: '/lists/' + id,
+      //   type: 'GET',
+      //   dataType: 'json',
+      //   data: {'date': date},
+      // });
+    }
+  });
+  var d= new Date(),
+      date = $('.datepicker').data('oldValue') || d;
+        console.log(date);
+  $('.datepicker').datepicker("setDate", date);
+
+  $('body').on('dateupdated','.datepicker', function(e) {
+    var date = $('.datepicker').val();
+    $('.datepicker').parent('form').submit();
+
+});
+
+
+  $('#today').click(function(){
+    var d = new Date();
+    $('.datepicker').datepicker( "setDate", d );
+    $('.datepicker').parent('form').submit();
+  });
+  // $picker_weekday = $('.picker__weekday-display'),
+  // $picker_month = $('.picker__month-display div'),
+  // $picker_day = $('.picker__day-display'),
+  // $picker_year =$('.picker__year-display div');
+  // var days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+  // var curr_weekday = days[d.getDay()];
+  // var curr_date = d.getDate();
+  // var curr_month = d.getMonth() + 1; //Months are zero based
+  // var curr_year = d.getFullYear();
+  //
+  // if (curr_date < 10){
+  //   curr_date= '0' + curr_date
+  // }
+  // if (curr_month < 10){
+  //   curr_month = '0' + curr_month
+  // }
+  //
+  // $picker_weekday.html(curr_weekday);
+  // $picker_month.html(d.getShortMonth());
+  // $picker_day.html(curr_date);
+  // $picker_year.html(curr_year);
+
+
+
+
+});
