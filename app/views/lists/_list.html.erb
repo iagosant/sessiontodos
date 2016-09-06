@@ -1,22 +1,18 @@
 <div class="new-task">
-  <%= render partial: 'tasks/form' %>
+ <%= render partial: 'tasks/form' %>
 </div>
 <% unless @list.tasks.empty? %>
-<h6>Incomplete Tasks</h6>
-<div class="tasks" id="incomplete_tasks">
-  <%= render @incomplete_tasks %>
-</div>
+   <h6>Incomplete Tasks</h6>
+   <div class="tasks" id="incomplete_tasks">
+     <%= render @incomplete_tasks %>
+   </div>
 
-<h6>Comlpete Tasks</h6>
-<div class="tasks" id="complete_tasks">
-  <%= render @complete_tasks %>
-</div>
+   <h6>Comlpete Tasks</h6>
+   <div class="tasks" id="complete_tasks">
+     <%= render @complete_tasks %>
+   </div>
 <% end %>
-<h4>Edit List</h4>
-<%= link_to "Edit", edit_list_path(@list) %>
-<% unless @list.all_tasks? %>
-<h4>List Delete</h4>
-<p class="delete-list">
-  <%= link_to 'Delete this list', @list, :confirm => 'Are you sure?', :method => :delete %>
-</p>
-<% end %>
+   <h4>List Delete</h4>
+   <p class="delete-list">
+       <%= link_to 'Delete this list', @list, :confirm => 'Are you sure?', :method => :delete %>
+   </p>
