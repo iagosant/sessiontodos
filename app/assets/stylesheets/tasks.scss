@@ -1,7 +1,7 @@
 // Place all the styles related to the tasks controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-#complete_tasks .menu-option form {
+#complete_tasks ul.menu-option form {
   font-size: 12px;
   color: #777;
   margin: 3px 0;
@@ -12,15 +12,18 @@
   width: 100%;
   background: aliceblue;
 }
-.menu-option li{
+ul.menu-option >li{
     display: inline-block;
     text-align: center;
     vertical-align: top;
     height: 30px;
 }
-.menu-option li:first-child {
+ul.menu-option > li:first-child {
   width: 41%;
   text-align: left;
+}
+#complete_tasks ul.menu-option #completed{
+  display:none;
 }
 // #new_blocker:not(.active) {
 //   display: none;

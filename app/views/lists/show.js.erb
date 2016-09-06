@@ -1,7 +1,9 @@
-console.log('in');
-$('#list').html("<%= j render @list %>")
-// $('.new-task').html("<%= j render partial: 'tasks/form' %>")
-// $('#incomplete_tasks').html("<%= j render @incomplete_tasks %>")
-// $('#complete_tasks').html("<%= j render @complete_tasks %>")
-// $('.delete-list').html("<%= link_to 'Delete this list', @list, :confirm => 'Are you sure?', :method => :delete %>");
+
+// $('.new-task').html("<%= j render partial: 'tasks/form' %>");
+// $('#incomplete_tasks').html("<%= j render @incomplete_tasks %>");
+// $('#complete_tasks').html("<%= j render @complete_tasks %>");
+
+$('#list').html("<%= j render @list %>");
+
 $('.edit_task').submitOnCheck();
+console.log('1');
