@@ -9,13 +9,11 @@ module ApplicationHelper
   end
 
   def set_date
-
     if (params[:date].blank?) && (get_date.nil?)
       $date =  Date.today
     else
       $date = (params[:date].present?)? params[:date].to_date : $date
     end
-byebug
   end
 
   def get_date

@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   include UsersHelper
+  before_action :set_user, only: [:update]
   before_action :require_logged_in, only: [:show, :edit, :update, :destroy]
   attr_accessor :email, :name, :password, :password_confirmation
 
@@ -49,15 +50,16 @@ class UsersController < ApplicationController
     if @user.save
       UserMailer.account_activation(@user).deliver_now
       flash[:info] = "Please check your email to activate your account."
-      redirect_to root_path
-
+      redirect_to login_path
     end
   end
 
   def update
+    byebug
+  current_user.current_step = (user_params[:current_step].present?)? user_params[:current_step] : steps.first
     respond_to do |format|
-      if @user.update(user_params)
-        format.html { redirect_to users_path, notice: 'User was successfully updated.' }
+      if current_user.update(user_params)
+        format.html { redirect_to :back, notice: 'User was successfully updated.' }
         format.json { render :show, status: :ok, location: @user }
       else
         format.html { render :edit }
@@ -96,7 +98,7 @@ class UsersController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :avatar, :email, :password, :password_confirmation, :role)
+    params.require(:user).permit(:first_name, :last_name, :avatar, :email, :password, :password_confirmation, :role, :current_step)
   end
   # Remembers a user in the database for use in persistent sessions.
   def remember

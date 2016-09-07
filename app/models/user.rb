@@ -1,4 +1,8 @@
 class User < ActiveRecord::Base
+  attr_writer :current_step
+
+  validates_presence_of :first_name, :if => lambda { |o| o.current_step == "personal" || o.current_step == steps.first }
+  validates_presence_of :avatar, :if => lambda { |o| o.current_step == "avatar" || o.current_step == steps.first }
 
   before_save :downcase_email
   validates :first_name, presence: true, length: { maximum: 50 }
@@ -7,7 +11,7 @@ class User < ActiveRecord::Base
   format: { with: VALID_EMAIL_REGEX },
   uniqueness: { case_sensitive: false }
   has_secure_password
-  validates :password, length: { minimum: 6 }
+  validates :password, presence: true, length: { minimum: 6 }, :if => lambda { |o| o.current_step == "security" || o.current_step == steps.first  }
   validates_confirmation_of :password
   validates_presence_of :password, :on => :create
   validates_presence_of :email
@@ -28,7 +32,7 @@ class User < ActiveRecord::Base
 
   #Migrations for USER INTERFACE
   has_attached_file :avatar,
-                    styles: { :medium => "200x200>", :thumb => "100x100>" }
+  styles: { :medium => "200x200>", :thumb => "100x100>" }
   validates_attachment_content_type :avatar, :content_type => /^image\/(png|gif|jpeg|jpg)/
 
   has_many :created_lists, class_name: "List"
@@ -39,6 +43,14 @@ class User < ActiveRecord::Base
   has_many :tasks
   has_many :collaboration_tasks, through: :collaboration_lists, :source => :tasks
   has_many :my_tasks, through: :created_lists, :source => :tasks
+
+  def steps
+    %w[all personal avatar security]
+  end
+
+  def current_step
+    @current_step || steps.first
+  end
 
   def set_default_role
     self.role ||= :employee
