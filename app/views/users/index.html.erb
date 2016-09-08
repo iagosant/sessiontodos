@@ -19,20 +19,20 @@
               </tr>
             </thead>
             <tbody>
-              <% @users.each do |user| %>
+
               <tr>
-                <td><%= user.first_name %><%= user.id %></td>
-                <td><%= user.last_name %></td>
-                <%= form_for user do |u|%>
-                 <td data='<%= user.id %>' id='roleUpdate' class='selected_role'>
+                <td><%= current_user.first_name %><%= current_user.id %></td>
+                <td><%= current_user.last_name %></td>
+                <%= form_for current_user do |u|%>
+                 <td data='<%= current_user.id %>' id='roleUpdate' class='selected_role'>
                   <div class="input-field" >
 
                   </div>
                 </td>
                 <td><%= u.submit 'Save' %></td>
-                <td><%= link_to 'Edit', edit_user_path(user) %></td>
-                <td><%= link_to 'Destroy', user, method: :delete %></td>
-                <% end %>
+                <td><%= link_to 'Edit', edit_user_path(current_user) %></td>
+                <td><%= link_to 'Destroy', current_user, method: :delete %></td>
+
               </tr>
               <% end %>
             </tbody>

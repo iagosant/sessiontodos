@@ -1,13 +1,17 @@
 class User < ActiveRecord::Base
+  attr_writer :current_step
+
+  validates_presence_of :first_name, :if => lambda { |o| o.current_step == "personal" || o.current_step == steps.first  }
+  validates :password, presence: true, length: { minimum: 6 }, :if => lambda { |o| o.current_step == "security" }
+
 
   before_save :downcase_email
   validates :first_name, presence: true, length: { maximum: 50 }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-  validates :email, presence: true, length: { maximum: 255 },
+  validates :email, length: { maximum: 255 },
   format: { with: VALID_EMAIL_REGEX },
   uniqueness: { case_sensitive: false }
   has_secure_password
-  validates :password, length: { minimum: 6 }
   validates_confirmation_of :password
   validates_presence_of :password, :on => :create
   validates_presence_of :email
@@ -39,6 +43,14 @@ class User < ActiveRecord::Base
   has_many :tasks
   has_many :collaboration_tasks, through: :collaboration_lists, :source => :tasks
   has_many :my_tasks, through: :created_lists, :source => :tasks
+
+  def steps
+    %w[all personal avatar security]
+  end
+
+  def current_step
+    @current_step || steps.first
+  end
 
   def set_default_role
     self.role ||= :employee

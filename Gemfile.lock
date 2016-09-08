@@ -97,13 +97,17 @@ GEM
       nokogiri (>= 1.5.9)
     mail (2.6.4)
       mime-types (>= 1.16, < 4)
+    metaclass (0.0.4)
     mime-types (3.1)
       mime-types-data (~> 3.2015)
     mime-types-data (3.2016.0521)
     mimemagic (0.3.1)
     mini_portile2 (2.1.0)
     minitest (5.9.0)
+    mocha (1.1.0)
+      metaclass (~> 0.0.1)
     multi_json (1.12.1)
+    nifty-generators (0.4.6)
     nokogiri (1.6.8)
       mini_portile2 (~> 2.1.0)
       pkg-config (~> 1.1.7)
@@ -230,6 +234,8 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails (~> 2.2.2)
   jquery-ui-rails
+  mocha
+  nifty-generators
   paperclip
   pg
   pundit

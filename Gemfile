@@ -58,6 +58,7 @@ group :development, :test do
   # Use sqlite3 as the database for Active Record
   gem 'sqlite3'
   gem 'figaro'
+  gem "nifty-generators"
 end
 
 group :development do
@@ -67,3 +68,5 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
 end
+
+gem 'mocha', group: :test
