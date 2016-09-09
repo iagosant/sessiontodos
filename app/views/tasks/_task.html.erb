@@ -33,6 +33,22 @@
 				 <i class="material-icons">delete</i>
 			<% end %>
 		</li>
+
+		<li>
+				<% if task.deadline? %>
+				<input type="hidden" id="deadlineDate">
+				<label for="select" id="deadline"><i class="material-icons">av_timer</i><%= task.deadline.strftime("%A %d %B") %></label>
+				<input type="text" name="datepicker" class="datepicker">
+				<% else %>
+				<%= form_for task, url: add_deadline_task_path(task), id: task.id, remote: true do |f| %>
+				<input type="hidden" id="deadlineDate">
+				<label for="select" id="deadline"><i class="material-icons">av_timer</i></label>
+				<input type="text" name="datepicker" class="datepicker">
+				<% end %>
+				<% end %>
+			</li>
+
+
 	</ul>
 	<div class='show_blockers row' id="show_blockers_<%= task.id%>" style="display:none">
 		<div id= "blockers" >
