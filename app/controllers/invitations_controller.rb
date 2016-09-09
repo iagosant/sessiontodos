@@ -1,5 +1,5 @@
 class InvitationsController < ApplicationController
-  before_action :set_invitation, only: [:show, :edit, :update, :destroy]
+  # before_action :set_invitation, only: [:show, :edit, :update, :destroy]
 
   # GET /invitations
   # GET /invitations.json
@@ -17,39 +17,62 @@ class InvitationsController < ApplicationController
     @invitation = Invitation.new
   end
 
-  # GET /invitations/1/edit
-  def edit
-  end
-
-  # POST /invitations
-  # POST /invitations.json
   def create
+    byebug
     @invitation = Invitation.new(invitation_params)
+    @invitation.sender = current_user
 
-    respond_to do |format|
-      if @invitation.save
-        format.html { redirect_to @invitation, notice: 'Invitation was successfully created.' }
-        format.json { render :show, status: :created, location: @invitation }
+    byebug
+    if @invitation.save
+      if logged_in?
+        InviteMailer.send_invitation(@invitation, new_user_path(:invitation_token => @invitation.token)).deliver #send the invite data to our mailer to deliver the email
+      
+        flash[:notice] = "Thank you, invitation sent."
+        redirect_to @list
       else
-        format.html { render :new }
-        format.json { render json: @invitation.errors, status: :unprocessable_entity }
+        flash[:notice] = "Thank you, we will notify when we are ready."
+        redirect_to root_url
       end
+    else
+      render :action => 'new'
     end
   end
+
+  def edit
+    byebug
+
+    @invitation = Invitation.find_by_token(token)
+    if @invitation.sender
+
+    byebug
+    if @invitation.save
+      if logged_in?
+        Mailer.deliver_invitation(@invitation, signup_url(@invitation.token))
+        flash[:notice] = "Thank you, invitation sent."
+        redirect_to @list
+      else
+        flash[:notice] = "Thank you, we will notify when we are ready."
+        redirect_to root_url
+      end
+    else
+      render :action => 'new'
+    end
+  end
+
 
   # PATCH/PUT /invitations/1
   # PATCH/PUT /invitations/1.json
-  def update
-    respond_to do |format|
-      if @invitation.update(invitation_params)
-        format.html { redirect_to @invitation, notice: 'Invitation was successfully updated.' }
-        format.json { render :show, status: :ok, location: @invitation }
-      else
-        format.html { render :edit }
-        format.json { render json: @invitation.errors, status: :unprocessable_entity }
-      end
-    end
-  end
+  # def update
+  #   respond_to do |format|
+  #     if @invitation.update(invitation_params)
+  #       format.html { redirect_to @invitation, notice: 'Invitation was successfully updated.' }
+  #       format.json { render :show, status: :ok, location: @invitation }
+  #     else
+  #       format.html { render :edit }
+  #       format.json { render json: @invitation.errors, status: :unprocessable_entity }
+  #     end
+  #   end
+  # end
 
   # DELETE /invitations/1
   # DELETE /invitations/1.json
@@ -63,9 +86,9 @@ class InvitationsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_invitation
-      @invitation = Invitation.find(params[:id])
-    end
+    # def set_invitation
+    #   @invitation = Invitation.find(params[:id])
+    # end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def invitation_params

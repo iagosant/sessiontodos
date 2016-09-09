@@ -10,6 +10,7 @@ module LoginHelper
   end
 
   def current_user
+    # byebug
     # if (user_id = session[:user_id])
     #   @current_user ||= User.find_by(id: user_id)
     #
@@ -21,6 +22,7 @@ module LoginHelper
       if user && user.authenticated?(cookies[:remember_token])
         log_in user
         @current_user = user
+
       end
     end
   end

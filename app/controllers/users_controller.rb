@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   include UsersHelper
+  before_action :set_user, only: [:update]
   before_action :require_logged_in, only: [:show, :edit, :update, :destroy]
   attr_accessor :email, :name, :password, :password_confirmation
 
@@ -45,23 +46,21 @@ class UsersController < ApplicationController
     # user_info[:password] = temp_password
     # user_info[:password_confirmation] = temp_password
     # @team = Team.find(session[:team_id])
-    byebug
     @user = User.create(user_params)
     if @user.save
       UserMailer.account_activation(@user).deliver_now
       flash[:info] = "Please check your email to activate your account."
-      redirect_to root_path
-
+      redirect_to login_path
     end
   end
 
   def update
     byebug
-    current_user.current_step = (user_params[:current_step].present?)? user_params[:current_step]: steps.first
+    current_user.current_step = (user_params[:current_step].present?)? user_params[:current_step] : steps.first
     respond_to do |format|
       if current_user.update(user_params)
-        format.html { redirect_to users_path, notice: 'User was successfully updated.' }
-        format.json
+        format.html { redirect_to :back, notice: 'User was successfully updated.' }
+        format.json { render :show, status: :ok, location: @user }
       else
         format.html { render :edit }
         format.json { render json: current_user.errors, status: :unprocessable_entity }
@@ -78,6 +77,11 @@ class UsersController < ApplicationController
       User.reset_pk_sequence
     end
   end
+
+  def accept_invitation
+    # invitation.token if invitation
+  end
+
   def resend_activation
     @user = User.find_by(email:params[:email])
     @user.activation_token = User.new_token
@@ -85,6 +89,7 @@ class UsersController < ApplicationController
     flash[:info] = "Please check your email to activate your account."
     redirect_to new_password_reset_url
   end
+
   private
 
   def user_not_authorized

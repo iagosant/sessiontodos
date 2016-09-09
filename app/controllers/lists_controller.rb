@@ -5,9 +5,7 @@ class ListsController < ApplicationController
   before_action :set_task_per_list, only: [:index, :show ]
 
   def index
-
     @all_tasks   = current_user.tasks.where(:completed_at => nil)
-
     # respond_to do |format|
     #   format.html
     #   format.json do
@@ -17,6 +15,7 @@ class ListsController < ApplicationController
   end
 
   def show
+    # byebug
     # @list = List.find(params[:id])
     # set_task_per_list
     respond_to do |format|
@@ -37,7 +36,6 @@ class ListsController < ApplicationController
 
     respond_to do |format|
       if @list.save
-        byebug
         @lists = current_user.created_lists.all
         set_task_per_list
         format.html{ render :index }
@@ -48,10 +46,9 @@ class ListsController < ApplicationController
   end
 
   def update
-
     respond_to do |format|
       if @list.update(list_params)
-        format.html { redirect_to @list, notice: 'List was successfully updated.' }
+        format.html { redirect_to lists_path }
         format.json { render :show, status: :ok, location: @list }
       else
         format.html { render :edit }
@@ -61,18 +58,17 @@ class ListsController < ApplicationController
   end
 
   def destroy
-
     @list.destroy
     respond_to do |format|
-      format.html { redirect_to root_url, notice: 'List was successfully destroyed.' }
+      format.html { redirect_to lists_path, notice: 'List was successfully destroyed.' }
       format.json { head :no_content }
+      List.reset_pk_sequence
     end
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_list
-
       if params[:id].blank?
         @list = current_all_tasks
       else
@@ -87,7 +83,6 @@ class ListsController < ApplicationController
     end
 
     def set_task_per_list
-
      set_date
      d_today = get_date
      d_yesterday = d_today - 1.day
@@ -95,8 +90,5 @@ class ListsController < ApplicationController
      @tasks = @list.tasks
      @incomplete_tasks = @tasks.where(["completed_at IS ? and DATE(created_at)=?",nil,d_today])
      @complete_tasks = @tasks.where('DATE(completed_at) BETWEEN ? AND ?', d_yesterday , d_today ).order('completed_at')
-
-     byebug
     end
-
 end

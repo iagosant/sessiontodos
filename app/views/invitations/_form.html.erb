@@ -1,15 +1,11 @@
-<%= simple_form_for(@invitation) do |f| %>
-  <%= f.error_notification %>
-
-  <div class="form-inputs">
-    <%= f.input :sender_id %>
-    <%= f.input :list_id %>
-    <%= f.input :recipient_email %>
-    <%= f.input :token %>
-    <%= f.input :sent_at %>
+<%= form_for( @invitation) do |f| %>
+  <div class="field">
+    <%= f.hidden_field :list_id, :value => @list.id %>
+    <%= f.label :recipient_email, "Recipient's email address" %><br />
+    <%= f.text_field :recipient_email %>
   </div>
 
-  <div class="form-actions">
-    <%= f.button :submit %>
+  <div class="actions">
+    <%= f.submit "Invite!" %>
   </div>
 <% end %>

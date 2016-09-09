@@ -2,17 +2,42 @@
  <%= render partial: 'tasks/form' %>
 </div>
 <% unless @list.tasks.empty? %>
-   <h6>Incomplete Tasks</h6>
-   <div class="tasks" id="incomplete_tasks">
-     <%= render @incomplete_tasks %>
+  <div class="row">
+     <h6>Incomplete Tasks</h6>
+     <div class="tasks" id="incomplete_tasks">
+       <%= render @incomplete_tasks %>
+     </div>
    </div>
-
-   <h6>Comlpete Tasks</h6>
-   <div class="tasks" id="complete_tasks">
-     <%= render @complete_tasks %>
-   </div>
+   <div class="row">
+       <h6>Completed Tasks</h6>
+       <div class="tasks" id="complete_tasks">
+         <% if @complete_tasks.empty? %>
+            <p>This List don't have completed tasks at this time</p>
+         <% else %>
+            <%= render @complete_tasks %>
+         <% end %>
+       </div>
+    </div>
 <% end %>
-   <h4>List Delete</h4>
-   <p class="delete-list">
-       <%= link_to 'Delete this list', @list, :confirm => 'Are you sure?', :method => :delete %>
-   </p>
+<div class="row">
+  <div class="col s2">
+
+    <%= link_to "Edit List", edit_list_path(@list) %>
+  </div>
+  <% unless @list.all_tasks? %>
+  <div class="col s2">
+
+    <p class="delete-list">
+      <%= link_to 'Delete this list', @list, :confirm => 'Are you sure?', :method => :delete %>
+    </p>
+  </div>
+  <% end %>
+  <div class="col s2">
+
+    <p class="delete-list">
+      <%= link_to 'New invitations', new_list_invitation_path(@list) %>
+    </p>
+  </div>
+
+
+</div>

@@ -1,13 +1,20 @@
 
+<ul id="dropdownlist_<%= task.id%>" class="dropdown-list">
+	<% current_all_lists.each do |list| %>
+	<% if (list.id != @list.id) %>
+	<li><%= link_to list.name, changelist_task_path(list_id: list.id, id: task.id ), remote: true, :method=> :patch  %></li>
+	<% end %>
+	<% end %>
 </ul>
 
-	<ul id='edit_task_<%= task.id%>' class="menu-option">
-	 <li>
+<ul id='edit_task_<%= task.id%>' class="menu-option">
+	<li>
 		<%= form_for task, url: complete_task_path(:id => task.id, :list_id => @list.id), remote: true do |f| %>
 		<%= check_box_tag "completed[#{task.id}]", "#{task.id}", task.completed?, :name => "task_id", disabled: task.completed? %>
 		<%= label_tag "completed_#{task.id}", "#{task.detail} #{task.completed_at}"%>
 		<%= f.submit "Update" %>
 		<% end %>
+
 	 </li>
 	 <li>
 	  	<a class='dropdown-button' href='#!' data-activates='dropdownlist_<%= task.id%>'>

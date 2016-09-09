@@ -1,7 +1,12 @@
 class TasksController < ApplicationController
+  include TasksHelper
   before_action :set_list, only: [:new, :create, :edit ], if: -> { params[:type].blank? }
   before_action :set_task, except: [:new, :create]
   skip_before_filter :verify_authenticity_token
+
+#   def add_deadline
+# byebug
+#   end
 
   def new
     if params[:type]== 'blocker'
@@ -30,7 +35,6 @@ class TasksController < ApplicationController
   end
 
   def update
-
     @task.update_attributes!(task_params)
       respond_to do |format|
         format.html { redirect_to @list }
@@ -39,20 +43,18 @@ class TasksController < ApplicationController
     end
 
    def destroy
-
      if (@task.destroy)
          respond_to do |format|
            format.html { redirect_to @list }
            format.js
+           Task.reset_pk_sequence
          end
      end
 
    end
 
    def complete
-
      @task.update_attribute(:completed_at, Time.now)
-     #  @task.complete = true
      respond_to do |format|
        format.html {  redirect_to @list, notice: "Task completed" }
        format.js
@@ -79,7 +81,7 @@ class TasksController < ApplicationController
      end
 
      def set_task
-       
+
        @task = Task.find(params[:id])
 
      end
