@@ -1,11 +1,13 @@
-<%= form_for( @invitation) do |f| %>
-  <div class="field">
+<div id="new_invitation">
+<%= form_for([@list, @invitation]) do |f| %>
+  <div class="input-field">
     <%= f.hidden_field :list_id, :value => @list.id %>
     <%= f.label :recipient_email, "Recipient's email address" %><br />
     <%= f.text_field :recipient_email %>
   </div>
 
-  <div class="actions">
+  <div class="input-field">
     <%= f.submit "Invite!" %>
   </div>
 <% end %>
+</div>

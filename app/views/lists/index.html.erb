@@ -1,18 +1,35 @@
+<div class="padding8"></div>
 <div class="row">
   <div class="col s12 m4 l3"> <!-- Note that "m4 l3" was added -->
     <div class="collection" id="collection-list">
       <%= link_to current_all_tasks.name, current_all_tasks, class: "collection-item active", id:"#{current_all_tasks.id}", remote: true %>
-      <% current_all_lists.each do |list| %>
-      <% if (current_all_tasks.id != list.id)  %>
-        <%= link_to list.name, list, class: "collection-item",id:"#{list.id}", remote: true %>
-      <% end %>
-      <% end %>
-      <%= link_to 'Add List +', new_list_path, class: "collection-item"%>
+      <% @lists.each do |list| %>
+        <% if (current_all_tasks.id != list.id)  %>
+          <%= link_to list.name, list, class: "collection-item",id:"#{list.id}", remote: true %>
+        <% end %>
+        <% end %>
+      <%= link_to 'Add List +', new_list_path, class: "collection-item", remote: true%>
     </div>
+    <ul class="collection" id="collaboration-lists">
+     <% if !@collaboration_lists.empty? %>
+        <li class="collection-item"><p class="collection-header uppercase">Collaboration lists</p></li>
+        <% @collaboration_lists.each do |collection_list| %>
+            <li class="collection-item avatar">
+              <%= link_to  collection_list, id:"#{collection_list.id}", remote: true do %>
+                 <%= image_tag(collection_list.avatar(:medium), class: 'circle') %>
+                 <span class="title"><b><%= collection_list.name %></b></span>
+                 <p>By <%= collection_list.owner.first_name %> </p>
+               <% end %>
+            </li>
+        <% end %>
+      <% end %>
+
+    </ul>
   </div>
-  <div class="col s12 m8 l9"> <!-- Note that "m8 l9" was added -->
-    <div class="row center">
-      <div class="col s2 offset-s6">
+  <div class="col s12 m8 l9" style="padding: 0 40px;" > <!-- Note that "m8 l9" was added -->
+   <div id="main_center">
+    <div class="center">
+      <div class="col s1 offset-s6">
         <div id='date'>
           <%= form_for @list, method: :get, html: { class: "form_date", id: "form_date" },remote: true do |f| %>
           <!-- <input type="hidden" name="date"> -->
@@ -26,12 +43,16 @@
         <div class="picker__year-display"><div></div></div>
       </div> -->
     </div>
-    <div class="col s2">
+    <div class="col s1">
       <a class="waves-effect waves-teal btn-flat" id="today">Today</a>
+    </div>
+    <div class="share-icons" id="collaboration-users">
+      <%= render 'list_users' %>
     </div>
   </div>
   <div id="list"><%= render @list %></div>
-</div>
+  </div>
+  </div>
 </div>
 <!-- Modal Structure -->
 <div id="modal1" class="modal">

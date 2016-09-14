@@ -1,6 +1,6 @@
 
 $(document).on('turbolinks:load',function(){
-  $('.modal-trigger').leanModal();
+  
   $('.edit_task').submitOnCheck();
 
   // Add class active to selected list and change form action in datepicker to point to the new list
@@ -19,9 +19,6 @@ $(document).on('turbolinks:load',function(){
   // Use the picker object directly.
   var picker = $input.pickadate('picker');
   picker.set('select', d);
-
-
-
 
   // $('#mainDate').datepicker({
   //   dateFormat: "yy-mm-dd",
@@ -43,8 +40,7 @@ $(document).on('turbolinks:load',function(){
     var date = $('#mainDate').val();
     $('#mainDate').parent('form').submit();
 
-});
-
+    });
 
   $('#today').click(function(){
     var d = new Date();

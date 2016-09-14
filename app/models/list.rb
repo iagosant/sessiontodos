@@ -1,6 +1,10 @@
 class List < ActiveRecord::Base
 
   belongs_to :owner, class_name:"User", foreign_key:"user_id"
+  
+  has_attached_file :avatar,
+  styles: { :medium => "200x200>", :thumb => "100x100>" }
+  validates_attachment_content_type :avatar, :content_type => /^image\/(png|gif|jpeg|jpg)/
 
   has_many :tasks
 

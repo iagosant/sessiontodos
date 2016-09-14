@@ -4,8 +4,12 @@ class ListsController < ApplicationController
   before_action :require_logged_in
   before_action :set_task_per_list, only: [:index, :show ]
 
+
   def index
     @all_tasks   = current_user.tasks.where(:completed_at => nil)
+    @lists = current_user.created_lists.all.order('created_at')
+    byebug
+    @collaboration_lists = current_user.collaboration_lists.all
     # respond_to do |format|
     #   format.html
     #   format.json do
@@ -18,10 +22,7 @@ class ListsController < ApplicationController
     # byebug
     # @list = List.find(params[:id])
     # set_task_per_list
-    respond_to do |format|
-      format.html{ redirect_to @list }
-      format.js
-   end
+
   end
 
   def new
@@ -36,9 +37,9 @@ class ListsController < ApplicationController
 
     respond_to do |format|
       if @list.save
-        @lists = current_user.created_lists.all
+        # @lists = current_user.created_lists.all
         set_task_per_list
-        format.html{ render :index }
+        format.html{ redirect_to lists_url}
         format.js
 
       end
@@ -46,6 +47,7 @@ class ListsController < ApplicationController
   end
 
   def update
+    byebug
     respond_to do |format|
       if @list.update(list_params)
         format.html { redirect_to lists_path }
@@ -66,6 +68,7 @@ class ListsController < ApplicationController
     end
   end
 
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_list
@@ -74,12 +77,11 @@ class ListsController < ApplicationController
       else
         @list = List.find(params[:id])
       end
-
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def list_params
-      params.require(:list).permit(:name, :description)
+      params.require(:list).permit(:name, :description, :avatar)
     end
 
     def set_task_per_list

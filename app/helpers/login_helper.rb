@@ -72,4 +72,8 @@ module LoginHelper
     cookies.delete(:remember_token)
   end
 
+  def initials(id)
+    @initials = User.find(id).first_name[0]
+    @initials << User.find(id).first_name[0]
+  end
 end

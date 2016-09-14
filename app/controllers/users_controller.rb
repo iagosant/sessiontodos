@@ -31,11 +31,17 @@ class UsersController < ApplicationController
     # user = User.find(session[:user_id])
     # authorize user
     @user = User.new
+    @token = params[:invitation_token]
+    if !@token.nil?
+      @user.email = Invitation.find_by_token(@token).recipient_email
+    end
+
   end
 
   def edit
     # authorize @user
     @user = User.find(params[:id])
+
   end
 
   def create
@@ -47,7 +53,13 @@ class UsersController < ApplicationController
     # user_info[:password_confirmation] = temp_password
     # @team = Team.find(session[:team_id])
     @user = User.create(user_params)
+    @token = params[:invitation_token]
+    byebug
     if @user.save
+      if !@token.nil?
+          list = Invitation.find_by_token(@token).list_id #find the list_id attached to the invitation
+          @user.collaboration_lists << List.find(list) #add this user to the list as a collaborator
+      end
       UserMailer.account_activation(@user).deliver_now
       flash[:info] = "Please check your email to activate your account."
       redirect_to login_path

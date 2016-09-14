@@ -1,20 +1,22 @@
-<div class="new-task">
- <%= render partial: 'tasks/form' %>
-</div>
-<% unless @list.tasks.empty? %>
+<% if @list_user.tasks.empty? %>
+  <div class="new-task">
+    <%= render partial: 'tasks/form' %>
+  </div>
+<% end %>
+<% unless @list_user.tasks.empty? %>
   <div>
      <h6>Incomplete Tasks</h6>
      <div class="tasks" id="incomplete_tasks">
-       <%= render @incomplete_tasks %>
+       <%= render @list_user_incomplete_tasks %>
      </div>
    </div>
    <div>
        <h6>Completed Tasks</h6>
        <div class="tasks" id="complete_tasks">
-         <% if @complete_tasks.empty? %>
+         <% if @list_user_complete_tasks.empty? %>
             <p>This List don't have completed tasks at this time</p>
          <% else %>
-            <%= render @complete_tasks %>
+            <%= render @list_user_complete_tasks %>
          <% end %>
        </div>
     </div>

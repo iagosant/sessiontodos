@@ -9,11 +9,15 @@ class Invitation < ActiveRecord::Base
   # validate :recipient_is_not_registered
 
   before_create :generate_token
+  before_save :check_recipient_existence
 
   private
 
-  def recipient_is_not_registered
-    errors.add :recipient_email, 'is already registered' if User.find_by_email(recipient_email)
+  def check_recipient_existence
+    recipient = User.find_by_email(recipient_email)
+    if recipient
+      self.recipient_id = recipient.id
+    end
   end
 
   def generate_token

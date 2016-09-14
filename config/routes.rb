@@ -27,7 +27,7 @@ Rails.application.routes.draw do
   # get 'sessions/:session_id/completeds' => 'completeds#index'
   # get 'sessions/:session_id/wips' => 'wips#index'
 
-  patch :sign_up '/sign_up/:invitation_token', :controller => 'users', :action => 'new'
+  # patch :sign_up '/sign_up/:invitation_token', :controller => 'users', :action => 'new'
 
   post 'users/roleUpdate' => 'users#roleUpdate'
   post 'users/resend_activation' => 'users#resend_activation'
@@ -56,7 +56,7 @@ Rails.application.routes.draw do
   resources :users
   resources :lists do
     resources :tasks , only: [:new, :create, :edit]
-
+    resources :invitations
   end
   resources :tasks do
     member do
@@ -67,7 +67,7 @@ Rails.application.routes.draw do
     resources :t_blockers, :controller => 'tasks', :defaults => {:type => 'blocker'}
   end
 
-  resources :invitations 
+
   # resources :applications do
   #   resource :owner, :controller => 'people', :defaults => {:type => 'owner'}
   #   resource :manager, :controller => 'people', :defaults => {:type => 'manager'}
