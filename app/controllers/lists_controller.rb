@@ -1,14 +1,14 @@
 class ListsController < ApplicationController
   include ApplicationHelper
+  before_action :set_user, only: [:index, :show, :edit, :update, :destroy]
   before_action :set_list, only: [:index, :show, :edit, :update, :destroy]
   before_action :require_logged_in
-  before_action :set_task_per_list, only: [:index, :show ]
+  # after_action :set_task_per_user, only: [:set_list ]
 
 
   def index
     @all_tasks   = current_user.tasks.where(:completed_at => nil)
     @lists = current_user.created_lists.all.order('created_at')
-    byebug
     @collaboration_lists = current_user.collaboration_lists.all
     # respond_to do |format|
     #   format.html
@@ -38,7 +38,7 @@ class ListsController < ApplicationController
     respond_to do |format|
       if @list.save
         # @lists = current_user.created_lists.all
-        set_task_per_list
+        # set_task_per_list
         format.html{ redirect_to lists_url}
         format.js
 
@@ -47,7 +47,6 @@ class ListsController < ApplicationController
   end
 
   def update
-    byebug
     respond_to do |format|
       if @list.update(list_params)
         format.html { redirect_to lists_path }
@@ -77,20 +76,30 @@ class ListsController < ApplicationController
       else
         @list = List.find(params[:id])
       end
+      set_task_per_user
+    end
+
+    def set_user
+      if params[:user_id].blank?
+        @user = current_user
+      else
+        @user = User.find(params[:user_id])
+      end
+    end
+
+
+    def set_task_per_user
+      set_date
+      d_today = get_date
+      d_yesterday = d_today - 1.day
+      #  @tasks = @list.tasks.where('DATE(created_at) BETWEEN ? AND ?', d_yesterday , d_today )
+      @tasks = @user.tasks.where(:list_id=>@list.id)
+      @incomplete_tasks = @tasks.where(["completed_at IS ? and DATE(created_at)=?",nil,d_today])
+      @complete_tasks = @tasks.where('DATE(completed_at) BETWEEN ? AND ?', d_yesterday , d_today ).order('completed_at')
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def list_params
       params.require(:list).permit(:name, :description, :avatar)
-    end
-
-    def set_task_per_list
-     set_date
-     d_today = get_date
-     d_yesterday = d_today - 1.day
-    #  @tasks = @list.tasks.where('DATE(created_at) BETWEEN ? AND ?', d_yesterday , d_today )
-     @tasks = @list.tasks
-     @incomplete_tasks = @tasks.where(["completed_at IS ? and DATE(created_at)=?",nil,d_today])
-     @complete_tasks = @tasks.where('DATE(completed_at) BETWEEN ? AND ?', d_yesterday , d_today ).order('completed_at')
     end
 end

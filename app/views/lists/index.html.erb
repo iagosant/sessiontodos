@@ -28,7 +28,7 @@
   </div>
   <div class="col s12 m8 l9" style="padding: 0 40px;" > <!-- Note that "m8 l9" was added -->
    <div id="main_center">
-    <div class="center">
+    <div class="center row">
       <div class="col s1 offset-s6">
         <div id='date'>
           <%= form_for @list, method: :get, html: { class: "form_date", id: "form_date" },remote: true do |f| %>
@@ -50,7 +50,9 @@
       <%= render 'list_users' %>
     </div>
   </div>
-  <div id="list"><%= render @list %></div>
+  <div id="list" class="row">
+    <%= render partial: "list_user" %>
+  </div>
   </div>
   </div>
 </div>

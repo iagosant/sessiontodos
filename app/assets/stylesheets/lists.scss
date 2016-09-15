@@ -26,7 +26,23 @@
 #edit_option {
   float: left;
 }
-
+.list-user-avatar{
+  width: 46px;
+  height: 46px;
+  border: 2px solid #12AAED!important;
+  background-color: #12AAED;
+  text-align: center;
+  display: table;
+}
+.list-user-avatar img{
+  display: inline-table;
+  vertical-align: middle;
+  padding: 5px 0 0;
+}
+#list h5{
+  margin: 1rem 0 1rem!important;
+  font-size: 1.3rem!important;
+}
 // @media only screen and (min-width: 601px){
 // #stand-up nav.task-option,
 // #stand-up nav.task-option .nav-wrapper i,

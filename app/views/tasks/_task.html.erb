@@ -43,6 +43,7 @@
 	<ul id="dropdownlist_<%= task.id%>" class="dropdown-list">
 		<% current_all_lists.each do |list| %>
 		    <% if (list.id != @list.id) %>
-				  <li><%= link_to list.name, changelist_task_path(list_id: list.id, id: task.id ), remote: true, :method=> :patch  %></li>
+				    <li><%= link_to list.name, changelist_task_path(list_id: list.id, id: task.id ), remote: true, :method=> :patch  %></li>
 				<% end %>
 		<% end %>
+  </ul>
