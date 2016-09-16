@@ -1,0 +1,11 @@
+$blockers = $('#blockers_<%= @task.id%>');
+$show_blocker = $('#show_blockers_<%= @task.id%>');
+$new_blocker = $('#new_blocker_<%= @task.id%>');
+$show_blocker.slideToggle( 500, "easeOutSine",function(){
+    //$blockers.remove();
+   //  if (!$(this).is(':hidden')){
+     $blockers .html('<%= j render(partial: "tasks/blocker", collection: @blockers) || "This Task dont have any blockers" %>');
+      $new_blocker.html('<%= j render("tasks/formBlocker") %>')
+   //  }
+
+  });

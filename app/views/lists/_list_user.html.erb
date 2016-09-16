@@ -12,13 +12,13 @@
     <div>
        <h5>Incomplete Tasks</h5>
        <div class="tasks" id="incomplete_tasks">
-          <%= render(partial: "tasks/task", collection: @incomplete_tasks) || "This List don't have incompleted tasks at this time" %>
+          <%= render(partial: "tasks/task", collection: @incomplete_tasks)%>
        </div>
      </div>
      <div>
         <h5>Completed Tasks</h5>
         <div class="tasks" id="complete_tasks">
-           <%= render(partial: "tasks/task", collection: @complete_tasks) || "This List don't have completed tasks at this time" %>
+           <%= render(partial: "tasks/task", collection: @complete_tasks)  %>
         </div>
       </div>
   <% end %>

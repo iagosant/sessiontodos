@@ -1,6 +1,6 @@
 
 <% if params[:type].present? %>
-   
+
    $('.new_blocker').append('<%= j render(@blocker) %>');
    $('#edit_task_<%= @blocker.id %>').submitOnCheck();
    $('.new_blocker #detail').val('');

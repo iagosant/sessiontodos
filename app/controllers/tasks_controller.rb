@@ -1,28 +1,33 @@
 class TasksController < ApplicationController
   include TasksHelper
   before_action :set_list, only: [:new, :create, :edit ], if: -> { params[:type].blank? }
-  before_action :set_task, except: [:new, :create]
+  before_action :set_task,  if: -> { !params[:type].blank? || !params[:id].blank? }
+
   skip_before_filter :verify_authenticity_token
 
 #   def add_deadline
 # byebug
 #   end
+  def index
+    respond_to do |format|
+      format.html { redirect_to @list  }
+      format.js
+    end
+  end
 
   def new
-    if params[:type]== 'blocker'
-       @task = Task.find(params[:task_id])
-       @blockers = @task.t_blockers
-       @blocker = @task.t_blockers.new
-     end
+
   end
 
   def create
+    byebug
      task_info = task_params
      task_info[:user_id] = current_user.id
 
      if params[:type].present?
        @task = Task.find(params[:task_id])
        @list = List.find(@task.list_id)
+       byebug
        @blocker = @task.t_blockers.create(task_params)
      else
        @task = @list.tasks.create(task_info)
@@ -81,9 +86,10 @@ class TasksController < ApplicationController
      end
 
      def set_task
-
-       @task = Task.find(params[:id])
-
+       byebug
+       id = (params[:type]== 'blocker') ? params[:task_id] : params[:id]
+       @task= Task.find(id)
+       @blockers = @task.t_blockers
      end
 
     #  def set_task(id)

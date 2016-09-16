@@ -23,7 +23,7 @@
 	 </li>
 	 <li>
 			<% if !task.completed? %>
-				<%= link_to new_task_t_blocker_path(list_id: @list.id, task_id: task.id),id: 'completed', remote: true do %>
+				<%= link_to task_t_blockers_path(list_id: @list.id, task_id: task.id),id: 'completed', remote: true do %>
 				   <i class="material-icons">warning</i>
 				<% end %>
 			<% end %>
@@ -35,9 +35,11 @@
 		</li>
 	</ul>
 	<div class='show_blockers row' id="show_blockers_<%= task.id%>" style="display:none">
-		<div id= "blockers" >
-		  <% @blockers = task.t_blockers %>
-      <%= render @blockers %>
+		<div id= "new_blocker_<%= task.id%>">
+		  
+		</div>
+		<div id= "blockers_<%= task.id%>">
+
 		</div>
   </div>
 	<ul id="dropdownlist_<%= task.id%>" class="dropdown-list">
