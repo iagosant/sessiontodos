@@ -1,11 +1,12 @@
 <div class="padding8"></div>
 <div class="row">
-  <div class="col s12 m4 l3"> <!-- Note that "m4 l3" was added -->
+  <div class="col s12 m4 l3" id="user_lists"> <!-- Note that "m4 l3" was added -->
     <div class="collection" id="collection-list">
       <%= link_to current_all_tasks.name, current_all_tasks, class: "collection-item active", id:"#{current_all_tasks.id}", remote: true %>
       <% @lists.each do |list| %>
         <% if (current_all_tasks.id != list.id)  %>
-          <%= link_to list.name, list, class: "collection-item",id:"#{list.id}", remote: true %>
+        <a  class= "collection-item" id="<%=list.id %>" href="#" data-href= "<%=list_path(list) %>" data-remote="true"><%=list.name %></a>
+          <!-- <%= link_to list.name, list, class: "collection-item",id:"#{list.id}", remote: true %> -->
         <% end %>
         <% end %>
       <%= link_to 'Add List +', new_list_path, class: "collection-item", remote: true%>
@@ -29,23 +30,18 @@
   <div class="col s12 m8 l9" style="padding: 0 40px;" > <!-- Note that "m8 l9" was added -->
    <div id="main_center">
     <div class="center row">
-      <div class="col s1 offset-s6">
-        <div id='date'>
-          <%= form_for @list, method: :get, html: { class: "form_date", id: "form_date" },remote: true do |f| %>
-          <!-- <input type="hidden" name="date"> -->
-            <input type="date" class="datepicker" id="mainDate">
+      <!-- <div class="col s2 offset-s8"> -->
+        <div id='application_date'>
+          <%= form_for @list, method: :get,remote: true do |f| %>
+             <input type="hidden" name="date" id="form_date">
+             <input type="date" class="datepicker right-align">
           <% end %>
         </div>
-        <!-- <div class="picker__date-display" class="datepicker">
-        <div class="picker__weekday-display"></div>
-        <div class="picker__month-display"><div></div></div>
-        <div class="picker__day-display"><div></div></div>
-        <div class="picker__year-display"><div></div></div>
-      </div> -->
-    </div>
+
+    <!-- </div>
     <div class="col s1">
       <a class="waves-effect waves-teal btn-flat" id="today">Today</a>
-    </div>
+    </div> -->
     <div class="share-icons" id="collaboration-users">
       <%= render 'list_users' %>
     </div>

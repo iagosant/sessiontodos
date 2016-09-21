@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
   before_filter -> { flash.now[:notice] = flash[:notice].html_safe if flash[:html_safe] && flash[:notice] }
+  # before_filter :get_current_date
 
   def require_logged_in
     return true if current_user
@@ -33,5 +34,16 @@ class ApplicationController < ActionController::Base
       flash[:alert] = "Access denied."
       redirect_to (request.referrer || root_path)
   end
+
+  # date
+  def get_current_date
+    byebug
+    if (params[:date].blank?) && (@current_date.nil?)
+      @current_date =  Date.today
+    else
+      @current_date = (params[:date].present?) ? params[:date].to_date : @current_date
+    end
+  end
+
 
 end

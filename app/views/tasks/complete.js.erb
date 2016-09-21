@@ -1,6 +1,7 @@
 <% if @task.completed? %>
-  $('#edit_task_<%= @task.id %>').appendTo('#complete_tasks');
+  $('#task_<%= @task.id %>').appendTo('#complete_tasks');
   $('input#completed_<%= @task.id %>').attr('disabled','disabled');
+  
 <% else %>
-  $('#edit_task_<%= @task.id %>').appendTo('#incomplete_tasks');
+  $('#task_<%= @task.id %>').appendTo('#incomplete_tasks');
 <% end %>

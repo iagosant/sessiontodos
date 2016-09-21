@@ -5,7 +5,7 @@ module LoginHelper
     all_task_list = current_user.created_lists.find_by(name: 'All Tasks')
     all_task_list = (all_task_list.nil?) ? current_user.created_lists.create(name: "All Tasks") : all_task_list
     session[:all_tasks_id] = all_task_list.id
-    $date = Date.today
+    # $date = Date.today
     # session[:team_id] = user.team_id
   end
 

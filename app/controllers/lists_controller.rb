@@ -1,10 +1,9 @@
 class ListsController < ApplicationController
   include ApplicationHelper
+  helper_method :get_current_date
   before_action :set_user, only: [:index, :show, :edit, :update, :destroy]
   before_action :set_list, only: [:index, :show, :edit, :update, :destroy]
   before_action :require_logged_in
-  # after_action :set_task_per_user, only: [:set_list ]
-
 
   def index
     @all_tasks   = current_user.tasks.where(:completed_at => nil)
@@ -89,17 +88,18 @@ class ListsController < ApplicationController
 
 
     def set_task_per_user
-      set_date
-      d_today = get_date
-      d_yesterday = d_today - 1.day
-      #  @tasks = @list.tasks.where('DATE(created_at) BETWEEN ? AND ?', d_yesterday , d_today )
+      byebug
+      # set_date
+      # d_today = get_current_date
+      d_yesterday =  get_current_date - 1.day
+      #  @tasks = @list.tasks.where('DATE(created_at) BETWEEN ? AND ?', d_yesterday , @current_date )
       @tasks = @user.tasks.where(:list_id=>@list.id)
-      @incomplete_tasks = @tasks.where(["completed_at IS ? and DATE(created_at)=?",nil,d_today])
-      @complete_tasks = @tasks.where('DATE(completed_at) BETWEEN ? AND ?', d_yesterday , d_today ).order('completed_at')
+      @incomplete_tasks = @tasks.where(["completed_at IS ? and DATE(created_at)=?",nil,@current_date])
+      @complete_tasks = @tasks.where('DATE(completed_at) BETWEEN ? AND ?', d_yesterday , @current_date ).order('completed_at')
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def list_params
-      params.require(:list).permit(:name, :description, :avatar)
+      params.require(:list).permit(:name, :description, :avatar, :date)
     end
 end

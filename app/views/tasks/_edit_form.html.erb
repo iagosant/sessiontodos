@@ -1,8 +1,7 @@
-<div class="row">
-<%= form_for([@list, @list.tasks.build], :remote => true) do |f| %>
-	<div class="input-field col s10">
+<div class="col s9">
+	<%= form_for(@task, :remote => true) do |f| %>
+	<div class="input-field col s6">
 		<%= f.text_field :detail, id: "detail" %>
-    <label for="detail">New Task</label>
   </div>
 	<div class="col s2 input-field">
 		 <a class="waves-effect waves-light su-btn btn-flat submit"><%= f.submit "ADD"%></a>

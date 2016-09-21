@@ -1,11 +1,12 @@
 
-<% if params[:type].present? %>
+ <% if params[:type].present? %>
 
-   $('.new_blocker').append('<%= j render(@blocker) %>');
+   $('#blockers_task<%= @task.id%>').append('<%= j render partial: "t_blocker", object: @blocker %>');
    $('#edit_task_<%= @blocker.id %>').submitOnCheck();
-   $('.new_blocker #detail').val('');
+   $('.show_blockers #detail').val('');
 <% else %>
-  $('#incomplete_tasks').append('<%= j render(@task) %>');
-  $('#edit_task_<%= @task.id %>').submitOnCheck();
-  $('.new_task #detail').val('');
-<% end %>
+
+   $('#incomplete_tasks').append('<%= j render(@task) %>');
+   $('#edit_task_<%= @task.id %>').submitOnCheck();
+   $('.new_task #detail').val('');
+ <% end %>
