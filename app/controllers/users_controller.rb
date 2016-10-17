@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   include UsersHelper
+  include PasswordResetsHelper
   before_action :set_user, only: [:update]
   before_action :require_logged_in, only: [:show, :edit, :update, :destroy]
   attr_accessor :email, :name, :password, :password_confirmation
@@ -55,8 +56,11 @@ class UsersController < ApplicationController
   end
 
   def update
-    byebug
-  current_user.current_step = (user_params[:current_step].present?)? user_params[:current_step] : steps.first
+    current_user.current_step = (user_params[:current_step].present?)? user_params[:current_step] : steps.first
+    if current_user.current_step == "security"
+      update_password(user_params)
+    else
+    end
     respond_to do |format|
       if current_user.update(user_params)
         format.html { redirect_to :back, notice: 'User was successfully updated.' }
@@ -77,6 +81,7 @@ class UsersController < ApplicationController
       User.reset_pk_sequence
     end
   end
+  
   def resend_activation
     @user = User.find_by(email:params[:email])
     @user.activation_token = User.new_token

@@ -6,6 +6,7 @@
           <div class="col s12 m9">
             <h1>Editing User</h1>
             <h6><%= current_user.first_name %> <%= current_user.last_name %></h6>
+            <%= flash[:message] %>
           </div>
           <i class="material-icons large col s12 m3">portrait</i>
         </div>
