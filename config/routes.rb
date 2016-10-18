@@ -58,6 +58,7 @@ Rails.application.routes.draw do
     resources :tasks , only: [:new, :create, :edit]
     resources :invitations
   end
+
   resources :tasks do
     member do
       patch :add_deadline
