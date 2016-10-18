@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   include UsersHelper
+
   helper_method :get_current_date
   before_action :set_user, only: [:show, :update, :list_user]
   before_action :set_list,  if: -> { !params[:type].blank? }
@@ -84,8 +85,13 @@ class UsersController < ApplicationController
   end
 
   def update
-    byebug
+
     current_user.current_step = (user_params[:current_step].present?)? user_params[:current_step] : steps.first
+    if current_user.current_step == "security"
+      update_password(user_params)
+    else
+    end
+
     respond_to do |format|
       if current_user.update(user_params)
         format.html { redirect_to :back, notice: 'User was successfully updated.' }

@@ -58,6 +58,7 @@ class TasksController < ApplicationController
    end
 
    def complete
+    #  byebug
 
      @task.update_attribute(:completed_at, Time.now)
      respond_to do |format|
@@ -68,7 +69,7 @@ class TasksController < ApplicationController
    end
 
    def changelist
-byebug
+
      @task.update_attribute(:list_id, params[:list_id])
      respond_to do |format|
        format.html {  redirect_to @list, notice: "Task changed" }

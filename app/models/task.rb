@@ -7,8 +7,8 @@ class Task < ActiveRecord::Base
   accepts_nested_attributes_for :t_blockers
 
   def completed?
+    # byebug
     !completed_at.blank?
   end
-
 
 end

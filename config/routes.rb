@@ -67,6 +67,7 @@ Rails.application.routes.draw do
     end
   end
 
+
   # resources :users
   # resources :lists do
   #   resources :tasks , only: [:new, :create, :edit]
@@ -76,6 +77,7 @@ Rails.application.routes.draw do
   #     patch :num_incompleted_tasks
   #   end
   # end
+
   resources :tasks do
     resources :t_blockers, :controller => 'tasks', :defaults => {:type => 'blocker'}, :name_prefix => "tasks_"
     member do
