@@ -8,9 +8,10 @@
   label { text-decoration: line-through; }
 }
 .show_blockers{
-  padding: 20px;
-  width: 100%;
+  padding: 20px 40px;
+  //width: 100%;
   background: aliceblue;
+  min-height: 80px;
 }
 ul.menu-option >li{
     display: inline-block;
@@ -25,6 +26,7 @@ ul.menu-option > li:first-child {
 #complete_tasks ul.menu-option #completed{
   display:none;
 }
+
 // #new_blocker:not(.active) {
 //   display: none;
 // }

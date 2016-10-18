@@ -16,6 +16,11 @@
   <div class="row">
     <div class="col s12">
       <div class="field">
+        <% if @token != nil %>
+          <%= hidden_field_tag :invitation_token, @token %>
+        <% end %>
+      </div>
+      <div class="field">
         <%= f.label :first_name %><br>
         <%= f.text_field :first_name %>
       </div>

@@ -1,0 +1,10 @@
+<div class="col s9">
+	<%= form_for(@task, :remote => true) do |f| %>
+	<div class="input-field col s6">
+		<%= f.text_field :detail, id: "detail" %>
+  </div>
+	<div class="col s2 input-field">
+		 <a class="waves-effect waves-light su-btn btn-flat submit"><%= f.submit "ADD"%></a>
+	</div>
+	<% end %>
+</div>

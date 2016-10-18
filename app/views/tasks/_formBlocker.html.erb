@@ -1,12 +1,12 @@
 
-<%= form_for(@blocker,as: :blocker,url: task_t_blockers_path(@task), method: :post, :remote => true) do |f| %>
+<%= form_for(@task.t_blockers.build, url:task_t_blockers_path(@task), method: :post, :remote => true) do |f| %>
 <div class="row">
-	<div class="input-field col s6">
+	<div class="input-field col s10">
 		<%= f.text_field :detail, id: "detail" %>
     <label for="detail">New Blocker</label>
   </div>
-	<div class="col s6 input-field">
+	<div class="col s2 input-field">
 		 <a class="waves-effect waves-light su-btn btn-flat submit"><%= f.submit "ADD"%></a>
 	</div>
 </div>
-	<% end %>
+<% end %>

@@ -10,6 +10,9 @@
             <h5 class="center-align">Welcome back!</h5>
             <div class="form">
               <%= form_for(:session, url: login_path) do |f| %>
+                <% if @token != nil %>
+                  <%= hidden_field_tag :invitation_token, @token %>
+                <% end %>
                 <div class="input-field">
                   <i class="material-icons prefix">person</i>
                   <%= f.email_field :email, id: 'icon_prefix' %>

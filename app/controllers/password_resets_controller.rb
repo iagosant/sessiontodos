@@ -30,19 +30,27 @@ class PasswordResetsController < ApplicationController
   end
 
   def update
-    # Self.update_password
-    if logged_in?
-      if current_user.authenticate(params[:user][:current_password])
-        password_update
-        redirect_to :back
-      else
-        # flash.now[:notice] = "Could not save client"
-        #flash message "You were already logged in."
-        #"To update your password go to the security tab."
-        render 'users/edit'
-      end
-    else
-      password_update
+# <<<<<<< HEAD
+#     # Self.update_password
+#     if logged_in?
+#       if current_user.authenticate(params[:user][:current_password])
+#         password_update
+#         redirect_to :back
+#       else
+#         # flash.now[:notice] = "Could not save client"
+#         #flash message "You were already logged in."
+#         #"To update your password go to the security tab."
+#         render 'users/edit'
+#       end
+#     else
+#       password_update
+# =======
+
+    if params[:user][:password].empty?
+      @user.errors.add(:password, "can't be empty")
+      render 'edit'
+    elsif @user.update_attributes(user_params)
+# >>>>>>> d1f9dfbf4ca487d1af56e9f8afb024e15af40365
       log_in @user
       byebug
       flash[:success] = "Password has been reset."
@@ -72,7 +80,11 @@ class PasswordResetsController < ApplicationController
   # Confirms a valid user.
   def valid_user
     unless (@user && @user.activated?) &
+<<<<<<< HEAD
       (@user.authenticated?(:reset, params[:id]) || logged_in?)
+=======
+      (@user.authenticated?(:reset, params[:id]) || logged_in)
+>>>>>>> d1f9dfbf4ca487d1af56e9f8afb024e15af40365
       redirect_to root_url
     end
   end

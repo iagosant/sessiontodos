@@ -1,0 +1,29 @@
+<% if has_collaborations? %>
+ <div class="row">
+   <div class="right-align">
+     <% if (@list.owner.id != current_user.id) %>
+       <div class="chip" style="background: none;">
+         <%= link_to  @list.owner, id:"#{@list.owner.id}", remote: true do %>
+           <% if !@list.owner.avatar.nil? %>
+             <%= image_tag(@list.owner.avatar(:medium), class: 'circle',alt: @list.owner.first_name, title:@list.owner.first_name) %>
+           <% else %>
+             <span class="user-initial circle"><%= initials(@list.owner.id) %></span>
+           <% end %>
+          <% end %>
+       </div>
+      <% end %>
+
+   <% list_users.each do |user| %>
+     <div class="chip" style="background: none;">
+       <%= link_to  user, id:"#{user.id}", remote: true do %>
+         <% if !user.avatar.nil? %>
+           <%= image_tag(user.avatar(:medium), class: 'circle',alt: user.first_name, title:user.first_name) %>
+         <% else %>
+           <span class="user-initial circle"><%= initials(user.id) %></span>
+         <% end %>
+        <% end %>
+     </div>
+    <% end %>
+   </div>
+ </div>
+<% end %>

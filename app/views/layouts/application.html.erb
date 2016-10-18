@@ -23,7 +23,7 @@
       <nav class="border-bottom">
         <div class="nav-wrapper">
           <a href="/" class="brand-logo valign-wrapper"><%= image_tag "sessions_logo.png", :size => "160x48", :alt => "StandUp", :title => "StandUp Logo"%></a>
-          <a class="dropdown-button right" href="#!" data-activates="dropdown1"><%= current_user.first_name %><i class="avatar-icons right"><%= image_tag(current_user.avatar(:medium), height: '42', width: '42') %></i></a>
+          <a class="dropdown-button right" href="#!" data-activates="dropdown1"><%= current_user.first_name %><i class="avatar-icons right"><%= image_tag(current_user.avatar(:medium), height: '42', width: '42',class: 'circle') %></i></a>
           <!-- <ul id="nav-mobile" class="right hide-on-med-and-down menu">
             <li class="div-right"><a href="/sessions" class="active"><i class="material-icons left"><img alt="All Sessions" id="icon-change" src="/assets/all-sessions-menu.png" width="25" height="29"></i>All Sessions</a></li>
             <li class="div-right"><a href="/sessions/new" class=""><i class="material-icons left"><img alt="New Sessions" id="icon-change"  src="/assets/new-session-menu.png" width="25" height="29"></i>New Session</a></li>

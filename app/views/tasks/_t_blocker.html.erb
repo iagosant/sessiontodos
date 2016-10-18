@@ -1,0 +1,10 @@
+<ul class="menu-option" id='blocker_<%= t_blocker.id %>'>
+	 <li class="col s10">
+		<%= label_tag "blocker_#{t_blocker.id}", t_blocker.detail %>
+	 </li>
+	 <li>
+			<%= link_to t_blocker, method: :delete, data: {confirm: "Are you sure?"}, remote: true do %>
+				<i class="material-icons">delete</i>
+			<% end %>
+		</li>
+</ul>

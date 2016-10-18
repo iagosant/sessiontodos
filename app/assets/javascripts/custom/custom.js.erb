@@ -9,6 +9,9 @@ jQuery.fn.submitOnCheck = function() {
 $(document).on('turbolinks:load',function(){
 
   $('select').material_select();
+  $('.modal-trigger').leanModal();
+
+
   var pgurl = window.location.href.substr(window.location.href.lastIndexOf("/")+1);
   $("#stand-up ul li a").each(function(){
       //  alert($(this).attr("href") );
@@ -42,14 +45,14 @@ $(document).on('turbolinks:load',function(){
       change_img_nav(this)
    });
 
-  $( "#datepicker" ).datepicker({
-    dateFormat: 'yy-mm-dd',
-    disabled: false
-   });
-   $( "#datepicker2" ).datepicker({
-     dateFormat: 'yy-mm-dd',
-     disabled: false
-    });
+  // $( "#datepicker" ).datepicker({
+  //   dateFormat: 'yy-mm-dd',
+  //   disabled: false
+  //  });
+  //  $( "#datepicker2" ).datepicker({
+  //    dateFormat: 'yy-mm-dd',
+  //    disabled: false
+  //   });
 
 });
 function change_img_nav(e){

@@ -8,16 +8,5 @@ module ApplicationHelper
     first_names
   end
 
-  def set_date
-    if (params[:date].blank?) && (get_date.nil?)
-      $date =  Date.today
-    else
-      $date = (params[:date].present?)? params[:date].to_date : $date
-    end
-  end
-
-  def get_date
-    @get_date = $date
-  end
 
 end

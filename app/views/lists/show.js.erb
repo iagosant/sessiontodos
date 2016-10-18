@@ -1,9 +1,7 @@
 
-// $('.new-task').html("<%= j render partial: 'tasks/form' %>");
-// $('#incomplete_tasks').html("<%= j render @incomplete_tasks %>");
-// $('#complete_tasks').html("<%= j render @complete_tasks %>");
-
-$('#list').html("<%= j render @list %>");
+$('#new_list').remove();
+$('#main_center').show();
+$('#collaboration-users').html("<%= j render partial: 'list_users' %>");
+$('#list').html("<%= j render partial: 'list_user' %>");
 
 $('.edit_task').submitOnCheck();
-console.log('1');

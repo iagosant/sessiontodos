@@ -5,7 +5,7 @@
     background-color: #FFFFFF;
     margin: 0;
     display: none;
-    min-width: 300px; /* Changed this to accomodate content width */
+    min-width: 200px; /* Changed this to accomodate content width */
     max-height: auto;
   	margin-left: -1px; /* Add this to keep dropdown in line with edge of navbar */
     overflow: hidden; /* Changed this from overflow-y:auto; to overflow:hidden; */
@@ -14,8 +14,15 @@
     white-space: nowrap;
     z-index: 1;
     will-change: width, height;
-
+    border: 1px solid #c3c3c3;
 }
+.dropdown-list li{
+  line-height: 30px;
+}
+.dropdown-list li:not(:last-child){
+  border-bottom: 1px solid #c3c3c3;
+}
+
 .dropdown-list ul li{
   padding: 5px 10px;
 }
@@ -26,7 +33,23 @@
 #edit_option {
   float: left;
 }
-
+.list-user-avatar{
+  width: 46px;
+  height: 46px;
+  border: 2px solid #12AAED!important;
+  background-color: #12AAED;
+  text-align: center;
+  display: table;
+}
+.list-user-avatar img{
+  display: inline-table;
+  vertical-align: middle;
+  padding: 5px 0 0;
+}
+#list h5{
+  margin: 1rem 0 1rem!important;
+  font-size: 1.3rem!important;
+}
 // @media only screen and (min-width: 601px){
 // #stand-up nav.task-option,
 // #stand-up nav.task-option .nav-wrapper i,
@@ -36,3 +59,6 @@
 //     line-height: 35px;
 // }
 // }
+#application_date .datepicker{
+  border-bottom: none;
+}

@@ -1,15 +1,21 @@
 class LoginController < ApplicationController
   include LoginHelper
   def new
-
+    @token = params[:invitation_token]
   end
 
   def create
+    byebug
       user = User.find_by_email(params[:session][:email].downcase)
       # If the user exists AND the password entered is correct.
       if user && user.authenticate(params[:session][:password]) && user.activated
         # Save the user id inside the browser cookie. This is how we keep the user
         # logged in when they navigate around our website.
+        @token = params[:invitation_token]
+        @invitation = Invitation.find_by_token(@token)
+        if (!@token.nil?)&&(user.email==@invitation.recipient_email)
+            user.collaboration_lists << List.find(@invitation.list_id) #add this user to the list as a collaborator
+        end
         log_in user
         remember user
         redirect_to '/lists'

@@ -4,17 +4,17 @@ class User < ActiveRecord::Base
   validates_presence_of :first_name, :if => lambda { |o| o.current_step == "personal" || o.current_step == steps.first }
   validates_presence_of :avatar, :if => lambda { |o| o.current_step == "avatar" || o.current_step == steps.first }
 
-  before_save :downcase_email
   validates :first_name, presence: true, length: { maximum: 50 }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, presence: true, length: { maximum: 255 },
   format: { with: VALID_EMAIL_REGEX },
   uniqueness: { case_sensitive: false }
   has_secure_password
+
   validates :password, presence: true, length: { minimum: 6 }, :if => lambda { |o| o.current_step == "security" || o.current_step == steps.first  }
   validates_confirmation_of :password
   validates_presence_of :password, :on => :create
-  validates_presence_of :email
+  before_save :downcase_email
   # validates_presence_of :team_id
 
   # belongs_to :team
@@ -43,6 +43,9 @@ class User < ActiveRecord::Base
   has_many :tasks
   has_many :collaboration_tasks, through: :collaboration_lists, :source => :tasks
   has_many :my_tasks, through: :created_lists, :source => :tasks
+
+  has_many :invitations, :class_name => "invitation", :foreign_key => 'recipient_id'
+  has_many :sent_invitations, :class_name => "Invitation", :foreign_key => 'sender_id'
 
   def steps
     %w[all personal avatar security]
@@ -96,12 +99,24 @@ class User < ActiveRecord::Base
     UserMailer.password_reset(self).deliver_now
   end
 
+  # Invitations to user.
+
+  def invitation_token
+    invitation.token if invitation
+  end
+
+  def invitation_token=(token)
+    self.invitation = Invitation.find_by_token(token)
+  end
 
   # Forgets a user.
   def forget
     update_attribute(:remember_digest, nil)
   end
 
+  def user_exist(email)
+    invitation.token if invitation
+  end
 
   private
 
