@@ -2,11 +2,12 @@
 <%= form_for([@list, @list.tasks.build], :remote => true) do |f| %>
 	<div class="input-field col s10">
 		<% if @user != nil %>
-			<%= f.hidden_field :user_id %>
+			<%= f.hidden_field :user_id, :value => @user.id  %>
 			<% if !current_user?(@user) %>
 				<%= f.hidden_field :assigner_id, :value => current_user.id %>
 			<% end %>
 		<% end %>
+
 		<%= f.text_field :detail, id: "detail" %>
     <label for="detail">New Task</label>
   </div>

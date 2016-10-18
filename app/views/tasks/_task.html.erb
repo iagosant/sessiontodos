@@ -1,28 +1,26 @@
-
 <% if task.completed?  %>
 	<ul id='task_<%= task.id%>' class="menu-option">
-	 	<li  class="col s11" style="text-transform: line-through">
-			 <%= label_tag "completed_#{task.id}", "#{task.detail} #{task.completed_at} created_at: #{task.created_at.strftime('%m:%d:%Y')} "%>
+	  	<li class="col s10">
+			 <p style="text-decoration: line-through;"><%= "#{task.detail} #{task.completed_at} created_at: #{task.created_at.strftime('%m:%d:%Y')} " %></p>
 		 </li>
-		 <li class="col s1">
+		 <li class="col s2">
 			 <% if permitted_user?(@user,@list) %>
 				 <%= link_to task, method: :delete, data: {confirm: "Are you sure?"}, remote: true do %>
-						<i class="material-icons">delete</i>
+						<i class="material-icons">cancel</i>
 				 <% end %>
 			 <% end %>
 		 </li>
 	 </ul>
 <% else %>
 	<ul id='task_<%= task.id%>' class="menu-option 	<%= (is_today?((task.created_at.to_date )))? 'today' : 'before'  %>">
-		<li  class="col s10">
-				<%= label_tag "completed_#{task.id}", "#{task.detail} #{task.completed_at} created_at: #{task.created_at.strftime('%m:%d:%Y')} "%>
+		<li class="col s9"><%= "#{task.detail} #{task.completed_at} created_at: #{task.created_at.strftime('%m:%d:%Y')} "%>
 	 	</li>
 		<li>
 			<%= form_for task, url: complete_task_path(:id => task.id, :list_id => @list.id), remote: true do |f| %>
 			<%= check_box_tag "completed[#{task.id}]", "#{task.id}", true, :name => "task_id", disabled: task.completed? || !permitted_user?(@user,@list) %>
+			<%= label_tag "completed_#{task.id}", ""%>
 			<%= f.submit "Update" %>
 			<% end %>
-
 		</li>
 		 <li>
 			  <% if (!task.completed? && permitted_user?(@user,@list))  %>
@@ -48,11 +46,11 @@
 			<li>
 				<% if permitted_user?(@user,@list) %>
 					<%= link_to task, method: :delete, data: {confirm: "Are you sure?"}, remote: true do %>
-						 <i class="material-icons">delete</i>
+						 <i class="material-icons">cancel</i>
 					<% end %>
 				<% end %>
 			</li>
-		</ul>
+	</ul>
 		<div class='show_blockers row' id="show_blockers_<%= task.id%>" style="display:none">
 		 <% if permitted_user?(@user,@list) %>
 				<div id= "new_blocker_<%= task.id%>"></div>

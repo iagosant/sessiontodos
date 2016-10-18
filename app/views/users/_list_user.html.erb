@@ -11,19 +11,11 @@
       <%= render partial: 'tasks/form' %>
     </div>
   <% end %>
-  <div>
-      <h5>Incomplete Tasks</h5>
-      <div class="tasks" id="incomplete_tasks">
-          <div class="tasks table-of-task" id="today">
-              <%= render(partial: "tasks/task", collection: user.incompleted_tasks_today(list,@date))%>
-          </div>
-          <div class="tasks table-of-task" id="before">
-              <%= render(partial: "tasks/task", collection: user.incompleted_tasks_past(list,@date))%>
-          </div>
-      </div>
+  <div class="tasks table-of-task" id="incomplete_tasks">
+    <%= render(partial: "tasks/task", collection: user.incompleted_tasks(list))%>
   </div>
   <div>
-    <h5>Completed Tasks</h5>
+    <div class="divider"></div>
     <div class="tasks" id="complete_tasks">
       <%= render(partial: "tasks/task", collection: user.completed_tasks(list,@date))  %>
     </div>
