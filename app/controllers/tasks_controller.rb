@@ -1,11 +1,13 @@
 class TasksController < ApplicationController
   include TasksHelper
-  before_action :set_list, only: [:new, :create, :edit ], if: -> { params[:type].blank? }
+  before_action :set_list, only: [:new, :create, :edit, :complete ], if: -> { params[:type].blank? }
   before_action :set_task,  if: -> { !params[:type].blank? || !params[:id].blank? }
+  before_action :set_user, only: [:create, :index ]
   skip_before_filter :verify_authenticity_token
 
 
   def index
+    byebug
     if (params[:type].present? || params[:type]=="blocker")
        @blockers = @task.t_blockers
     end
@@ -20,13 +22,13 @@ class TasksController < ApplicationController
   end
 
   def create
-
+  byebug
     task_info = task_params
-    task_info[:user_id] = current_user.id
+
     if params[:type].present?
        @blocker = @task.t_blockers.create(task_params)
      else
-       @task = @list.tasks.create(task_info)
+       @task = @list.tasks.create(task_params)
      end
 
      respond_to do |format|
@@ -57,6 +59,7 @@ class TasksController < ApplicationController
 
    def complete
     #  byebug
+
      @task.update_attribute(:completed_at, Time.now)
      respond_to do |format|
        format.html {  redirect_to @list, notice: "Task completed" }
@@ -76,9 +79,13 @@ class TasksController < ApplicationController
    end
 
    private
-
      def set_list
        @list = List.find(params[:list_id])
+     end
+
+     def set_user
+       byebug
+      @user = User.find((!task_params[:user_id].blank?) ? task_params[:user_id] : current_user.id)
      end
 
      def set_task
@@ -87,7 +94,7 @@ class TasksController < ApplicationController
      end
 
      def task_params
-        params[:task].permit(:detail, :user_id)
+        params[:task].permit(:detail, :user_id, :assigner_id)
      end
 
 

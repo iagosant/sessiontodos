@@ -12,4 +12,5 @@ module ListsHelper
     @list_users = @list.collaboration_users.where.not(:id=> current_user.id)
   end
 
+
 end
