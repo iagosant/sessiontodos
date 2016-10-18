@@ -53,18 +53,36 @@ Rails.application.routes.draw do
   #   resources :blockers
   # end
   resources :sessions
-  resources :users
-  resources :lists do
-    resources :tasks , only: [:new, :create, :edit]
-    resources :invitations
+#
+  resources :users do
+    resources :lists, :name_prefix => "user_"
   end
+
+  resources :lists do
+    resources :tasks, :name_prefix => "list_"
+    resources :invitations
+    resources :collaboration_users, :controller => 'users', :defaults => {:type => 'collaborator'}
+    member do
+      patch :num_incompleted_tasks
+    end
+  end
+
+  # resources :users
+  # resources :lists do
+  #   resources :tasks , only: [:new, :create, :edit]
+  #   resources :invitations
+  #   resources :collaboration_users, :controller => 'users', :defaults => {:type => 'collaborator'}
+  #   member do
+  #     patch :num_incompleted_tasks
+  #   end
+  # end
   resources :tasks do
+    resources :t_blockers, :controller => 'tasks', :defaults => {:type => 'blocker'}, :name_prefix => "tasks_"
     member do
       patch :add_deadline
       patch :complete
       patch :changelist
     end
-    resources :t_blockers, :controller => 'tasks', :defaults => {:type => 'blocker'}
   end
 
 

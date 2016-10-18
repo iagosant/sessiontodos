@@ -37,13 +37,15 @@ class ApplicationController < ActionController::Base
 
   # date
   def get_current_date
-    byebug
+
     if (params[:date].blank?) && (@current_date.nil?)
       @current_date =  Date.today
     else
       @current_date = (params[:date].present?) ? params[:date].to_date : @current_date
     end
+
   end
+
 
 
 end

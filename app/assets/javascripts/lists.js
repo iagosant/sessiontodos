@@ -1,6 +1,3 @@
-// # Place all the behaviors and hooks related to the matching controller here.
-// # All this logic will automatically be available in application.js.
-// # You can use CoffeeScript in this file: http://coffeescript.org/
 $(document).on('turbolinks:load',function(){
   $('.modal-trigger').leanModal();
   $('.edit_task').submitOnCheck();
@@ -45,14 +42,15 @@ $(document).on('turbolinks:load',function(){
     $('#user_lists a').on('click', function(){
         event.preventDefault();
         var date = $('#form_date').val() ? $('#form_date').val(): new Date();
+   console.log('Entroooooo');
         $.ajax({
            complete:function(request){},
            data:'date='+ date,
            dataType:'script',
            type:'get',
-           url: $(this).attr('data-href') // in your case, may be '/[CONTROLLER NAME]/geocode' until you define route
+           url: $(this).attr('data-href')
          })
-         //$.post($(this).attr('data-href') + "?date=" + date, function(data){} );
-    })
+    });
 
+  
 });

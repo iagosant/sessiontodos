@@ -3,8 +3,10 @@
 		<%= label_tag "blocker_#{t_blocker.id}", t_blocker.detail %>
 	 </li>
 	 <li>
-			<%= link_to t_blocker, method: :delete, data: {confirm: "Are you sure?"}, remote: true do %>
-				<i class="material-icons">delete</i>
+		 	<% if !permitted_user?(@user,@list) %>
+				<%= link_to t_blocker, method: :delete, data: {confirm: "Are you sure?"}, remote: true do %>
+					<i class="material-icons">delete</i>
+				<% end %>
 			<% end %>
 		</li>
 </ul>

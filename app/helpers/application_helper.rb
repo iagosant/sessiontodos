@@ -8,5 +8,8 @@ module ApplicationHelper
     first_names
   end
 
+  def is_today?(date)
+    (date == Date.today)
+  end
 
 end
