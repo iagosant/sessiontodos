@@ -64,6 +64,7 @@ Rails.application.routes.draw do
     resources :collaboration_users, :controller => 'users', :defaults => {:type => 'collaborator'}
     member do
       patch :num_incompleted_tasks
+      # patch :collaborations_users
     end
   end
 
@@ -96,6 +97,8 @@ Rails.application.routes.draw do
   resources :account_activations, only: [:edit]
 
   resources :password_resets, only: [:new, :create, :edit, :update]
+
+
   # resources :teams
   # get 'new_session' => 'sessions#new', as: 'new_session'
   # <%= link_to "New Session", new_session_path %>

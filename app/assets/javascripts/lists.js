@@ -6,6 +6,7 @@ $(document).on('turbolinks:load',function(){
     $(this).addClass('active');
   });
 
+
   // $('#deadline').on('click', function(){
   //   var deadline = $("input#datepicker").val()
   //   alert(deadline);
@@ -42,7 +43,6 @@ $(document).on('turbolinks:load',function(){
     $('#user_lists a').on('click', function(){
         event.preventDefault();
         var date = $('#form_date').val() ? $('#form_date').val(): new Date();
-   console.log('Entroooooo');
         $.ajax({
            complete:function(request){},
            data:'date='+ date,
@@ -52,5 +52,5 @@ $(document).on('turbolinks:load',function(){
          })
     });
 
-  
+
 });

@@ -12,12 +12,14 @@
     </div>
   <% end %>
   <div class="tasks table-of-task" id="incomplete_tasks">
-    <%= render(partial: "tasks/task", collection: user.incompleted_tasks(list))%>
+     <%= render partial: "tasks/task", layout: "tasks/incompleted", collection: user.incompleted_tasks(list,@date) %>
+      <!-- <%= render(partial: "tasks/task", collection: user.incompleted_tasks(list,@date))%> -->
   </div>
   <div>
     <div class="divider"></div>
     <div class="tasks" id="complete_tasks">
-      <%= render(partial: "tasks/task", collection: user.completed_tasks(list,@date))  %>
+      <%= render partial: "tasks/task", layout: "tasks/completed", collection: user.completed_tasks(list,@date) %>
+        <!-- <%= render(partial: "tasks/task", collection: user.completed_tasks(list,@date))  %> -->
     </div>
   </div>
 

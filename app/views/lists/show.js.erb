@@ -9,3 +9,27 @@ $('#list').html("<%= j render partial: 'users/list_user', locals:{user: current_
 $form.attr("action","lists/<%= @list.id %>");
 $form.attr("id","edit_list_<%= @list.id %>");
 $('.edit_task').submitOnCheck();
+
+
+$('#detail').triggeredAutocomplete({
+    hidden: '#hidden_inputbox',
+    source: [
+    "Asp",
+    "BASIC",
+    "COBOL",
+    "ColdFusion",
+    "Erlang",
+    "Fortran",
+    "Groovy",
+    "Java",
+    "JavaScript",
+    "Lisp",
+    "Perl",
+    "PHP",
+    "Python",
+    "Ruby",
+    "Scala",
+    "Scheme"
+    ],
+    trigger: "@"
+});

@@ -171,24 +171,24 @@ div .card{
   margin-bottom: 0px;
   font-size: 2rem!important;
   text-transform: uppercase;
-  color: #12aaeb!important;
+  color: #56c2bb!important;
   line-height: 1.5rem;
 }
 .container .card .card-action a:not(.btn):not(.btn-large):not(.btn-floating) {
   color: #989797;
 }
 .container .card .card-action a:not(.btn):not(.btn-large):not(.btn-floating):hover {
-  color: #12aaeb;
+  color: #56c2bb;
 }
 /* END STYLE FOR CARD ELEMENT */
 /* STYLE FOR BUTTON*/
 .btn, .btn-large {
-  background-color: #12aaeb!important;
+  background-color: #56c2bb!important;
   }
 .su-btn.btn-flat {
   color: #989797;
   background-color: #fff;
-  border: 1px solid #12aaeb!important;
+  border: 1px solid #56c2bb!important;
   border-radius: 5px;
   -moz-border-radius: 5px;
   /* for Safari y Chrome*/
@@ -215,11 +215,11 @@ div .card{
 .container input[type=number]:focus:not([readonly]),
 .container input[type=search]:focus:not([readonly]),
 .container textarea.materialize-textarea:focus:not([readonly]) {
-  border-bottom: 1px solid #12aaeb;
-  box-shadow: 0 1px 0 0 #12aaeb;
-  -moz-box-shadow: 0 1px 0 0 #12aaeb;
+  border-bottom: 1px solid #56c2bb;
+  box-shadow: 0 1px 0 0 #56c2bb;
+  -moz-box-shadow: 0 1px 0 0 #56c2bb;
   /* for Safari y Chrome*/
-  -webkit-box-shadow: 0 1px 0 0 #12aaeb
+  -webkit-box-shadow: 0 1px 0 0 #56c2bb
 
 }
 
@@ -236,14 +236,18 @@ div .card{
 .container input[type=number]:focus:not([readonly]) + label,
 .container input[type=search]:focus:not([readonly]) + label,
 .container textarea.materialize-textarea:focus:not([readonly]) + label {
-  color: #12aaeb;
+  color: #56c2bb;
 }
-.container [type="checkbox"]:checked+label:before {
-  border-right: 2px solid #12aaeb;
-  border-bottom: 2px solid #12aaeb;
+.container [type="checkbox"]:checked+label.md-today :before {
+  border-right: 2px solid rgba(86, 194, 187, 1);
+  border-bottom: 2px solid rgba(86, 194, 187, 1);
+}
+.container [type="checkbox"]:checked+label.md-before:before {
+  border-right: 2px solid rgba(249, 169, 90, 1);
+  border-bottom: 2px solid rgba(249, 169, 90, 1);
 }
 .container .input-field .prefix.active {
-  color: #12aaeb;
+  color: #56c2bb;
 }
 /** END CHANGE COLOR IN FOCUS (MATERIALIZE) **/
 
@@ -300,15 +304,8 @@ i.small {
   line-height: 3em;
   color: #f77f5f;
 }
-/*Collection*/
-.collection .collection-item.active {
-    background-color: #fff!important;
-    color: #12aaeb!important;;
-    border: 1px solid #12aaeb!important;
-}
-.collection a.collection-item {
-    color: #12aaeb!important;
-}
+
+
 /* MEDIA SCREEN */
 @media only screen and (min-width: 601px){
  #stand-up nav, #stand-up nav .nav-wrapper i, #stand-up nav a.button-collapse, #stand-up nav a.button-collapse i {
@@ -352,25 +349,44 @@ i.small {
   clear: both;
 }
 
-.table-of-task ul.today {
-    font-weight: 500;
-    padding-left: 18px;
-    border-left: 2px solid #56c2bb;
-}
-.table-of-task ul.before {
-    font-weight: 500;
-    padding-left: 18px;
-    border-left: 2px solid #8586c1;
-}
-.table-of-task ul{
-  margin-bottom: 5px;
-}
 .divider{
   background-color: #d3d3d5;
   height: 1px;
   width: 95%;
   margin: 15px 0 30px;
 }
+/********* material-icons ***************/
+.material-icons.md-18 { font-size: 18px; }
+
+.material-icons.md-dark { color: rgba(0, 0, 0, 0.54); }
+.material-icons.md-dark.md-inactive { color: rgba(0, 0, 0, 0.26); }
+
+.material-icons.md-light { color: rgba(255, 255, 255, 1); }
+.material-icons.md-light.md-inactive { color: rgba(255, 255, 255, 0.3); }
+
+.material-icons.md-red { color: rgba(238, 70, 114, 0.54); }
+.material-icons.md-red.md-inactive { color: rgba(238, 70, 114, 0.26); }
+
+.material-icons.md-today { color: rgba(86, 194, 187, 1); }
+.material-icons.md-today.md-inactive { color: rgba(86, 194, 187, 0.54); }
+
+.material-icons.md-before { color: rgba(249, 169, 90, 1); }
+.material-icons.md-before.md-inactive { color: rgba(249, 169, 90, 0.26); }
+
 .material-icons {
-    font-size: 17px!important;
+
+}
+a{
+  color:#636363!important;
+}
+
+/*******collection ***********/
+.collection .collection-item.active,
+.collection .collection-item.active,
+.collection a.collection-item {
+   color: #636363;
+}
+.collection .collection-item.active {
+    background-color: #fff!important;
+    border: 1px solid #56c2bb!important;
 }

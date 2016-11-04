@@ -14,5 +14,6 @@
 //= require jquery-ui
 //= require jquery_ujs
 //= require turbolinks
+//= require triggeredAutocomplete/jquery-ui.triggeredAutocomplete
 //= require custom/custom
 //= require_tree .

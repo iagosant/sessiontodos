@@ -4,9 +4,34 @@ jQuery.fn.submitOnCheck = function() {
     $(this).parent('form').submit();
   });
   return this;
-}
+};
+
 
 $(document).on('turbolinks:load',function(){
+console.log('hola');
+$('#detail').triggeredAutocomplete({
+    hidden: '#hidden_inputbox',
+    source: [
+    "Asp",
+    "BASIC",
+    "COBOL",
+    "ColdFusion",
+    "Erlang",
+    "Fortran",
+    "Groovy",
+    "Java",
+    "JavaScript",
+    "Lisp",
+    "Perl",
+    "PHP",
+    "Python",
+    "Ruby",
+    "Scala",
+    "Scheme"
+    ],
+    trigger: "@"
+});
+
 
   $('select').material_select();
   $('.modal-trigger').leanModal();
