@@ -12,4 +12,8 @@ module ApplicationHelper
     (date == Date.today)
   end
 
+  def today(date)
+    (is_today?(date))? 'today' : 'before'
+  end
+
 end

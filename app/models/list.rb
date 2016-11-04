@@ -12,7 +12,7 @@ class List < ActiveRecord::Base
   has_many :collaborations
   has_many :collaboration_users, through: :collaborations, :source => :user
 
-  has_many :invitations
+  has_many :invitations, dependent: :destroy
 
   def collaborations?
     !self.collaborations.blank?

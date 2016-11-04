@@ -72,8 +72,11 @@ class User < ActiveRecord::Base
 
   # Returns user's task
   def completed_tasks(list,date)
-    self.tasks.where(["list_id=? and completed_at IS NOT ? and DATE(completed_at) BETWEEN ? AND ?",list.id,nil, date - 1.day , date] ).order('completed_at')
-      # @complete_tasks = @list.completed_tasks(@user).where('DATE(completed_at) BETWEEN ? AND ?' , d_yesterday , d_today ).order('completed_at')
+    if helpers.is_today?(date)
+      self.tasks.where(["list_id=? and completed_at IS NOT ? and DATE(completed_at) BETWEEN ? AND ?",list.id,nil, date - 1.day , date] ).order('completed_at')
+    else
+      self.tasks.where(["list_id=? and completed_at IS NOT ? and DATE(completed_at) =?",list.id,nil, date - 1.day] ).order('completed_at')
+    end
   end
 
   def incompleted_tasks_past(list,date)
@@ -85,19 +88,23 @@ class User < ActiveRecord::Base
   end
 
   def num_incompleted_tasks(list)
-    self.incompleted_tasks(list).count
+    self.incompleted_tasks(list,Date.today).count
   end
 
-  def incompleted_tasks(list)
+  def incompleted_tasks(list,date)
+    if helpers.is_today?(date)
+      self.tasks.where(["list_id=? and completed_at IS ? ",list.id,nil]).order("created_at DESC")
+    else
     # self.tasks.where(completed_at: nil).order("updated_at DESC")
-    self.tasks.where(["list_id=? and completed_at IS ?",list.id,nil]).order("created_at DESC")
+      self.tasks.where(["list_id=? and completed_at IS ? and DATE(created_at) =?",list.id,nil, date ]).order("created_at DESC")
+    end
   end
+
 
   # Returns user's task
 
   # Returns true if the given token matches the digest.
   def authenticated?(attribute, token)
-    byebug
     digest = send("#{attribute}_digest")
     return false if digest.nil?
     BCrypt::Password.new(digest).is_password?(token)
@@ -150,6 +157,10 @@ class User < ActiveRecord::Base
     invitation.token if invitation
   end
 
+  def helpers
+    ApplicationController.helpers
+  end
+
   private
 
   def downcase_email
@@ -157,7 +168,7 @@ class User < ActiveRecord::Base
   end
 
   def create_activation_digest
-    byebug
+
     self.activation_token  = User.new_token
     self.activation_digest = User.digest(activation_token)
   end

@@ -7,7 +7,6 @@ class TasksController < ApplicationController
 
 
   def index
-    byebug
     if (params[:type].present? || params[:type]=="blocker")
        @blockers = @task.t_blockers
     end
@@ -22,7 +21,7 @@ class TasksController < ApplicationController
   end
 
   def create
-  byebug
+
     task_info = task_params
 
     if params[:type].present?
@@ -84,13 +83,13 @@ class TasksController < ApplicationController
      end
 
      def set_user
-       byebug
       @user = User.find((!task_params[:user_id].blank?) ? task_params[:user_id] : current_user.id)
      end
 
      def set_task
        id = (params[:type]== 'blocker') ? params[:task_id] : params[:id]
        @task= Task.find(id)
+
      end
 
      def task_params
