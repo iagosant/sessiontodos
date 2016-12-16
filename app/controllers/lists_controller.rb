@@ -2,13 +2,12 @@ class ListsController < ApplicationController
   include ApplicationHelper
   helper_method :get_current_date
   before_action :set_user, only: [:index, :show, :edit, :update, :destroy]
-  before_action :set_list, only: [:index, :show, :edit, :update, :destroy, :collaboration_users]
+  before_action :set_list, only: [:index, :show, :edit, :update, :destroy, :complete_users]
   before_action :require_logged_in
 
   def index
     @all_tasks   = current_user.tasks.where(:completed_at => nil).order('created_at')
-    @lists = current_user.created_lists.all.order('created_at')
-    @collaboration_lists = current_user.collaboration_lists.all
+
     @collaborators = @list.collaboration_users
     respond_to do |format|
       format.html
@@ -29,11 +28,17 @@ class ListsController < ApplicationController
 
   end
 
-  def ccollaboration_users
-    @ccollaboration_users = @list.collaboration_users
+  def complete_users
+
+    @collaboration_users = @list.collaboration_users
+    @c_users = {}
+    @collaboration_users.each do |user|
+      @c_users['value'] =   user.id
+      @c_users['label'] =   user.first_name
+    end
     respond_to do |format|
-      format.html
-      format.json { render json: @ccollaboration_users }
+      format.html {redirect_to lists_url}
+      format.json { render json: @c_users }
     end
   end
 
@@ -87,6 +92,8 @@ class ListsController < ApplicationController
       else
         @list = List.find(params[:id])
       end
+      @lists = current_user.created_lists.all.order('created_at')
+      @collaboration_lists = current_user.collaboration_lists.all
       # set_task_per_user
 
     end

@@ -1,8 +1,8 @@
 <div class="padding8"></div>
 <div class="row">
-  <div class="col s12 m4 l3" id="user_lists"> <!-- Note that "m4 l3" was added -->
+  <!-- <div class="col s12 m4 l3" id="user_lists">
     <div class="collection" id="collection-list">
-      <!-- <%= link_to current_all_tasks.name, current_all_tasks, class: "collection-item active", id:"#{current_all_tasks.id}", remote: true %> -->
+      // <%= link_to current_all_tasks.name, current_all_tasks, class: "collection-item active", id:"#{current_all_tasks.id}", remote: true %>
       <a  class= "collection-item active" id="<%=current_all_tasks.id %>" href="#" data-href= "<%=list_path(current_all_tasks) %>" data-remote="true"><%=current_all_tasks.name %>
        <div class="secondary-content"><span id="num"><%= current_user.num_incompleted_tasks(current_all_tasks) %></span></div>
       </a>
@@ -12,7 +12,7 @@
           <a  class= "collection-item" id="<%=list.id %>" href="#" data-href= "<%=list_path(list) %>" data-remote="true"><%=list.name %>
               <div class="secondary-content"><span id="num"><%=current_user.num_incompleted_tasks(list)%></span><% if list.collaborations? %> | <i class="material-icons secondary-content" style="font-size: 20px;">group</i><%end %></div>
           </a>
-          <!-- <%= link_to list.name, list, class: "collection-item",id:"#{list.id}", remote: true %> -->
+          // <%= link_to list.name, list, class: "collection-item",id:"#{list.id}", remote: true %>
         <% end %>
         <% end %>
       <%= link_to 'Add List +', new_list_path, class: "collection-item", remote: true%>
@@ -23,11 +23,11 @@
         <% @collaboration_lists.each do |collection_list| %>
             <li class="collection-item avatar">
               <a id="<%= collection_list.id %>" href="#" data-href= "<%=list_path(collection_list) %>" data-remote="true">
-              <!-- <%= link_to  collection_list, id:"#{collection_list.id}", remote: true do %> -->
+              //<%= link_to  collection_list, id:"#{collection_list.id}", remote: true do %>
                 <%= image_tag(collection_list.avatar(:medium), class: 'circle') %>
                 <span class="title"><b><%= collection_list.name %></b></span>
                 <p>By <%= collection_list.owner.first_name %></p>
-               <!-- <% end %> -->
+               //<% end %>
                 <div class="secondary-content"><span id="num"><%=current_user.num_incompleted_tasks(collection_list)%></span><% if collection_list.collaborations? %> |<i class="material-icons" style="font-size: 20px;float: right;">group</i><%end %></div>
              </a>
             </li>
@@ -35,37 +35,34 @@
       <% end %>
 
     </ul>
-  </div>
-  <div class="col s12 m8 l9" style="padding: 0 40px;" > <!-- Note that "m8 l9" was added -->
+  </div> -->
+
    <div id="main_center">
-    <div class="center row">
-      <!-- <div class="col s2 offset-s8"> -->
-        <div id='application_date'>
-          <%= form_for @list, method: :get,remote: true do |f| %>
-             <input type="hidden" name="date" id="form_date">
-             <input type="date" class="datepicker right-align">
-          <% end %>
+        <div class="center row">
+          <!-- <div class="col s2 offset-s8"> -->
+            <!-- <div id='application_date'>
+              <%= form_for @list, method: :get,remote: true do |f| %>
+                 <input type="hidden" name="date" id="form_date">
+                 <input type="date" class="datepicker right-align">
+              <% end %>
+            </div> -->
+
+        <!-- </div>
+        <div class="col s1">
+          <a class="waves-effect waves-teal btn-flat" id="today">Today</a>
+        </div> -->
+        <div class="share-icons" id="collaboration_users">
+          <%= render 'list_users' %>
         </div>
+      </div>
+      <div id="list" class="row">
+        <%= render partial: "users/list_user", locals: {user: current_user, list: @list} %>
+      </div>
+      <div id="show_collaboration_users" class="row">
 
-    <!-- </div>
-    <div class="col s1">
-      <a class="waves-effect waves-teal btn-flat" id="today">Today</a>
-    </div> -->
-    <div class="share-icons" id="collaboration_users">
-      <%= render 'list_users' %>
-    </div>
+      </div>
   </div>
-  <div id="list" class="row">
-    <%= render partial: "users/list_user", locals: {user: current_user, list: @list} %>
-  </div>
-  <div id="show_collaboration_users" class="row">
 
-  </div>
-  </div>
-  </div>
-</div>
-<div>
-  <input id='tags' />  
 </div>
 <!-- Modal Structure -->
 <div id="modal1" class="modal">

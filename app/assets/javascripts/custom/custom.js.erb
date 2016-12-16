@@ -8,30 +8,16 @@ jQuery.fn.submitOnCheck = function() {
 
 
 $(document).on('turbolinks:load',function(){
-console.log('hola');
-$('#detail').triggeredAutocomplete({
-    hidden: '#hidden_inputbox',
-    source: [
-    "Asp",
-    "BASIC",
-    "COBOL",
-    "ColdFusion",
-    "Erlang",
-    "Fortran",
-    "Groovy",
-    "Java",
-    "JavaScript",
-    "Lisp",
-    "Perl",
-    "PHP",
-    "Python",
-    "Ruby",
-    "Scala",
-    "Scheme"
-    ],
-    trigger: "@"
-});
 
+$(".sidebar-collapse").sideNav();
+
+$('.leftside-navigation').perfectScrollbar();
+
+// $('#detail').triggeredAutocomplete({
+//     hidden: '#hidden_inputbox',
+//     source: "/lists/28/complete_users",
+//     trigger: "@"
+// });
 
   $('select').material_select();
   $('.modal-trigger').leanModal();

@@ -11,6 +11,7 @@
 * file per style scope.
 *
 *= require jquery-ui/datepicker
+*= require perfect-scrollbar
 *= require_self
 *= require_tree .
 */
@@ -19,3 +20,4 @@
 v2.0 | 20110126
 License: none (public domain)
 */
+ @import "materialize";

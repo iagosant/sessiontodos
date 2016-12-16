@@ -31,7 +31,7 @@ Rails.application.routes.draw do
 
   post 'users/roleUpdate' => 'users#roleUpdate'
   post 'users/resend_activation' => 'users#resend_activation'
-
+  # get 'lists/:id' => 'lists#complete_users'
   # post 'sessions/:session_id/wips/:id/update' => 'wips#update'
   # post 'sessions/:session_id/completeds/:id/update' => 'completeds#update'
   # post 'sessions/:session_id/blockers/:id/update' => 'blockers#update'
@@ -64,7 +64,7 @@ Rails.application.routes.draw do
     resources :collaboration_users, :controller => 'users', :defaults => {:type => 'collaborator'}
     member do
       patch :num_incompleted_tasks
-      # patch :collaborations_users
+      get :complete_users
     end
   end
 

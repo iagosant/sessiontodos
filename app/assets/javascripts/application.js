@@ -16,4 +16,6 @@
 //= require turbolinks
 //= require triggeredAutocomplete/jquery-ui.triggeredAutocomplete
 //= require custom/custom
+//= require materialize-sprockets
+//= require perfect-scrollbar
 //= require_tree .
