@@ -1,4 +1,5 @@
-source 'https://rubygems.org'
+source "https://rubygems.org"
+ruby "2.2.4"
 
 gem "paperclip"
 # Amazon web services
@@ -36,6 +37,8 @@ gem 'simple_form'
 gem 'rails_autolink'
 
 gem 'perfect-scrollbar-rails'
+
+gem 'rails_12factor'
 
 # Use ActiveModel has_secure_password
 
