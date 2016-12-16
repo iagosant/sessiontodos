@@ -97,6 +97,8 @@ GEM
       nokogiri (>= 1.5.9)
     mail (2.6.4)
       mime-types (>= 1.16, < 4)
+    materialize-sass (0.97.7)
+      sass (~> 3.3)
     metaclass (0.0.4)
     mime-types (3.1)
       mime-types-data (~> 3.2015)
@@ -117,6 +119,8 @@ GEM
       cocaine (~> 0.5.5)
       mime-types
       mimemagic (~> 0.3.0)
+    perfect-scrollbar-rails (0.6.15)
+      railties (>= 3.2, < 6.0)
     pg (0.18.4)
     pkg-config (1.1.7)
     pundit (1.1.0)
@@ -234,9 +238,11 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails (~> 2.2.2)
   jquery-ui-rails
+  materialize-sass
   mocha
   nifty-generators
   paperclip
+  perfect-scrollbar-rails
   pg
   pundit
   rails (= 4.2.6)

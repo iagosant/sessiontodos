@@ -1,42 +1,33 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>StandupLogs</title>
   <%= javascript_include_tag "application", "data-turbolinks-track" => "reload" %>
   <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => "reload" %>
-  <!--Import materialize.css-->
-  <%= stylesheet_link_tag "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css", media: "all", "data-turbolinks-track" => "reload" %>
   <%= stylesheet_link_tag "https://fonts.googleapis.com/icon?family=Material+Icons", media: "all", "data-turbolinks-track" => "reload" %>
   <%= csrf_meta_tags %>
   <%= favicon_link_tag 'favicon.png' %>
 
 </head>
 <body id="stand-up">
-  <% if @current_user %>
-  <header class="navbar navbar-fixed-top navbar-inverse">
-    <div class="container">
-      <ul id="dropdown1" class="dropdown-content">
-        <li><%= link_to "Settings", edit_user_path(current_user) %></li>
-        <li class="divider"></li>
-        <li> <%= link_to "Logout", '/logout' %></li>
-      </ul>
-      <nav class="border-bottom">
-        <div class="nav-wrapper">
-          <a href="/" class="brand-logo valign-wrapper"><%= image_tag "sessions_logo.png", :size => "160x48", :alt => "StandUp", :title => "StandUp Logo"%></a>
-          <a class="dropdown-button right" href="#!" data-activates="dropdown1"><%= current_user.first_name %><i class="avatar-icons right"><%= image_tag(current_user.avatar(:medium), height: '42', width: '42',class: 'circle') %></i></a>
-          <!-- <ul id="nav-mobile" class="right hide-on-med-and-down menu">
-            <li class="div-right"><a href="/sessions" class="active"><i class="material-icons left"><img alt="All Sessions" id="icon-change" src="/assets/all-sessions-menu.png" width="25" height="29"></i>All Sessions</a></li>
-            <li class="div-right"><a href="/sessions/new" class=""><i class="material-icons left"><img alt="New Sessions" id="icon-change"  src="/assets/new-session-menu.png" width="25" height="29"></i>New Session</a></li>
-            <li><a href="/users"><i class="material-icons left" class=""><img alt="Team Memmbers" id="icon-change"  src="/assets/stand-up-menu.png" width="26" height="29"></i>Team Members</a></li>
-         </ul> -->
-        </div>
-      </nav>
-    </div>
+  <header id="header" class="page-topbar">
+      <% if @current_user %>
+          <%= render 'layouts/topnavbar' %>
+      <% end %>
   </header>
-  <% end %>
-  <div class="container" id="content">
-    <%= yield %>
-  </div>
-  <%= javascript_include_tag "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js", "data-turbolinks-track" => "reload" %>
+  <div id="main">
+        <!-- START WRAPPER -->
+    <div class="wrapper">
+          <% if @current_user %>
+              <%= render 'layouts/navigation' %>
+          <% end %>
+          <div class="container">
+            <%= yield %>
+          </div>
+          <!-- Footer -->
+          <%= render 'layouts/footer' %>
+      </div>
 </body>
 </html>

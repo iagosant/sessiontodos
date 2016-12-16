@@ -1,52 +1,54 @@
-
 $(document).on('turbolinks:load',function(){
-  
+
   $('.edit_task').submitOnCheck();
+  $('.modal-trigger').leanModal();
+  // $(".sidebar-collapse").sideNav();
 
-  // Add class active to selected list and change form action in datepicker to point to the new list
-  $('.collection-item').click(function(){
-     $('.collection-item').removeClass('active');
-     $(this).addClass('active');
+  var $navItem = $("ul.side-nav.leftside-navigation li");
 
-     var id = $('#collection-list a.active').attr('id');
-     $("#form_date").attr('action', '/lists/' + id);
+  $navItem.on('click', function(){
+    event.preventDefault();
+    $("ul.side-nav.leftside-navigation li.active").removeClass('active');
+    $(this).addClass('active');
+    $('#nav-list').html($(this).attr("data-name"));
+    var id = $('ul.side-nav.leftside-navigation li.active a').attr('id');
+    $("#form_date").attr('action', '/lists/' + id);
+    var date = $('#form_date').val() ? $('#form_date').val(): new Date();
+    $.ajax({
+      complete:function(request){},
+      data:'date='+ date,
+      dataType:'script',
+      type:'get',
+      url: $('ul.side-nav.leftside-navigation li.active a').attr('data-href')
+    })
+
   });
 
-  var d = new Date();
-  console.log(d);
-  var $input = $('#mainDate').pickadate();
+  $('#application_date .datepicker').pickadate({
+      selectMonths: true, // Creates a dropdown to control month
+      selectYears: 15, // Creates a dropdown of 15 years to control year
+      closeOnSelect: true,
+      hiddenName: true,
+      onClose: function (){
+        $('#form_date').val(this.get());
+        this.$root.parent('form').submit();
+       },
+       onStart: function (){
+          var date = new Date()
+          this.set('select', [date.getFullYear(), date.getMonth(), date.getDate()]);
+      },
+    });
 
-  // Use the picker object directly.
-  var picker = $input.pickadate('picker');
-  picker.set('select', d);
-
-  // $('#mainDate').datepicker({
-  //   dateFormat: "yy-mm-dd",
-  //   onClose: function(dateText,datePickerInstance){
-  //     var oldValue = $(this).data('oldValue') || "";
-  //             if (dateText !== oldValue) {
-  //                 $(this).data('oldValue',dateText);
-  //                 $(this).trigger('dateupdated');
-  //             }
-  //           }
-  // });
-  // var d= new Date(),
-  //     date = $('#mainDate').data('oldValue') || d;
-  //       console.log(date);
-  // picker.set('select', d);
-  // $('#mainDate').datepicker("setDate", date);
-
-  $('body').on('dateupdated','#mainDate', function(e) {
+  $('body').on('dateupdated','#mainDate', function(e){
     var date = $('#mainDate').val();
     $('#mainDate').parent('form').submit();
-
-    });
+  });
 
   $('#today').click(function(){
     var d = new Date();
     $('#mainDate').datepicker( "setDate", d );
-    console.log($('#mainDate').val());
+    // console.log($('#mainDate').val());
     $('#mainDate').parent('form').submit();
   });
 
-});
+})
