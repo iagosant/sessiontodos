@@ -72,7 +72,7 @@ class UsersController < ApplicationController
     # @team = Team.find(session[:team_id])
     @user = User.create(user_params)
     @token = params[:invitation_token]
-    byebug
+  
     if @user.save
       if !@token.nil?
           list = Invitation.find_by_token(@token).list_id #find the list_id attached to the invitation
