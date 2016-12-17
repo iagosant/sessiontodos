@@ -1,5 +1,5 @@
 source "https://rubygems.org"
-ruby "2.2.4"
+ruby "2.3.0"
 
 gem "paperclip"
 # Amazon web services
@@ -40,6 +40,10 @@ gem 'perfect-scrollbar-rails'
 
 gem 'rails_12factor'
 
+gem 'pundit'
+
+gem 'figaro'
+
 # Use ActiveModel has_secure_password
 
 # Use Unicorn as the app server
@@ -47,9 +51,7 @@ gem 'rails_12factor'
 
 group :production do
   gem 'pg'
-  gem 'pundit'
   gem 'bcrypt'
-  gem 'figaro'
   gem 'whenever', require: false
 
 end
@@ -60,10 +62,8 @@ group :development, :test do
   #testing
   gem 'capybara'
   gem 'rspec-rails'
-  gem 'pundit'
   # Use sqlite3 as the database for Active Record
   gem 'sqlite3'
-  gem 'figaro'
   gem "nifty-generators"
 end
 
