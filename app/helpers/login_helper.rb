@@ -26,6 +26,14 @@ module LoginHelper
     end
   end
 
+  def current_user?(user)
+    return true if (current_user == user)
+  end
+
+  def permitted_user?(user,list)
+    return true if current_user?(user)|| current_user.owner?(list)
+  end
+
   def current_all_lists
       @lists = current_user.created_lists.all.order('created_at')
       @collaboration_lists = current_user.collaboration_lists.all

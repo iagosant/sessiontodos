@@ -1,4 +1,5 @@
-source 'https://rubygems.org'
+source "https://rubygems.org"
+ruby "2.3.0"
 
 gem "paperclip"
 # Amazon web services
@@ -9,6 +10,7 @@ gem 'rails-erd'
 gem 'rails', '4.2.6'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
+gem 'materialize-sass'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
@@ -34,6 +36,14 @@ gem 'simple_form'
 
 gem 'rails_autolink'
 
+gem 'perfect-scrollbar-rails'
+
+gem 'rails_12factor'
+
+gem 'pundit'
+
+gem 'figaro'
+
 # Use ActiveModel has_secure_password
 
 # Use Unicorn as the app server
@@ -41,9 +51,7 @@ gem 'rails_autolink'
 
 group :production do
   gem 'pg'
-  gem 'pundit'
   gem 'bcrypt'
-  gem 'figaro'
   gem 'whenever', require: false
 
 end
@@ -54,10 +62,8 @@ group :development, :test do
   #testing
   gem 'capybara'
   gem 'rspec-rails'
-  gem 'pundit'
   # Use sqlite3 as the database for Active Record
   gem 'sqlite3'
-  gem 'figaro'
   gem "nifty-generators"
 end
 

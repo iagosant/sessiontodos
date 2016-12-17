@@ -1,0 +1,41 @@
+<% if task.completed?  %>
+<ul id='task_<%= task.id%>' class="menu-option">
+	  	<li class="col s10">
+			 <p style="text-decoration: line-through;"><%= "#{task.detail} #{task.completed_at} created_at: #{task.created_at.strftime('%m:%d:%Y')} " %></p>
+		 </li>
+		 <li class="col s2">
+			 <% if permitted_user?(@user,@list) %>
+				 <%= link_to task, method: :delete, data: {confirm: "Are you sure?"}, remote: true do %>
+						<i class="material-icons">cancel</i>
+				 <% end %>
+			 <% end %>
+		 </li>
+</ul>
+<% else %>
+	<ul id='task_<%= task.id%>' class="menu-option 	<%= (is_today?((task.created_at.to_date )))? 'today' : 'before'  %>">
+		<li class="col s9"><%= "#{task.detail} #{task.completed_at} created_at: #{task.created_at.strftime('%m:%d:%Y')} "%>
+	 	</li>
+		<li>
+				<% if !task.completed? %>
+					<%= link_to task_t_blockers_path(list_id: @list.id, task_id: task.id,user_id: @user),id: 'completed', remote: true do %>
+					   <i class="material-icons">warning</i>
+					<% end %>
+				<% end %>
+		</li>
+
+	</ul>
+		<div class='show_blockers row' id="show_blockers_<%= task.id%>" style="display:none">
+		 <% if permitted_user?(@user,@list) %>
+				<div id= "new_blocker_<%= task.id%>"></div>
+		  <% end%>
+			<div id= "blockers_task<%= task.id%>">
+			</div>
+	  </div>
+		<ul id="dropdownlist_<%= task.id%>" class="dropdown-list">
+			<% current_all_lists.each do |list| %>
+			    <% if (list.id != @list.id) %>
+					    <li><%= link_to list.name, changelist_task_path(list_id: list.id, id: task.id ), remote: true, :method=> :patch  %></li>
+					<% end %>
+			<% end %>
+	  </ul>
+<% end %>

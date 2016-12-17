@@ -1,6 +1,5 @@
 class User < ActiveRecord::Base
   attr_writer :current_step
-
   validates_presence_of :first_name, :if => lambda { |o| o.current_step == "personal" || o.current_step == steps.first }
   validates_presence_of :avatar, :if => lambda { |o| o.current_step == "avatar" || o.current_step == steps.first }
 
@@ -41,8 +40,12 @@ class User < ActiveRecord::Base
   has_many :collaboration_lists, through: :collaborations, :source => :list
 
   has_many :tasks
-  has_many :collaboration_tasks, through: :collaboration_lists, :source => :tasks
-  has_many :my_tasks, through: :created_lists, :source => :tasks
+  has_many :lists, through: :tasks
+
+  has_many :assigns_tasks, class_name: "Task", foreign_key: "assigner_id"
+
+  # has_many :collaboration_tasks, through: :collaboration_lists, :source => :tasks
+  # has_many :my_tasks, through: :created_lists, :source => :tasks
 
   has_many :invitations, :class_name => "invitation", :foreign_key => 'recipient_id'
   has_many :sent_invitations, :class_name => "Invitation", :foreign_key => 'sender_id'
@@ -63,9 +66,46 @@ class User < ActiveRecord::Base
     self.created_lists << self.created_lists.create(name: "All Tasks", all_tasks: true)
   end
 
+  def owner?(list)
+    return true if (list.owner == self)
+  end
+
+  # Returns user's task
+  def completed_tasks(list,date)
+    if helpers.is_today?(date)
+      self.tasks.where(["list_id=? and completed_at IS NOT ? and DATE(completed_at) BETWEEN ? AND ?",list.id,nil, date - 1.day , date] ).order('completed_at')
+    else
+      self.tasks.where(["list_id=? and completed_at IS NOT ? and DATE(completed_at) =?",list.id,nil, date - 1.day] ).order('completed_at')
+    end
+  end
+
+  def incompleted_tasks_past(list,date)
+    @incomplete_tasks_past= (Date.today == date)? incompleted_tasks(list) - incompleted_tasks_today(list,date) : nil
+  end
+
+  def incompleted_tasks_today(list,date)
+    incompleted_tasks(list).where(["DATE(created_at)=?", date]).order('created_at')
+  end
+
+  def num_incompleted_tasks(list)
+    self.incompleted_tasks(list,Date.today).count
+  end
+
+  def incompleted_tasks(list,date)
+    if helpers.is_today?(date)
+      self.tasks.where(["list_id=? and completed_at IS ? ",list.id,nil]).order("created_at DESC")
+    else
+    # self.tasks.where(completed_at: nil).order("updated_at DESC")
+      self.tasks.where(["list_id=? and completed_at IS ? and DATE(created_at) =?",list.id,nil, date ]).order("created_at DESC")
+    end
+  end
+
+
+  # Returns user's task
+
   # Returns true if the given token matches the digest.
   def authenticated?(attribute, token)
-    
+
     digest = send("#{attribute}_digest")
     return false if digest.nil?
     BCrypt::Password.new(digest).is_password?(token)
@@ -118,6 +158,10 @@ class User < ActiveRecord::Base
     invitation.token if invitation
   end
 
+  def helpers
+    ApplicationController.helpers
+  end
+
   private
 
   def downcase_email
@@ -125,7 +169,7 @@ class User < ActiveRecord::Base
   end
 
   def create_activation_digest
-    byebug
+
     self.activation_token  = User.new_token
     self.activation_digest = User.digest(activation_token)
   end

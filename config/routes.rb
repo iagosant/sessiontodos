@@ -31,7 +31,7 @@ Rails.application.routes.draw do
 
   post 'users/roleUpdate' => 'users#roleUpdate'
   post 'users/resend_activation' => 'users#resend_activation'
-
+  # get 'lists/:id' => 'lists#complete_users'
   # post 'sessions/:session_id/wips/:id/update' => 'wips#update'
   # post 'sessions/:session_id/completeds/:id/update' => 'completeds#update'
   # post 'sessions/:session_id/blockers/:id/update' => 'blockers#update'
@@ -53,19 +53,39 @@ Rails.application.routes.draw do
   #   resources :blockers
   # end
   resources :sessions
-  resources :users
-  resources :lists do
-    resources :tasks , only: [:new, :create, :edit]
-    resources :invitations
+#
+  resources :users do
+    resources :lists, :name_prefix => "user_"
   end
 
+  resources :lists do
+    resources :tasks, :name_prefix => "list_"
+    resources :invitations
+    resources :collaboration_users, :controller => 'users', :defaults => {:type => 'collaborator'}
+    member do
+      patch :num_incompleted_tasks
+      get :complete_users
+    end
+  end
+
+
+  # resources :users
+  # resources :lists do
+  #   resources :tasks , only: [:new, :create, :edit]
+  #   resources :invitations
+  #   resources :collaboration_users, :controller => 'users', :defaults => {:type => 'collaborator'}
+  #   member do
+  #     patch :num_incompleted_tasks
+  #   end
+  # end
+
   resources :tasks do
+    resources :t_blockers, :controller => 'tasks', :defaults => {:type => 'blocker'}, :name_prefix => "tasks_"
     member do
       patch :add_deadline
       patch :complete
       patch :changelist
     end
-    resources :t_blockers, :controller => 'tasks', :defaults => {:type => 'blocker'}
   end
 
 
@@ -77,6 +97,8 @@ Rails.application.routes.draw do
   resources :account_activations, only: [:edit]
 
   resources :password_resets, only: [:new, :create, :edit, :update]
+
+
   # resources :teams
   # get 'new_session' => 'sessions#new', as: 'new_session'
   # <%= link_to "New Session", new_session_path %>

@@ -8,5 +8,12 @@ module ApplicationHelper
     first_names
   end
 
+  def is_today?(date)
+    (date == Date.today)
+  end
+
+  def today(date)
+    (is_today?(date))? 'today' : 'before'
+  end
 
 end

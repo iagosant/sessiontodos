@@ -4,9 +4,20 @@ jQuery.fn.submitOnCheck = function() {
     $(this).parent('form').submit();
   });
   return this;
-}
+};
+
 
 $(document).on('turbolinks:load',function(){
+
+$(".sidebar-collapse").sideNav();
+
+$('.leftside-navigation').perfectScrollbar();
+
+// $('#detail').triggeredAutocomplete({
+//     hidden: '#hidden_inputbox',
+//     source: "/lists/28/complete_users",
+//     trigger: "@"
+// });
 
   $('select').material_select();
   $('.modal-trigger').leanModal();

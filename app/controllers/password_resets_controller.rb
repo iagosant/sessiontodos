@@ -52,7 +52,7 @@ class PasswordResetsController < ApplicationController
     elsif @user.update_attributes(user_params)
 # >>>>>>> d1f9dfbf4ca487d1af56e9f8afb024e15af40365
       log_in @user
-      
+
       flash[:success] = "Password has been reset."
       redirect_to lists_path
     end
