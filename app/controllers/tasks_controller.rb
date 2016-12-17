@@ -56,7 +56,6 @@ class TasksController < ApplicationController
    end
 
    def complete
-    #  byebug
      @task.update_attribute(:completed_at, Time.now)
      respond_to do |format|
        format.html {  redirect_to @list, notice: "Task completed" }

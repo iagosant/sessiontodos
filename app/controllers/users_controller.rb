@@ -55,7 +55,6 @@ class UsersController < ApplicationController
     # @team = Team.find(session[:team_id])
     @user = User.create(user_params)
     @token = params[:invitation_token]
-    byebug
     if @user.save
       if !@token.nil?
           list = Invitation.find_by_token(@token).list_id #find the list_id attached to the invitation
@@ -68,16 +67,12 @@ class UsersController < ApplicationController
   end
 
   def update
-<<<<<<< HEAD
     current_user.current_step = (user_params[:current_step].present?)? user_params[:current_step] : steps.first
     if current_user.current_step == "security"
       update_password(user_params)
     else
     end
-=======
-    byebug
-    current_user.current_step = (user_params[:current_step].present?)? user_params[:current_step] : steps.first
->>>>>>> d1f9dfbf4ca487d1af56e9f8afb024e15af40365
+
     respond_to do |format|
       if current_user.update(user_params)
         format.html { redirect_to :back, notice: 'User was successfully updated.' }

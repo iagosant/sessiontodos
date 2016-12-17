@@ -18,7 +18,7 @@ class ListsController < ApplicationController
   end
 
   def show
-    # byebug
+
     # @list = List.find(params[:id])
     # set_task_per_list
 
@@ -88,7 +88,7 @@ class ListsController < ApplicationController
 
 
     def set_task_per_user
-      byebug
+      
       # set_date
       # d_today = get_current_date
       d_yesterday =  get_current_date - 1.day

@@ -3,6 +3,8 @@ class UserMailer < ApplicationMailer
 
   def account_activation(user)
     @user = user
+    # to include images in mail
+    # attachments["rails.png"] = File.read("#{Rails.root}/public/images/rails.png")
     mail to: user.email, subject: "Account activation"
   end
 

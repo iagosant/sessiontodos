@@ -16,7 +16,7 @@ class ApplicationController < ActionController::Base
   def team_user_create(team_params)
     team_avatar = team_params[:avatar]
     @team = Team.new(team_params)
-    byebug
+
     @team.save
     u_params = (team_params[:users_attributes]["0"])
     @user = @team.users.build(u_params)
@@ -37,7 +37,7 @@ class ApplicationController < ActionController::Base
 
   # date
   def get_current_date
-    byebug
+    
     if (params[:date].blank?) && (@current_date.nil?)
       @current_date =  Date.today
     else
