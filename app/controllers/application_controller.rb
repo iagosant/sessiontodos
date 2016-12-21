@@ -8,9 +8,10 @@ class ApplicationController < ActionController::Base
   # before_filter :get_current_date
 
   def require_logged_in
-    return true if current_user
-    redirect_to sessions_path
-    return false
+    redirect_to login_url, alert: "Not authorized" if current_user.nil?
+    # return true if current_user
+    # redirect_to sessions_path
+    # return false
   end
 
   def team_user_create(team_params)

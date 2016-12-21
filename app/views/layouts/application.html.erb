@@ -17,7 +17,7 @@
           <%= render 'layouts/topnavbar' %>
       <% end %>
   </header>
-  <div id="main">
+  <div id="main" <% if current_user.nil? %> class="toggled"<% end %>>
         <!-- START WRAPPER -->
     <div class="wrapper">
           <% if @current_user %>

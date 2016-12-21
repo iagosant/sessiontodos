@@ -1,4 +1,5 @@
 class InvitationsController < ApplicationController
+  before_action :require_logged_in
   before_action :set_list
 
   def index

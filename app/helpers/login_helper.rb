@@ -10,11 +10,6 @@ module LoginHelper
   end
 
   def current_user
-    # byebug
-    # if (user_id = session[:user_id])
-    #   @current_user ||= User.find_by(id: user_id)
-    #
-    # end
     if (user_id = session[:user_id])
       @current_user ||= User.find_by(id: user_id)
     elsif (user_id = cookies.signed[:user_id])
@@ -22,7 +17,6 @@ module LoginHelper
       if user && user.authenticated?(cookies[:remember_token])
         log_in user
         @current_user = user
-
       end
     end
   end
@@ -82,6 +76,6 @@ module LoginHelper
 
   def initials(id)
     @initials = User.find(id).first_name[0]
-    @initials << User.find(id).first_name[0]
+    @initials << User.find(id).last_name[0]
   end
 end

@@ -1,4 +1,5 @@
 class WipsController < ApplicationController
+  before_action :require_logged_in
   before_action :set_wip, only: [:show, :edit, :update, :destroy]
   before_action :get_session, only: [:show, :edit, :update]
 

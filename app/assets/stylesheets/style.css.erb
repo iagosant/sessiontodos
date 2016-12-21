@@ -3,6 +3,9 @@ body{
 #main{
   padding-left:240px
   }
+#main.toggled{
+    padding-left:0px
+}
 footer{
   padding-left:240px}
   footer.page-footer{
@@ -189,12 +192,24 @@ footer{
     padding: 0;
     margin: 10px 0px 0px 90px;}
   header .brand-logo img{width:140px}
+
   @media only screen and (max-width: 992px){
     nav .nav-wrapper{text-align:center}
+
     nav .nav-wrapper a.page-title{
-      font-size:36px}
+      font-size:36px
+    }
+
     ul.side-nav.leftside-navigation{
-      top:110px !important}}
+      top:110px !important}
+
+    #ms-login, #ms-reset-password {
+          margin-top: 2vh;
+      }
+   #ms-login .card, #ms-reset-password .card {
+      width: 100%;
+    }
+  }
     .header-search-wrapper{
       margin:10px auto 0 240px;
       width:calc(100% - 600px);
@@ -902,8 +917,58 @@ extra-small {
     font-size: 0.6rem;
 }
 extra-small.notification-badge {
-
     top: -16px;
     margin: 0 -.5em;
     padding: 3px 4px;
+}
+.text-copyright{
+  font-size: .86rem;
+}
+.card .card-content h5{
+  font-size: 1.5rem;
+  color: #55C2B9!important;
+}
+.capitalize{
+  text-transform: capitalize;
+}
+.ms-upload-avatar{
+  width: 100px;
+  height: 100px;
+  text-align: center;
+  margin: 0 auto 20px;
+  border-radius: 50%;
+  background-color: #606262;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  border: 1px solid #606262;
+  cursor: pointer;
+}
+.ms-upload-avatar input[type="file"]{
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  z-index: -99;
+}
+.ms-upload-avatar label{
+  font-size: .7rem;
+  cursor: pointer;
+  display: block;
+  line-height: 13px;
+  letter-spacing: 1px;
+}
+.ms-upload-avatar label i{
+  display: block;
+  padding-bottom: 2px;
+  font-size: 2.2rem!important;
+}
+.ms-upload-avatar label i,
+.ms-upload-avatar label{
+  color: white;
+}
+#ms-user-new .input-field {
+     margin-top: 0rem;
+}
+.text-green{
+  color: #55C2B9!important;
 }
