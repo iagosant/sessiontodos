@@ -12,10 +12,10 @@
            </div>
           </div>
           <div class="col s12 m12 center">
-           <% if !current_user.nil? %>
-            <p>Signed in as <%= current_user.first_name.capitalize %> | <%= link_to "Logout", 'logout_path' %></p>
+            <% if !current_user.nil? %>
+              <p>Signed in as <%= current_user.first_name.capitalize %> | <%= link_to "Logout", 'logout_path' %></p>
             <% else %>
-            <p>Already have an account? <%= link_to "Login", 'login_path', class: "text-green"  %></p>
+              <p>Already have an account? <%= link_to "Login", 'login_path', class: "text-green"  %></p>
             <% end %>
           </div>
         </div>
