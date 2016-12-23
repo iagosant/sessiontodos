@@ -1,10 +1,9 @@
 class UsersController < ApplicationController
   include UsersHelper
-
+  before_action :require_logged_in, only: [:index,:show, :edit, :update, :destroy]
   helper_method :get_current_date
   before_action :set_user, only: [:show, :update, :list_user]
   before_action :set_list,  if: -> { !params[:type].blank? }
-  before_action :require_logged_in, only: [:show, :edit, :update, :destroy]
   # before_action :set_task_per_user, only: [:show]
   attr_accessor :email, :name, :password, :password_confirmation
 
@@ -72,7 +71,7 @@ class UsersController < ApplicationController
     # @team = Team.find(session[:team_id])
     @user = User.create(user_params)
     @token = params[:invitation_token]
-    byebug
+
     if @user.save
       if !@token.nil?
           list = Invitation.find_by_token(@token).list_id #find the list_id attached to the invitation
