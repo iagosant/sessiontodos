@@ -1,5 +1,6 @@
 class TasksController < ApplicationController
   include TasksHelper
+  before_action :require_logged_in
   before_action :set_list, only: [:new, :create, :edit, :complete ], if: -> { params[:type].blank? }
   before_action :set_task,  if: -> { !params[:type].blank? || !params[:id].blank? }
   before_action :set_user, only: [:create, :index ]

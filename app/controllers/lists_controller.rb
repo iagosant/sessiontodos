@@ -1,9 +1,9 @@
 class ListsController < ApplicationController
   include ApplicationHelper
+  before_action :require_logged_in
   helper_method :get_current_date
   before_action :set_user, only: [:index, :show, :edit, :update, :destroy]
   before_action :set_list, only: [:index, :show, :edit, :update, :destroy, :complete_users]
-  before_action :require_logged_in
 
   def index
     @all_tasks   = current_user.tasks.where(:completed_at => nil).order('created_at')

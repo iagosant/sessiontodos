@@ -2,47 +2,37 @@
   <div class="row valign-wrapper">
     <div class="card">
       <div class="card-title center-align valign-wrapper" >
-        <%= image_tag "sessions_logo.png", :size => "171x55", :alt => "StandUp", :title => "StandUp"%>
+        <%= image_tag "sessions_logo.png", :size => "171x55", :alt => "Sessiontodos", :title => "Sessiontodos"%>
       </div>
       <div class="white card-content">
         <div class="row">
-          <div class="col s8 offset-s2">
-              <div class="card-content">
-               <h5 class="center-align"><%= flash[:info]? 'Email sent!': 'Password Reset'%></h5>
-                 <%= content_tag :div, flash[:notice] , class: "danger" %>
-               <% if flash[:danger] %>
-                  <%= content_tag :div, flash[:danger] , class: "danger" %>
-               <% end %>
-                <div class="row center-align">
-                  <div class="col s12">
-                    <% if flash[:info] %>
-                        <%= content_tag :p, flash[:info] , class: "notice center-align" %>
-                        <!-- <p>Unsure if that email address was correct? <%= link_to 'We can help.', password_resets_path %>.</p> -->
-                    <% else %>
-                        <p class="">To reset your password, enter the email address you use to sign in.</p>
-                        <div class="form">
-                          <%= render 'new_reset' %>
-                        </div>
-                    <% end %>
+          <div class="col s12 l10 offset-l1">
+             <h5 class="center-align"><%= flash[:info]? 'Email sent!': 'Forgot Password?'%></h5>
+               <%= content_tag :div, flash[:notice] , class: "danger" %>
+             <% if flash[:danger] %>
+                <%= content_tag :div, flash[:danger] , class: "danger" %>
+             <% end %>
+             <% if flash[:info] %>
+                  <%= content_tag :p, flash[:info] , class: "notice center-align" %>
+            <% else %>
+                  <p class="center-align">To reset your password, enter the email address you use to sign in.</p>
+                  <div class="form">
+                    <%= render 'new_reset' %>
                   </div>
-                  </div>
-              </div>
+            <% end %>
           </div>
         </div>
       </div>
       <div class="card-action">
         <div class="row center-align">
-          <div class="col s12 m6 right-align border-right">
-            <%= link_to "Log in", root_path %>
-          <!-- </div> -->
-          <!-- <div class="col s12 m6 left-align"> -->
-            <%#= link_to 'Create Team', new_team_path %>
-          <!-- </div> -->
+          <div class="col s6 m6 l6 right-align border-right">
+            <%= link_to "Log In", login_path %>
+          </div>
+          <div class="col s6 m6 l6 left-align">
+            <%= link_to 'Create Account', sign_up_path %>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-<!-- <% flash.each do |key, value| %>
-  <%= content_tag :div, value, class: "flash #{key}" %>
- <% end %> -->

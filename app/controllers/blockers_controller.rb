@@ -1,6 +1,7 @@
 class BlockersController < ApplicationController
   include ApplicationHelper
   # before_filter :get_session, only: [:show]
+  before_action :require_logged_in
   before_action :set_blocker, only: [:show, :edit, :update, :destroy]
   before_filter :get_session, only: [:edit, :update]
 

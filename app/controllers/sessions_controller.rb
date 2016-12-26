@@ -1,8 +1,8 @@
 class SessionsController < ApplicationController
 
   include ApplicationHelper
-  before_action :set_session, only: [:show, :edit, :update, :destroy, :deleteSession, :searchByUser]
   before_action :require_logged_in
+  before_action :set_session, only: [:show, :edit, :update, :destroy, :deleteSession, :searchByUser]
   before_action :team_users, only: [:new, :index, :cleanDate, :show]
   include SessionsHelper
 

@@ -2,46 +2,25 @@
   <div class="row valign-wrapper">
     <div class="card">
       <div class="card-title center-align valign-wrapper" >
-        <%= image_tag "sessions_logo.png", :size => "171x55", :alt => "Facebook", :title => "Facebook"%>
+        <%= image_tag "sessions_logo.png", :size => "171x55", :alt => "Sessiontodos", :title => "Sessiontodos"%>
       </div>
       <div class="white card-content">
         <div class="row">
-          <div class="col s8 offset-s2">
+          <div class="col s12 l10 offset-l1">
             <h5 class="center-align">Welcome back!</h5>
             <div class="form">
-              <%= form_for(:session, url: login_path) do |f| %>
-                <% if @token != nil %>
-                  <%= hidden_field_tag :invitation_token, @token %>
-                <% end %>
-                <div class="input-field">
-                  <i class="material-icons prefix">person</i>
-                  <%= f.email_field :email, id: 'icon_prefix' %>
-                  <%= f.label :icon_prefix, 'Email' %>
-                </div>
-                <div class="input-field">
-                  <i class="material-icons prefix">lock_outline</i>
-                  <%= f.password_field :password, id: 'icon_prefix' %>
-                  <%= f.label :icon_prefix, 'Password' %>
-                </div>
-                <div class="input-field">
-                  <%= f.check_box :remember_me %>
-                  <%= f.label :remember_me, 'Remember me on this computer' %>
-                </div>
-                <div class="input-field center-align">
-                 <a class="waves-effect waves-light su-btn btn-flat submit"><%= submit_tag "Enter" %></a>
-                </div>
-              <% end %>
+              <%= render 'form' %>
            </div>
           </div>
         </div>
       </div>
       <div class="card-action">
         <div class="row center-align">
-          <div class="col s12 m6 right-align border-right">
+          <div class="col s6 m6 l6 right-align border-right">
             <%= link_to "Forgot password?", password_resets_path %>
             <%#= link_to 'Create User', new_user_path %>
           </div>
-          <div class="col s12 m6 left-align">
+          <div class="col s6 m6 l6 left-align">
             <%= link_to 'Create Account', new_user_path %>
           </div>
         </div>

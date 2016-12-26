@@ -9,6 +9,37 @@ jQuery.fn.submitOnCheck = function() {
 
 $(document).on('turbolinks:load',function(){
 
+  // CHANGE IMAGE IN USER NEW FILE UPLOAD
+  // $("input[id*='user_avatar']").change(function(){
+  //   alert($(this).val());
+  //   $("#ms-upload-avatar").css('background-image','url('+$(this).val()+')');
+  // });
+
+  $("input[id='user_avatar']").on("change", function(){
+
+    // Get a reference to the fileList
+    var files = !!this.files ? this.files : [];
+
+    // If no files were selected, or no FileReader support, return
+    if ( !files.length || !window.FileReader ) return;
+
+    // Only proceed if the selected file is an image
+    if ( /^image/.test( files[0].type ) ) {
+        // Create a new instance of the FileReader
+        var reader = new FileReader();
+
+        // Read the local file as a DataURL
+        reader.readAsDataURL( files[0] );
+
+        // When loaded, set image data as background of page
+        reader.onloadend = function(){
+
+            $(".ms-upload-avatar").css("background-image", "url(" + this.result + ")");
+        }
+    }
+});
+  // END
+
 $(".sidebar-collapse").sideNav();
 
 $('.leftside-navigation').perfectScrollbar();
