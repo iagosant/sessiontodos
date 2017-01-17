@@ -38,8 +38,6 @@ gem 'rails_autolink'
 
 gem 'perfect-scrollbar-rails'
 
-gem 'rails_12factor'
-
 gem 'pundit'
 
 gem 'figaro'
@@ -76,3 +74,5 @@ group :development do
 end
 
 gem 'mocha', group: :test
+
+gem 'rails_12factor', group: :production
