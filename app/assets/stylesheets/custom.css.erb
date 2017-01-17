@@ -153,48 +153,60 @@ h1, h2, h3, h4, h5, h6 {
   -webkit-border-radius: 2px;
 
 }
-.card-title .row {
+.card-title{
   margin: 0!important;
 }
 div .card{
   box-shadow: 0px 0px 100px rgba(147, 161, 185, 0.59);
   -moz-box-shadow: 0px 0px 100px rgba(147, 161, 185, 0.59);
   -webkit-box-shadow: 0px 0px 100px rgba(147, 161, 185, 0.59);
-
+ color: #848994;
 }
 .card .card-title {
   border-bottom: 1px solid rgba(160,160,160,0.2);
-  min-height: 100px;
+  min-height: 137px;
 }
+.card .card-action {
+    border-top: none;
+    padding: 0px;
+}
+#ms-user-new .card .card-title{
+  min-height: 122px;
+}
+
 .card .card-title h1{
   margin-top: 10px;
   margin-bottom: 0px;
   font-size: 2rem!important;
   text-transform: uppercase;
-  color: #56c2bb!important;
+  color: #55C2B9!important;
   line-height: 1.5rem;
 }
-.container .card .card-action a:not(.btn):not(.btn-large):not(.btn-floating) {
+.container .card .card-action a:not(.55C2B9):not(.btn-large):not(.btn-floating) {
   color: #989797;
 }
 .container .card .card-action a:not(.btn):not(.btn-large):not(.btn-floating):hover {
-  color: #56c2bb;
+  color: #55C2B9;
+}
+.card .card-content a[class="btn"],
+.card .card-content a[class="btn"] input{
+  width: 100%;
+  height: 54px;
 }
 /* END STYLE FOR CARD ELEMENT */
 /* STYLE FOR BUTTON*/
 .btn, .btn-large {
-  background-color: #56c2bb!important;
+  background-color: #55C2B9!important;
+  color: #fff!important;
   }
 .su-btn.btn-flat {
   color: #989797;
   background-color: #fff;
-  border: 1px solid #56c2bb!important;
+  border: 1px solid #55C2B9!important;
   border-radius: 5px;
   -moz-border-radius: 5px;
   /* for Safari y Chrome*/
   -webkit-border-radius: 5px;
-
-
 }
 .su-btn input{
   border:0px;
@@ -215,12 +227,11 @@ div .card{
 .container input[type=number]:focus:not([readonly]),
 .container input[type=search]:focus:not([readonly]),
 .container textarea.materialize-textarea:focus:not([readonly]) {
-  border-bottom: 1px solid #56c2bb;
-  box-shadow: 0 1px 0 0 #56c2bb;
-  -moz-box-shadow: 0 1px 0 0 #56c2bb;
+  border-bottom: 1px solid #55C2B9;
+  box-shadow: 0 1px 0 0 #55C2B9;
+  -moz-box-shadow: 0 1px 0 0 #55C2B9;
   /* for Safari y Chrome*/
-  -webkit-box-shadow: 0 1px 0 0 #56c2bb
-
+  -webkit-box-shadow: 0 1px 0 0 #55C2B9;
 }
 
 .container input:not([type]):focus:not([readonly]) + label,
@@ -236,7 +247,7 @@ div .card{
 .container input[type=number]:focus:not([readonly]) + label,
 .container input[type=search]:focus:not([readonly]) + label,
 .container textarea.materialize-textarea:focus:not([readonly]) + label {
-  color: #56c2bb;
+  color: #55C2B9;
 }
 .container [type="checkbox"]:checked+label.md-today :before {
   border-right: 2px solid rgba(86, 194, 187, 1);
@@ -247,7 +258,7 @@ div .card{
   border-bottom: 2px solid rgba(249, 169, 90, 1);
 }
 .container .input-field .prefix.active {
-  color: #56c2bb;
+  color: #55C2B9;
 }
 /** END CHANGE COLOR IN FOCUS (MATERIALIZE) **/
 
@@ -276,7 +287,7 @@ textarea:focus, input:focus, select:focus{
 }
 /* END STYLE FOR INPUT */
 a:hover{
-  background: none!important;
+  /*background: none!important;*/
 }
 
 i.small {
@@ -377,9 +388,20 @@ i.small {
 
 }
 a{
-  color:#636363!important;
+  color:#848994;
 }
-
+.btn-large input[type="submit"]{
+  line-height: 50px;
+  width: 100%;
+}
+.btn input[type="submit"]{
+  line-height: 31px;
+  width: 100%;
+}
+.input-field label,
+.card .card-content p {
+  color: #848994;
+}
 /*******collection ***********/
 /*.collection .collection-item.active,
 .collection .collection-item.active,
@@ -388,5 +410,5 @@ a{
 }
 .collection .collection-item.active {
     background-color: #fff!important;
-    border: 1px solid #56c2bb!important;
+    border: 1px solid #55C2B9!important;
 }*/

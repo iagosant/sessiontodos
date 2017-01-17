@@ -333,7 +333,8 @@ footer{
     background:none}
   .side-nav a{
     line-height:48px;
-    height:48px}
+    height:48px;
+    padding: 0 14px}
 .side-nav.leftside-navigation .collapsible-body li.active{
   background-color:rgba(0,0,0,0.04)}
 .side-nav.fixed.leftside-navigation .collapsible-body li.active{
@@ -376,13 +377,16 @@ ul.side-nav.leftside-navigation ul.collapsible-accordion{
   background-color:#fff}
 ul.side-nav li{padding:0}
 ul.side-nav .collapsible-header{margin:0}
-#slide-out li a i{
+#slide-out li a i.people{
   line-height:inherit;
   width:2rem;
   font-size:1.6rem;
   display:block;float:left;
   text-align:center;
-  margin-right:1rem}
+  margin-right:0rem}
+#slide-out li a i{
+  margin:0 15px 0;
+}
 #slide-out ul.side-nav li{
   padding:0 !important}
 .caption{
@@ -894,7 +898,8 @@ ul.side-nav .material-icons.collaboration{
   margin: 0 38px 0 0;
 }
 span.badge {
-    right: 2px!important;
+  min-width: 1rem;
+    /*right: 2px!important;*/
   }
 @media only screen and (min-width: 601px){
   .navbar-fixed {
@@ -971,4 +976,10 @@ extra-small.notification-badge {
 }
 .text-green{
   color: #55C2B9!important;
+}
+.padding-small{
+  height: 20px;
+}
+.padding-large{
+  height: 40px;
 }

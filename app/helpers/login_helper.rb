@@ -5,6 +5,8 @@ module LoginHelper
     all_task_list = current_user.created_lists.find_by(name: 'All Tasks')
     all_task_list = (all_task_list.nil?) ? current_user.created_lists.create(name: "All Tasks") : all_task_list
     session[:all_tasks_id] = all_task_list.id
+    session[:list_id] = all_task_list.id
+
     # $date = Date.today
     # session[:team_id] = user.team_id
   end
@@ -14,7 +16,7 @@ module LoginHelper
       @current_user ||= User.find_by(id: user_id)
     elsif (user_id = cookies.signed[:user_id])
       user = User.find_by(id: user_id)
-      if user && user.authenticated?(cookies[:remember_token])
+      if user && user.authenticated?(:remember,cookies[:remember_token])
         log_in user
         @current_user = user
       end
@@ -35,9 +37,25 @@ module LoginHelper
       @current_all_lists ||= @lists + @collaboration_lists
   end
 
+  def current_created_lists
+      @current_created_lists ||= current_user.created_lists.all.order('created_at')
+  end
+
+  def current_collaboration_lists
+      @current_collaboration_lists ||= current_user.collaboration_lists.all.order('created_at')
+  end
+
   def current_all_tasks
     if (all_tasks_id = session[:all_tasks_id])
       @current_all_tasks ||= List.find_by(id: all_tasks_id)
+    end
+  end
+
+  def current_list
+    if (!@list.nil?)
+      @current_list ||= @list
+    elsif (list_id = session[:list_id])
+      @current_list ||= List.find_by(id: list_id)
     end
   end
 

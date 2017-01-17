@@ -33,13 +33,13 @@
                   <span class="badge"><%= current_user.num_incompleted_tasks(current_all_tasks) %>
                   </span></a>
                 </li>
-                <% @lists.each do |list| %>
+                <% current_created_lists.each do |list| %>
                   <% if (current_all_tasks.id != list.id)  %>
                       <li class="bold" data-name="<%=list.name %>">
                         <a href="#"  id="<%=list.id %>" class="waves-effect waves-cyan" data-href= "<%=list_path(list) %>" data-remote="true">
                           <i class="material-icons"><%= image_tag(list.avatar(:medium), class: 'circle', size: "28x28") %></i><%=list.name %>
                           <% if list.collaborations? %>
-                            <i class="material-icons collaboration right secondary-content md-18 md-dark">group</i>
+                            <i class="material-icons collaboration right people secondary-content md-18 md-dark">group</i>
                           <%end %>
                           <span class="badge"><%= current_user.num_incompleted_tasks(list)%></span>
                         </a>
@@ -50,16 +50,16 @@
                 <li class="bold"><a href="<%= new_list_path%>" class="waves-effect waves-cyan" data-remote="true">
                   <i class="material-icons">add_circle</i>Add List</a>
                 </li>
-                <% if !@collaboration_lists.empty? %>
+                <% if !current_collaboration_lists.empty? %>
                       <li class="li-hover"><div class="divider"></div></li>
                       <li class="li-hover"><p class="ultra-small center margin more-text">Collaboration lists</p></li>
-                      <% @collaboration_lists.each do |collection_list| %>
+                      <% @current_collaboration_lists.each do |collection_list| %>
                           <li class="bold" data-name="<%=collection_list.name %>">
                             <a id="<%= collection_list.id %>" href="#" data-href= "<%=list_path(collection_list) %>" data-remote="true">
                               <i class="material-icons "><%= image_tag(collection_list.avatar(:medium), class: 'circle', size: "28x28") %></i><%= collection_list.name %>
                               <!-- <p>By <%= collection_list.owner.first_name %></p> -->
                               <% if collection_list.collaborations? %>
-                                  <i class="material-icons collaboration right secondary-content md-18 md-dark">group</i>
+                                  <i class="material-icons collaboration people right secondary-content md-18 md-dark">group</i>
                               <% end %>
                               <span class="badge"><%=current_user.num_incompleted_tasks(collection_list)%></span>
                             </a>

@@ -16,7 +16,7 @@
   padding: 0px;
   width: 100%;
   max-width: 500px;
-  background: none!important;
+  // background: none!important;
 }
 #ms-login .card .card-title, #ms-reset-password .card .card-title,
 #ms-user-new .card .card-title{
@@ -78,6 +78,7 @@
 #ms-login [type="checkbox"]+label {
     padding-left: 30px;
     line-height: 20px;
+    font-size: 1rem;
 }
 #ms-login [type="checkbox"]+label:before,
 #ms-login [type="checkbox"]:not(.filled-in)+label:after {
