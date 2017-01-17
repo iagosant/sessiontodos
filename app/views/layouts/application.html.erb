@@ -13,14 +13,14 @@
 </head>
 <body id="stand-up">
   <header id="header" class="page-topbar">
-      <% if @current_user %>
+      <% if logged_in? %>
           <%= render 'layouts/topnavbar' %>
       <% end %>
   </header>
   <div id="main" <% if current_user.nil? %> class="toggled"<% end %>>
         <!-- START WRAPPER -->
     <div class="wrapper">
-          <% if @current_user %>
+          <% if logged_in? %>
               <%= render 'layouts/navigation' %>
           <% end %>
           <div class="container">

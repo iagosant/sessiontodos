@@ -71,7 +71,7 @@ class UsersController < ApplicationController
     # @team = Team.find(session[:team_id])
     @user = User.create(user_params)
     @token = params[:invitation_token]
-
+    byebug
     if @user.save
       if !@token.nil?
           list = Invitation.find_by_token(@token).list_id #find the list_id attached to the invitation
@@ -80,7 +80,10 @@ class UsersController < ApplicationController
       UserMailer.account_activation(@user).deliver_now
       flash[:info] = "Please check your email to activate your account."
       redirect_to login_path
+    else
+      render 'new'
     end
+
   end
 
   def update

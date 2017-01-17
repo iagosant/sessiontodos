@@ -16,7 +16,7 @@ class LoginController < ApplicationController
             user.collaboration_lists << List.find(@invitation.list_id) #add this user to the list as a collaborator
         end
         log_in user
-        remember user
+        params[:session][:remember_me] == '1' ? remember(user) : forget(user)
         redirect_to '/lists'
       else
       # If user's login doesn't work, send them back to the login form.
