@@ -95,7 +95,6 @@ class ListsController < ApplicationController
       @lists = current_user.created_lists.all.order('created_at')
       @collaboration_lists = current_user.collaboration_lists.all
       # set_task_per_user
-
     end
 
     def set_user
