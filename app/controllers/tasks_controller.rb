@@ -6,7 +6,6 @@ class TasksController < ApplicationController
   before_action :set_user, only: [:create, :index ]
   skip_before_filter :verify_authenticity_token
 
-
   def index
     if (params[:type].present? || params[:type]=="blocker")
        @blockers = @task.t_blockers
@@ -22,15 +21,12 @@ class TasksController < ApplicationController
   end
 
   def create
-
     task_info = task_params
-
     if params[:type].present?
        @blocker = @task.t_blockers.create(task_params)
      else
        @task = @list.tasks.create(task_params)
      end
-
      respond_to do |format|
        format.html{ redirect_to @list, :locals => {:task => @task}}
        format.js {  }
@@ -96,8 +92,4 @@ class TasksController < ApplicationController
      def task_params
         params[:task].permit(:detail, :user_id, :assigner_id)
      end
-
-
-
-
 end

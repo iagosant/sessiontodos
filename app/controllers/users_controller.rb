@@ -71,7 +71,6 @@ class UsersController < ApplicationController
     # @team = Team.find(session[:team_id])
     @user = User.create(user_params)
     @token = params[:invitation_token]
-  
     if @user.save
       if !@token.nil?
           list = Invitation.find_by_token(@token).list_id #find the list_id attached to the invitation
@@ -91,9 +90,7 @@ class UsersController < ApplicationController
     current_user.current_step = (user_params[:current_step].present?)? user_params[:current_step] : steps.first
     if current_user.current_step == "security"
       update_password(user_params)
-    else
     end
-
     respond_to do |format|
       if current_user.update(user_params)
         format.html { redirect_to :back, notice: 'User was successfully updated.' }
