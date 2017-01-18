@@ -184,7 +184,6 @@ class SessionsController < ApplicationController
     Session.reset_pk_sequence
   end
 
-
   private
   # Use callbacks to share common setup or constraints between actions.
 
@@ -197,11 +196,8 @@ class SessionsController < ApplicationController
     @session = Session.find(params[:id])
   end
 
-
   # Never trust parameters from the scary internet, only allow the white list through.
   def session_params
-
     params.require(:session).permit(:user_id, :dateTypeVar, :sessionId, :user, :tag_list)
-
   end
 end

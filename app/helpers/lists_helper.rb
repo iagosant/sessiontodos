@@ -1,5 +1,4 @@
 module ListsHelper
-
   def owner?
     @list.owner == current_user
   end
@@ -11,6 +10,4 @@ module ListsHelper
   def list_users
     @list_users = @list.collaboration_users.where.not(:id=> current_user.id)
   end
-
-
 end
