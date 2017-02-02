@@ -39,17 +39,55 @@ $(document).on('turbolinks:load',function(){
     }
 });
   // END
-
+/* Modal for view*/
+var modal_holder_selector;
+ modal_holder_selector = "#modal-holder";
+ $(document).on("click", "[data-behavior='modal']", function() {
+   var location;
+   location = $(this).attr("href");
+   $.get(location, function(data) {
+     $(modal_holder_selector).html(data);
+      $('.modal').modal();
+     return $("#ms-modal-dialog").modal("open");
+   });
+   return false;
+ });
+ return $(document).on("ajax:success", "[data-behavior='modal-form']", function(event, data, status, xhr) {
+   var url;
+   url = xhr.getResponseHeader("Location");
+   if (url) {
+     window.location = url;
+   } else {
+     $("#ms-modal-dialog").modal("close");
+   }
+   return false;
+ });
+/* end modal*/
 $(".sidebar-collapse").sideNav();
 
 $('.leftside-navigation').perfectScrollbar();
+
+
 
 // $('#detail').triggeredAutocomplete({
 //     hidden: '#hidden_inputbox',
 //     source: "/lists/28/complete_users",
 //     trigger: "@"
 // });
-
+/* MODAL */
+ $('#ms-modal-applications').modal({
+     dismissible: false, // Modal can be dismissed by clicking outside of the modal
+     opacity: .5, // Opacity of modal background
+     inDuration: 300, // Transition in duration
+     outDuration: 200, // Transition out duration
+     startingTop: '4%', // Starting top style attribute
+     endingTop: '150px', // Ending top style attribute
+     ready: function(modal, trigger) { // Callback for Modal open. Modal and trigger parameters available.
+       alert("Ready");
+       console.log(modal, trigger);
+     },
+     complete: function() { alert('Closed'); } // Callback for Modal close
+   });
   $('select').material_select();
   $('.modal-trigger').modal();
 

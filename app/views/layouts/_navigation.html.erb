@@ -1,4 +1,4 @@
-<aside id="left-sidebar-nav" class="user_lists">
+<aside id="left-sidebar-nav" class="user_lists navigation-lists">
             <ul id="slide-out" class="side-nav fixed leftside-navigation ps-container ps-active-y" style="width: 240px;">
                   <li><div class="userView user-details">
                         <div class="background">
@@ -27,9 +27,11 @@
                           </div>
                       </div>
                   </li> -->
-                <li class="bold active avatar" data-name="<%=current_all_tasks.name %>"><a href="#" class="waves-effect waves-cyan" id="<%=current_all_tasks.id %>" data-remote="true" data-href= "<%=list_path(current_all_tasks) %>">
-                  <i class="material-icons">view_list</i>
-                  <%=current_all_tasks.name %>
+                <li class="bold active avatar" data-name="<%=current_all_tasks.name %>">
+                  <a href="#" class="waves-effect waves-cyan" id="<%=current_all_tasks.id %>" data-remote="true" data-href= "<%=list_path(current_all_tasks) %>">
+                  <!-- <i class="material-icons">view_list</i>
+                  <%=current_all_tasks.name %> -->
+                  <%= render "lists/nav_list_name", :current_list => current_all_tasks %>
                   <span class="badge"><%= current_user.num_incompleted_tasks(current_all_tasks) %>
                   </span></a>
                 </li>
@@ -37,7 +39,8 @@
                   <% if (current_all_tasks.id != list.id)  %>
                       <li class="bold" data-name="<%=list.name %>">
                         <a href="#"  id="<%=list.id %>" class="waves-effect waves-cyan" data-href= "<%=list_path(list) %>" data-remote="true">
-                          <i class="material-icons"><%= image_tag(list.avatar(:medium), class: 'circle', size: "28x28") %></i><%=list.name %>
+                          <!-- <i class="material-icons"><%= image_tag(list.avatar(:medium), class: 'circle', size: "28x28") %></i><%=list.name %> -->
+                              <%= render "lists/nav_list_name", :current_list => list%>
                           <% if list.collaborations? %>
                             <i class="material-icons collaboration right people secondary-content md-18 md-dark">group</i>
                           <%end %>
@@ -47,8 +50,8 @@
                   <% end %>
                 <% end %>
                 <li class="li-hover"></li>
-                <li class="bold"><a href="<%= new_list_path%>" class="waves-effect waves-cyan" data-remote="true">
-                  <i class="material-icons">add_circle</i>Add List</a>
+                <li class="bold"><a href="<%= new_list_path%>" class="waves-effect waves-cyan ms-add-list" data-remote="true">
+                Add List <i class="material-icons right ms-text-green">add_circle_outline</i></a>
                 </li>
                 <% if !current_collaboration_lists.empty? %>
                       <li class="li-hover"><div class="divider"></div></li>
@@ -56,7 +59,8 @@
                       <% @current_collaboration_lists.each do |collection_list| %>
                           <li class="bold" data-name="<%=collection_list.name %>">
                             <a id="<%= collection_list.id %>" href="#" data-href= "<%=list_path(collection_list) %>" data-remote="true">
-                              <i class="material-icons "><%= image_tag(collection_list.avatar(:medium), class: 'circle', size: "28x28") %></i><%= collection_list.name %>
+                                <%= render "lists/nav_list_name", :current_list => collection_list%>
+                              <!-- <i class="material-icons "><%= image_tag(collection_list.avatar(:medium), class: 'circle', size: "28x28") %></i><%= collection_list.name %> -->
                               <!-- <p>By <%= collection_list.owner.first_name %></p> -->
                               <% if collection_list.collaborations? %>
                                   <i class="material-icons collaboration people right secondary-content md-18 md-dark">group</i>
@@ -67,7 +71,5 @@
                       <% end %>
                   <% end %>
         </ul>
-        <a href="#" data-activates="slide-out" class="sidebar-collapse btn-floating btn-medium waves-effect waves-light hide-on-large-only">
-          <i class="material-icons">menu</i>
-        </a>
+
       </aside>

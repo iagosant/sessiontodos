@@ -35,16 +35,6 @@ class ApplicationController < ActionController::Base
       redirect_to (request.referrer || root_path)
   end
 
-  # date
-  def get_current_date
-
-    if (params[:date].blank?) && (@current_date.nil?)
-      @current_date =  Date.today
-    else
-      @current_date = (params[:date].present?) ? params[:date].to_date : @current_date
-    end
-
-  end
 
 
 

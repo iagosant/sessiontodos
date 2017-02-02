@@ -1,4 +1,4 @@
-<h5 id="<%= @list.id %>"><%= @list.name %></h5>
+<!-- <h5 id="<%= @list.id %>"><%= @list.name %></h5>
 <div class="new-task">
 	<%= render partial: 'tasks/form' %>
 </div>
@@ -13,13 +13,4 @@
 		  <%= render @complete_tasks %>
 		</div>
 <% end %>
-<% unless @list.all_tasks? %>
-<!-- <h4>Edit List</h4>
-<%#= link_to "Edit", edit_list_path(@list) %>
-<% end %> -->
-<h4>List Delete</h4>
-<p class="delete-list">
-		<%= link_to list_path(@list), :method => :delete, data: {confirm: "Are you sure?"} do %>
-	  	<i class="small material-icons">delete</i>
-		<% end %>
-</p>
+<% unless @list.all_tasks? %> -->

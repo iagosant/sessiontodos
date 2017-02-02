@@ -5,7 +5,7 @@
    </i>
 </div>
 <div class="col s11">
-  <% @date = get_current_date%>
+  <% @date = get_current_date %>
   <% if permitted_user?(user,list) && is_today?(@date) %>
     <div class="new-task">
       <%= render partial: 'tasks/form' %>
@@ -20,34 +20,6 @@
     <div class="tasks" id="complete_tasks">
       <%= render partial: "tasks/task", layout: "tasks/completed", collection: user.completed_tasks(list,@date) %>
         <!-- <%= render(partial: "tasks/task", collection: user.completed_tasks(list,@date))  %> -->
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col s2">
-      <%= link_to "Edit List", edit_list_path(list) %>
-    </div>
-    <% unless (list.all_tasks?||!owner?) %>
-    <div class="col s2">
-      <p class="delete-list">
-        <%= link_to 'Delete this list', list, :confirm => 'Are you sure?', :method => :delete, remote: true %>
-      </p>
-    </div>
-    <div class="col s6" id="new_initation_link">
-      <%= link_to 'New invitations', new_list_invitation_path(list), remote: true %>
-    </div>
-    <% end %>
-  </div>
-
-
-  <!-- Modal Structure -->
-  <div id="modal_new_invitation" class="modal bottom-sheet">
-    <div class="modal-content">
-      <h4>Modal Header</h4>
-      <p>A bunch of text</p>
-    </div>
-    <div class="modal-footer">
-      <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
     </div>
   </div>
   </div>

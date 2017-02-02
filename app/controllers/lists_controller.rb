@@ -3,7 +3,7 @@ class ListsController < ApplicationController
   before_action :require_logged_in
   helper_method :get_current_date
   before_action :set_user, only: [:index, :show, :edit, :update, :destroy]
-  before_action :set_list, only: [:index, :show, :edit, :update, :destroy, :complete_users]
+  before_action :set_list, only: [:index, :show, :showList, :edit, :update, :destroy, :complete_users]
 
   def index
     @all_tasks   = current_user.tasks.where(:completed_at => nil).order('created_at')
@@ -28,6 +28,14 @@ class ListsController < ApplicationController
 
   end
 
+  def showList
+     render layout: 'modal'
+    # byebug
+    # @list = List.find(params[:id])
+    # set_task_per_list
+
+  end
+
   def complete_users
 
     @collaboration_users = @list.collaboration_users
@@ -43,10 +51,13 @@ class ListsController < ApplicationController
   end
 
   def new
+
     @list = current_user.created_lists.new
   end
 
   def edit
+
+    render layout: 'modal'
   end
 
   def create

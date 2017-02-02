@@ -1,5 +1,5 @@
 <div id="new_invitation">
-<%= form_for([@list, @invitation]) do |f| %>
+<%= form_for([@list, @invitation], :remote => true,:html => {:"data-behavior" => 'modal-form'}) do |f| %>
   <div class="input-field">
     <%= f.hidden_field :list_id, :value => @list.id %>
     <%= f.label :recipient_email, "Recipient's email address" %><br />

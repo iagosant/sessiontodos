@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   get '/login' => 'login#new'
   post '/login' => 'login#create'
   get '/logout' => 'login#destroy'
+  get '/lists/:id/showList' => 'lists#showList', as: 'list_showList'
 
   # get 'sessions' => 'sessions#index'
   # get 'sessions/new' => 'sessions#new'

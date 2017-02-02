@@ -8,7 +8,7 @@ class TasksController < ApplicationController
 
   def index
     if (params[:type].present? || params[:type]=="blocker")
-       @blockers = @task.t_blockers
+       @t_blockers = @task.t_blockers
     end
     respond_to do |format|
       format.html { redirect_to @list  }
@@ -17,13 +17,26 @@ class TasksController < ApplicationController
   end
 
   def new
+    if (params[:type].present? || params[:type]=="blocker")
+       @t_blockers = @task.t_blockers.new
+     else
+       @task = Task.new
+    end
+     render layout: 'modal'
+    # respond_to do |format|
+    #   format.html { redirect_to @list  }
+    #   format.js
+    # end
+  end
 
+  def edit
+     render layout: 'modal'
   end
 
   def create
     task_info = task_params
     if params[:type].present?
-       @blocker = @task.t_blockers.create(task_params)
+       @t_blocker = @task.t_blockers.create(task_params)
      else
        @task = @list.tasks.create(task_params)
      end
@@ -34,13 +47,12 @@ class TasksController < ApplicationController
   end
 
   def update
-
     @task.update_attributes!(task_params)
-      # respond_to do |format|
-      #   format.html { redirect_to @list}
-      #   format.js
-      # end
+    respond_to do |format|
+      format.html { redirect_to @list}
+      format.js
     end
+  end
 
    def destroy
 
@@ -54,8 +66,6 @@ class TasksController < ApplicationController
    end
 
    def complete
-    #  byebug
-
      @task.update_attribute(:completed_at, Time.now)
      respond_to do |format|
        format.html {  redirect_to @list, notice: "Task completed" }
@@ -90,6 +100,6 @@ class TasksController < ApplicationController
      end
 
      def task_params
-        params[:task].permit(:detail, :user_id, :assigner_id)
+        params.require(:task).permit(:detail, :user_id, :assigner_id)
      end
 end

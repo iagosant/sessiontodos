@@ -1,7 +1,8 @@
 class UsersController < ApplicationController
   include UsersHelper
+  include ApplicationHelper
   before_action :require_logged_in, only: [:index,:show, :edit, :update, :destroy]
-  helper_method :get_current_date
+  # helper_method :get_current_date
   before_action :set_user, only: [:show, :update, :list_user]
   before_action :set_list,  if: -> { !params[:type].blank? }
   # before_action :set_task_per_user, only: [:show]
@@ -58,6 +59,10 @@ class UsersController < ApplicationController
   def edit
     # authorize @user
     @user = User.find(params[:id])
+    respond_to do |format|
+      format.html
+      format.js
+    end
 
   end
 

@@ -1,23 +1,216 @@
 body{
-  background-color:#f9f9f9}
+  background-color:#f9f9f9
+}
+article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
+  display: block;
+}
 #main{
   padding-left:240px
-  }
-#main.toggled{
-    padding-left:0px
 }
+#main.toggled{
+  padding-left:0px
+}
+html body .wrapper main {
+  min-height: calc(100vh - 64px);
+}
+main {
+  flex: 1 0 auto;
+}
+main, nav .wrapper{
+  padding-left:240px;
+  padding-right:240px;
+}
+
+header nav .nav-main{
+  padding-right:240px;
+}
+header nav .nav-logo{
+  height: 150px;
+  width: 230px;
+  float: left;
+  padding-right: 10px;
+}
+header nav .nav-logo a{
+  display: inline-table;
+  vertical-align: middle;
+  width: 100%;
+  text-align: right;
+}
+.nav-belt ul.nav-belt-left li{
+  padding-left: 20px;
+}
+header nav {
+    background-color: #222f42;
+}
+.navbar-fixed nav {
+    position: fixed;
+}
+nav {
+    color: #fff;
+    background-color: #ee6e73;
+    width: 100%;
+    height: 100px;
+    line-height: 100px;
+}
+.nav-main #nav-list{
+  /*font-size: 25px;
+  text-transform: capitalize;
+  font-weight: 100;
+  line-height: 100px;
+  letter-spacing: 1.5px;
+  padding-left: 20px;
+  font-family: 'ProximaNova-Light';*/
+}
+.avatar-list .chip,.navigation-lists .chip{
+  background: none;
+  font-weight: 100;
+}
+.nav-main .avatar-list .chip{
+  font-size: 25px;
+  text-transform: capitalize;
+  line-height: 50px;
+  height: 50px;
+  color: #fff;
+}
+.nav-main .avatar-list .chip img{
+  height: 50px;
+  width: 50px;
+  margin: 0 22px 0 -12px;
+
+}
+.nav-main .avatar-list .chip i{
+    height: 40px!important;
+    width: 40px;
+    margin: 0 22px 0 -12px;
+    font-size: 30px;
+    line-height: 40px!important;
+    padding: 0;
+}
+.nav-main .avatar-list .chip i, .navigation-lists .chip i, .chip i.add-user{
+  float: left;
+  border-radius: 50%;
+  background-color: #fff;
+  text-align: center;
+  color: #7F7F7F;
+  border: 1px solid #7F7F7F;
+}
+.navigation-lists .chip, .ms-add-list{
+  letter-spacing: 0.025em;
+  color: #636363;
+}
+.list-collaboration-users .chip{
+  background: none;
+}
+.ms-modal-main{
+  top:150px!important;
+  min-height: calc(100vh - 150px);
+  width: 100%;
+}
+#slide-out li a.ms-add-list{
+  padding: 0 15px 0 50px;
+}
+#slide-out li a.ms-add-list i{
+  margin: 0;
+  font-size: 30px;
+}
+.nav-main .avatar-list .chip img, .navigation-lists .chip img{
+  background: white;
+  border: 1px solid #7F7F7F;
+  padding: 5px;
+}
+.navigation-lists .chip i, .chip i.add-user{
+  font-size: 22px;
+  margin: 0 8px 0 -12px!important;
+  height: 32px;
+  width: 32px;
+  line-height: 32px;
+}
+.ms-text-green{
+  color: #56c2bb!important;
+}
+header nav .nav-logo {
+  height: 100px;
+  text-align: center;
+  line-height: 40px;
+}
+header nav .row{
+  margin-bottom: 0px;
+}
+header nav .nav-belt, header nav .nav-belt ul a{
+  font-size: 14px;
+}
+.z-depth-1, .card-panel, .card, .toast, .btn, .btn-large, .btn-floating, .dropdown-content, .collapsible {
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
+}
+.side-nav, nav {
+  box-shadow: none;
+  /*//  box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);*/
+}
+/* TABS FOR USER SETTING*/
+.ms-tabsSetting-titles.tabs .tab a{
+   color: #848A95;
+}
+.ms-tabsSetting-titles.tabs .indicator {
+    background-color: #55C2BA;
+}
+.ms-tabsSetting-titles.tabs  .tab a.active,
+.ms-tabsSetting-titles.tabs  .tab a:hover{
+   color: #F7F7F9;
+}
+header nav .nav-wrapper {
+    /*box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);*/
+}
+nav .nav-wrapper {
+    position: relative;
+    height: 100%;
+}
+#ms-tabsSetting{
+  padding-left: 240px;
+}
+#ms-tabsSetting ul.tabs{
+  background: none;
+}
+@media only screen and (min-width: 601px){
+ nav .nav-main,.nav-main i, nav-main a.button-collapse, nav-main a.button-collapse i {
+      height: 100px!important;
+      line-height: 90px!important;
+  }
+  nav .nav-belt, .wrapper .nav-belt i, .nav-belt a.button-collapse, .nav-belt a.button-collapse i,.nav-belt a{
+      height: 50px!important;
+      line-height: 50px!important;
+  }
+  nav {
+      height: 150px;
+      line-height: 150px;
+  }
+  header nav .nav-main{
+    padding-right:240px;
+  }
+  header{
+    min-height: 150px;
+  }
+}
+
+@media only screen and (max-width: 1024px){
+   main{padding-left:0}
+   main{padding-right:0}
+ }
+
 footer{
-  padding-left:240px}
-  footer.page-footer{
-    padding-top:0px}
-    select{
+  padding-left:240px;
+}
+footer.page-footer{
+    padding-top:0px;
+}
+select{
       background-color:transparent;
       width:100%;
       padding:5px;
       border:none;
       border-radius:2px;
       height:3rem;
-      border-bottom:1px solid #9e9e9e}
+      border-bottom:1px solid #9e9e9e
+}
 #sidenav-overlay{
   background-color:transparent}
   .container{
@@ -201,7 +394,7 @@ footer{
     }
 
     ul.side-nav.leftside-navigation{
-      top:110px !important}
+      top:100px !important}
 
     #ms-login, #ms-reset-password {
           margin-top: 2vh;
@@ -327,7 +520,7 @@ footer{
     -moz-box-shadow:none;
     box-shadow:none}
   nav.top-nav a.page-title{
-    line-height:122px;
+    line-height:55px;
     font-size:48px}
   nav ul li.no-hover:hover{
     background:none}
@@ -342,7 +535,7 @@ footer{
 .side-nav .collapsible-body li a{
     margin:0 1rem 0 3rem}
 ul.side-nav.leftside-navigation{
-  top:110px;overflow:hidden}
+  top:150px;overflow:hidden}
 ul.side-nav.leftside-navigation hr{
   display:block;height:1px;
   border:0;
@@ -400,8 +593,14 @@ ul.side-nav .collapsible-header{margin:0}
   text-transform:uppercase}
 .sidebar-collapse{
   position:absolute;
-  left:-170px;
-  top:-75px}  /*-45*/
+  width: 50px;
+  text-align: center;
+  /*left:-170px;
+  top:-75px*/}  /*-45*/
+.sidebar-collapse i{
+  vertical-align: middle;
+  display: inline-table!important;
+}
 .user-task,
 .user-time{
   margin:0;
@@ -865,15 +1064,8 @@ tr.group:hover{background-color:#ddd !important}
 #profile-page-wall-posts .card-action-share{padding:16px}.page-footer .container{padding:0 15px}
 #world-map-markers{height:300px}
 #polar-chart-holder{padding-top:20px}
-nav.navbar-color{
-  background-color: #222f42;
-}
-@media only screen and (min-width: 601px){
-nav, nav .nav-wrapper i, nav a.button-collapse, nav a.button-collapse i {
-    height: 110px!important;
-    line-height: 110px!important;
-}
-}
+
+
 ul.side-nav.leftside-navigation .profile-btn i{
   position: absolute;
 }
@@ -909,15 +1101,16 @@ span.badge {
 .btn-floating {
     background: none;
   }
-nav ul.nav-setting li a {
+nav ul.nav-setting  li a {
       padding: 0 5px;
   }
+ul.ms-dropdown-setting li a{
+    min-height: 50px;
+}
 nav ul.nav-setting li> div{
-        padding: 0 20px;
+        padding: 0 20px 0 0;
 }
-nav ul.nav-setting{
-        padding: 0 20px;
-}
+
 extra-small {
     font-size: 0.6rem;
 }
@@ -982,4 +1175,11 @@ extra-small.notification-badge {
 }
 .padding-large{
   height: 40px;
+}
+/**Helpers*/
+.text-right{
+  text-align: right;
+}
+.text-left{
+  text-align: left;
 }

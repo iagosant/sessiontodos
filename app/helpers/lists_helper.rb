@@ -10,4 +10,9 @@ module ListsHelper
   def list_users
     @list_users = @list.collaboration_users.where.not(:id=> current_user.id)
   end
+
+  def all_task?(list)
+    list.name == 'All Tasks'
+  end
+
 end

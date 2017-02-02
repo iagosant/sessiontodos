@@ -55,22 +55,22 @@
 }
 
 /********* Modal *********/
-#edit_task.modal {
+#ms-modal-dialog.modal {
   width:100%;
   max-height:100vh;
   top:0!important;
   height:100vh;
 }
-#edit_task.modal .modal-close{
+#ms-modal-dialog.modal .modal-close{
   position: absolute;
   top: 0;
   right: 0;
   z-index: 999;
 }
-#edit_task.modal input#detail{
+#ms-modal-dialog.modal input#detail{
   min-width: 600px;
 }
-#edit_task.modal #form{
+#ms-modal-dialog.modal .modal-content{
   margin: 0 auto;
 }
 // #new_blocker:not(.active) {

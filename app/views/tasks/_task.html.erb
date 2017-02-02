@@ -1,9 +1,13 @@
-<p id="<%= task.id %> "><%= "#{task.detail} #{task.completed_at} created_at: #{task.created_at.strftime('%m:%d:%Y')} " %></p>
+<p id="<%= task.id%>"><%= "#{task.detail} #{task.completed_at}" %></p>
 <% if (!task.is_blocker?) && (!task.completed?) %>
 	<ul class="menu-option menu-information">
-		<li><p><%= "#{task.list_belonging}" %></p></li>
+	<% if (all_task?(@list) ) %>
+		<li><p><%= "#{task.list_belonging}"%></p></li>
 		<li><p>/</p></li>
+	<% end %>
 		<li><p><%= "#{distance_of_time_in_words(task.created_at, Time.now, include_seconds: true)} ago" %></p></li>
+		<li><p>/</p></li>
+		<li><p> created_at: <%= "#{task.created_at.strftime('%m:%d:%Y')} " %></p></li>
 		<% if (task.deadline?) %>
 			<li><p>/</p></li>
 		  <li><i class="material-icons md-18 md-red">&#xE858;</i><p><%= "#{task.deadline}" %></p></li>

@@ -7,27 +7,38 @@
   <%= javascript_include_tag "application", "data-turbolinks-track" => "reload" %>
   <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => "reload" %>
   <%= stylesheet_link_tag "https://fonts.googleapis.com/icon?family=Material+Icons", media: "all", "data-turbolinks-track" => "reload" %>
+  <style><%= yield :stylesheets %></style>
   <%= csrf_meta_tags %>
   <%= favicon_link_tag 'favicon.png' %>
 
 </head>
 <body id="stand-up">
-  <header id="header" class="page-topbar">
-      <% if logged_in? %>
-          <%= render 'layouts/topnavbar' %>
-      <% end %>
-  </header>
-  <div id="main" <% if current_user.nil? %> class="toggled"<% end %>>
-        <!-- START WRAPPER -->
-    <div class="wrapper">
-          <% if logged_in? %>
-              <%= render 'layouts/navigation' %>
-          <% end %>
-          <div class="container">
+  <div class="wrapper vertical-sidebar" id="full-page">
+    <header id="header" class="page-topbar">
+        <% if logged_in? %>
+            <%= render 'layouts/topnavbar' %>
+        <% end %>
+
+    </header>
+    <% if logged_in? %>
+        <%= render 'layouts/navigation' %>
+    <% end %>
+    <main id="content" <% if current_user.nil? %> class="toggled"<% end %>>
+        <div id="page-content">
             <%= yield %>
-          </div>
-          <!-- Footer -->
-          <%= render 'layouts/footer' %>
+        </div>
+
+    </main>
+    <!-- Footer -->
+    <%= render 'layouts/footer' %>
+    <!-- Modal Structure -->
+    <div id="modal-holder"></div>
+  
+    <!-- Modal Structure -->
+    <!-- <div id="ms-modal-applications" class="modal ms-modal-main">
+      <div class="modal-content">
       </div>
+    </div> -->
+  </div>
 </body>
 </html>

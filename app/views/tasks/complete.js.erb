@@ -1,6 +1,8 @@
 <% if @task.completed? %>
  $('#task_<%= @task.id %>').remove();
- $('#list_user_<%=@task.user_id%> #complete_tasks').append('<%= j render(@task) %>');
+ <% @date= Date.today %>
+  <% @user= current_user %>
+ $('#list_user_<%=@task.user_id%> #complete_tasks').append('<%= j render partial: "tasks/task", layout: "tasks/completed",  locals: {task: @task} %>');
   // $('#task_<%= @task.id %>').appendTo('#list_user_<%=@task.user_id%> #complete_tasks');
   $('input#completed_<%= @task.id %>').attr('disabled','disabled');
   var $num_incompleted_tasks= $('#<%= @list.id%> .secondary-content span#num');

@@ -11,6 +11,7 @@ class InvitationsController < ApplicationController
 
   def new
     @invitation = Invitation.new
+    render layout: 'modal'
   end
 
   def create

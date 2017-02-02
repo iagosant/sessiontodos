@@ -1,9 +1,11 @@
 var $form =  $('#application_date form')
 
-$('#new_list').remove();
+$('#new-list').remove();
+$('#ms-user-edit').remove();
 $('#main_center').show();
 $('#collaboration_users').html("<%= j render partial: 'list_users' %>");
 $('#show_collaboration_users').html("");
+$("div#ms-link-listSetting").html("<%= j render partial: 'lists/link_listSetting', locals:{list: @list} %>");
 
 $('#list').html("<%= j render partial: 'users/list_user', locals:{user: current_user, list: @list} %>");
 $form.attr("action","lists/<%= @list.id %>");
@@ -16,3 +18,4 @@ $('#detail').triggeredAutocomplete({
   source: "/lists/28/complete_users",
   trigger: "@"
 });
+$('#nav-list').html("<%= j render partial: 'nav_list_name.html'%>");

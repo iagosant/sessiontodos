@@ -1,0 +1,8 @@
+$('#ms-tabsSetting').html('<%= j render partial: 'users/tabsSetting' %>');
+$('.navbar .navbar-fixed').css('min-height','200px');
+$('nav').css('min-height','200px');
+$('header').css('min-height','200px');
+$('#page-content').html('<%= j render partial: 'users/edit' %>');
+// $('#ms-modal-applications').modal('open');
+$('.navigation-lists').hide();
+$('ul.tabs').tabs();

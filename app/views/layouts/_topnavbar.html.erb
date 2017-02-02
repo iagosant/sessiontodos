@@ -1,74 +1,89 @@
-        <!-- start header nav-->
-        <div class="navbar-fixed">
-            <nav class="navbar-color">
-              <div class="nav-wrapper">
-                 <a href="#!" class="brand-logo darken-1"><%= image_tag "sessions_logo.png", :size => "140x42", :alt => "StandUp", :title => "StandUp Logo"%></a>
-                 <div class="container">
-                     <div class="col s3 offset-s6 left uppercase" id="nav-list">
-                        <%=current_all_tasks.name %>
-                     </div>
-                  </div>
+<!-- start header nav-->
+<div class="navbar navbar-fixed">
+ <nav class="navbar-color">
+    <div class="nav-wrapper row">
+          <div class="nav-belt wrapper hide-on-med-and-down">
+            <div class="col s12">
+              <ul class="nav-belt-left">
+                 <li>List</li>
+                 <li>Guest Users</li>
+              </ul>
               <ul class="right hide-on-med-and-down nav-setting">
-                <li><a href="#" class="waves-effect waves-block waves-light dropdown-button" data-activates="setting-dropdown">
-                         <i class="material-icons md-18 md-light">settings</i>
-                       </a>
-                       <ul id="setting-dropdown" class="dropdown-content">
-                             <li>
-                               <%= link_to "Settings", edit_user_path(current_user) %>
-                             </li>
-                             <li>
-                               <%= link_to "Logout", '/logout' %>
-                             </li>
-                       </ul>
-                 </li>
-                <li><div id='application_date'>
-                     <%= form_for current_list, method: :get,remote: true do |f| %>
-                        <input type="hidden" name="date" id="form_date">
-                        <input type="date" class="datepicker right-align">
-                     <% end %>
-                   </div>
-                </li>
-                <li><a href="badges.html" ><i class="material-icons md-18 md-light">view_module</i></a></li>
-                   <li>
-                     <ul id="notifications-dropdown" class="dropdown-content">
-                         <li>
-                           <h5>NOTIFICATIONS <span class="new badge">5</span></h5>
-                         </li>
-                         <li class="divider"></li>
-                         <li>
-                           <a href="#!"><i class="mdi-action-add-shopping-cart"></i> A new order has been placed!</a>
-                           <time class="media-meta" datetime="2015-06-12T20:50:48+08:00">2 hours ago</time>
-                         </li>
-                         <li>
-                           <a href="#!"><i class="mdi-action-stars"></i> Completed the task</a>
-                           <time class="media-meta" datetime="2015-06-12T20:50:48+08:00">3 days ago</time>
-                         </li>
-                         <li>
-                           <a href="#!"><i class="mdi-action-settings"></i> Settings updated</a>
-                           <time class="media-meta" datetime="2015-06-12T20:50:48+08:00">4 days ago</time>
-                         </li>
-                         <li>
-                           <a href="#!"><i class="mdi-editor-insert-invitation"></i> Director meeting started</a>
-                           <time class="media-meta" datetime="2015-06-12T20:50:48+08:00">6 days ago</time>
-                         </li>
-                         <li>
-                           <a href="#!"><i class="mdi-action-trending-up"></i> Generate monthly report</a>
-                           <time class="media-meta" datetime="2015-06-12T20:50:48+08:00">1 week ago</time>
-                         </li>
-                       </ul>
-                   <a href="#" class="waves-effect waves-block waves-light notification-button dropdown-button" data-activates="notifications-dropdown">
-                     <i class="material-icons md-18 md-light">notifications<extra-small class="notification-badge">5</sextra-small></i>
-                     </a>
-                   </li>
-                   <li><a href="collapsible.html"><i class="material-icons md-18 md-light">refresh</i></a></li>
-                   <li><a href="mobile.html"><i class="material-icons md-18 md-light">more_vert</i></a></li>
-
-
+                    <li>
+                       <ul id="notifications-dropdown" class="dropdown-content">
+                           <li>
+                              <h5>NOTIFICATIONS<span class="new badge">5</span></h5>
+                           </li>
+                           <li class="divider"></li>
+                           <li>
+                              <a href="#!"><i class="mdi-action-add-shopping-cart"></i> A new order has been placed!</a>
+                              <time class="media-meta" datetime="2015-06-12T20:50:48+08:00">2 hours ago</time>
+                           </li>
+                           <li>
+                              <a href="#!"><i class="mdi-action-stars"></i> Completed the task</a>
+                              <time class="media-meta" datetime="2015-06-12T20:50:48+08:00">3 days ago</time>
+                           </li>
+                           <li>
+                              <a href="#!"><i class="mdi-action-settings"></i> Settings updated</a>
+                              <time class="media-meta" datetime="2015-06-12T20:50:48+08:00">4 days ago</time>
+                           </li>
+                           <li>
+                              <a href="#!"><i class="mdi-editor-insert-invitation"></i> Director meeting started</a>
+                              <time class="media-meta" datetime="2015-06-12T20:50:48+08:00">6 days ago</time>
+                           </li>
+                           <li>
+                              <a href="#!"><i class="mdi-action-trending-up"></i> Generate monthly report</a>
+                              <time class="media-meta" datetime="2015-06-12T20:50:48+08:00">1 week ago</time>
+                           </li>
+                         </ul>
+                         <a href="#" class="waves-effect waves-block waves-light notification-button dropdown-button" data-activates="notifications-dropdown">
+                            <i class="material-icons md-18 md-light">notifications<extra-small class="notification-badge">5</sextra-small></i>
+                        </a>
+                     </li>
+                     <li><a href="badges.html" >
+                       <i class="material-icons md-18 md-light">view_module</i></a>
+                     </li>
+                     <li>
+                       <a class='dropdown-button' href='#' data-activates='dropdownUser'><%=current_user.first_name%><i class="material-icons right">arrow_drop_down</i></a>
+                     </li>
                  </ul>
-               </div>
+            </div>
+          </div>
+          <div class="nav-main">
+                <div class="row">
+                    <a href="#" data-activates="slide-out" class="sidebar-collapse btn-medium waves-effect waves-light">
+                      <i class="material-icons">menu</i>
+                    </a>
+                    <div class="nav-logo valign-wrapper">
+                        <a href="#!" class="darken-1"><%= image_tag "sessions-logo-nav.png", :size => "130x40", :alt => "StandUp", :title => "StandUp Logo"%></a>
+                    </div>
+                    <div class="col s3 left uppercase avatar-list" id="nav-list">
+                        <%= render "lists/nav_list_name"%>
+                    </div>
+                    <ul class="right hide-on-med-and-down nav-setting">
+                        <li><div id='application_date'>
+                             <%= form_for current_list, method: :get,remote: true do |f| %>
+                                <input type="hidden" name="date" id="form_date">
+                                <input type="date" class="datepicker right-align">
+                             <% end %>
+                           </div>
+                        </li>
+                     </ul>
+                       <div class="col s1 text-right right" id="ms-link-listSetting">
+                          <%= render partial: 'lists/link_listSetting',  locals:{list: current_list}%>
+                       </div>
+                 </div>
+                 <div id="ms-tabsSetting" class="row"></div>
+            </div>
+     </div>
+  </nav>
+</div>
 
-            </nav>
-        </div>
+<!-- Dropdown Structure -->
+<ul id='dropdownUser' class='dropdown-content'>
+  <li><%= link_to "Settings", edit_user_path(current_user),remote: true %></li>
+  <li><% if logged_in? %><%= link_to "Logout", '/logout' %><% else %><%= link_to "Login", '/login' %><% end %></li>
+</ul>
         <!-- end header nav-->
 
 

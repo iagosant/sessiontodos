@@ -3,7 +3,7 @@
 	  <%= yield %>
 	</div>
 	<div class="col s2">
-			 <% if permitted_user?(@user,@list) %>
+			 <% if permitted_user?(@user,current_list) %>
 				 <%= link_to task, method: :delete, data: {confirm: "Are you sure?"}, remote: true do %>
 						<i class="material-icons md-dark md-inactive md-18">cancel</i>
 				 <% end %>
