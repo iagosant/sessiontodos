@@ -6,7 +6,7 @@ module LoginHelper
     all_task_list = (all_task_list.nil?) ? current_user.created_lists.create(name: "All Tasks") : all_task_list
     session[:all_tasks_id] = all_task_list.id
     session[:list_id] = all_task_list.id
-
+    set_current_date
     # $date = Date.today
     # session[:team_id] = user.team_id
   end
@@ -65,6 +65,21 @@ module LoginHelper
     end
   end
 
+  #date
+  def set_current_date
+    if (params[:date].blank?) && (session[:current_date].nil?)
+      session[:current_date] =  Date.today
+    else
+      session[:current_date] = (params[:date].present?) ? params[:date].to_date : session[:current_date]
+    end
+
+  end
+
+  def get_current_date
+
+     @get_current_date = (session[:current_date].nil?) ? Date.today : session[:current_date].to_date
+
+  end
   # Remembers a user in a persistent session.
   def remember(user)
     user.remember

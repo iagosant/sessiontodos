@@ -16,15 +16,7 @@ module ApplicationHelper
     (is_today?(date))? 'today' : 'before'
   end
   # date
-  def get_current_date
 
-    if (params[:date].blank?) && (@current_date.nil?)
-      @current_date =  Date.today
-    else
-      @current_date = (params[:date].present?) ? params[:date].to_date : @current_date
-    end
-
-  end
   # def is_active_controller(controller_name)
   #     params[:controller] == controller_name ? "active" : nil
   # end

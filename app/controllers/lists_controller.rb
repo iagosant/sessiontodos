@@ -1,7 +1,7 @@
 class ListsController < ApplicationController
-  include ApplicationHelper
+  include LoginHelper
   before_action :require_logged_in
-  helper_method :get_current_date
+  before_action :set_current_date,  if: -> { !params[:date].blank? }
   before_action :set_user, only: [:index, :show, :edit, :update, :destroy]
   before_action :set_list, only: [:index, :show, :showList, :edit, :update, :destroy, :complete_users]
 

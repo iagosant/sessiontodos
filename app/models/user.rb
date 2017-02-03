@@ -72,6 +72,7 @@ class User < ActiveRecord::Base
 
   # Returns user's task
   def completed_tasks(list,date)
+    
     if helpers.is_today?(date)
       self.tasks.where(["list_id=? and completed_at IS NOT ? and DATE(completed_at) BETWEEN ? AND ?",list.id,nil, date - 1.day , date] ).order('completed_at')
     else
