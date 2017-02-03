@@ -84,23 +84,4 @@
   <li><%= link_to "Settings", edit_user_path(current_user),remote: true %></li>
   <li><% if logged_in? %><%= link_to "Logout", '/logout' %><% else %><%= link_to "Login", '/login' %><% end %></li>
 </ul>
-        <!-- end header nav-->
-
-
-
-<!-- <header class="navbar navbar-fixed-top navbar-inverse">
-  <div class="container">
-    <ul id="dropdown1" class="dropdown-content">
-      <li><%= link_to "Settings", edit_user_path(current_user) %></li>
-      <li class="divider"></li>
-      <li> <%= link_to "Logout", '/logout' %></li>
-    </ul>
-    <nav class="border-bottom">
-      <div class="nav-wrapper">
-        <a href="/" class="brand-logo valign-wrapper"><%= image_tag "sessions_logo.png", :size => "160x48", :alt => "StandUp", :title => "StandUp Logo"%></a>
-        <a class="dropdown-button right" href="#!" data-activates="dropdown1"><%= current_user.first_name %><i class="avatar-icons right"><%= image_tag(current_user.avatar(:medium), height: '42', width: '42',class: 'circle') %></i></a>
-
-      </div>
-    </nav>
-  </div>
-</header> -->
+<!-- end header nav-->

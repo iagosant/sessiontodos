@@ -10,7 +10,6 @@
   <style><%= yield :stylesheets %></style>
   <%= csrf_meta_tags %>
   <%= favicon_link_tag 'favicon.png' %>
-
 </head>
 <body id="stand-up">
   <div class="wrapper vertical-sidebar" id="full-page">
@@ -18,27 +17,25 @@
         <% if logged_in? %>
             <%= render 'layouts/topnavbar' %>
         <% end %>
-
     </header>
     <% if logged_in? %>
         <%= render 'layouts/navigation' %>
     <% end %>
-    <main id="content" <% if current_user.nil? %> class="toggled"<% end %>>
+    <main id="content"  class="<% if current_user.nil? %>toggled<% end %> container" >
         <div id="page-content">
             <%= yield %>
         </div>
-
     </main>
     <!-- Footer -->
     <%= render 'layouts/footer' %>
     <!-- Modal Structure -->
     <div id="modal-holder"></div>
-  
+  </div>
+</body>
+</html>
+
     <!-- Modal Structure -->
     <!-- <div id="ms-modal-applications" class="modal ms-modal-main">
       <div class="modal-content">
       </div>
     </div> -->
-  </div>
-</body>
-</html>

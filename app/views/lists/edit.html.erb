@@ -1,19 +1,23 @@
-<h1 class="list_name">Edit List</h1>
+<div class="row">
+	<div class="col s12">
+		<h1 class="list_name">Edit List</h1>
 
-<div class="forms">
-	<%= render 'form' %>
-</div>
+		<div class="forms">
+			<%= render 'form' %>
+		</div>
 
-<div class="links">
-	<%= link_to 'Cancel', lists_path, remote: true, data: {behavior: 'modal-form'}  %>
+		<div class="links">
+			<%= link_to 'Cancel', lists_path, remote: true, data: {behavior: 'modal-form'}  %>
+		</div>
+		<% unless (@list.all_tasks?||!owner?) %>
+				<div class="col s2">
+					<p class="delete-list">
+						<%= link_to 'Delete list', @list, :confirm => 'Are you sure?', :method => :delete, remote: true %>
+					</p>
+				</div>
+				<div class="col s6" id="new_initation_link">
+					<%= link_to 'New invitations', new_list_invitation_path(@list), remote: true %>
+				</div>
+		<% end %>
+	</div>
 </div>
-<% unless (@list.all_tasks?||!owner?) %>
-		<div class="col s2">
-			<p class="delete-list">
-				<%= link_to 'Delete list', @list, :confirm => 'Are you sure?', :method => :delete, remote: true %>
-			</p>
-		</div>
-		<div class="col s6" id="new_initation_link">
-			<%= link_to 'New invitations', new_list_invitation_path(@list), remote: true %>
-		</div>
-<% end %>
