@@ -13,18 +13,10 @@ class ListsController < ApplicationController
       format.html
       format.json { render json: @collaborators }
     end
-    # respond_to do |format|
-    #   format.html
-    #   format.json do
-    #     render :json => {:tasks => Task.all.map(&:to_json) }
-    #   end
-    # end
+
   end
 
   def show
-    # byebug
-    # @list = List.find(params[:id])
-    # set_task_per_list
 
   end
 
@@ -37,7 +29,6 @@ class ListsController < ApplicationController
   end
 
   def complete_users
-
     @collaboration_users = @list.collaboration_users
     @c_users = {}
     @collaboration_users.each do |user|
@@ -51,12 +42,10 @@ class ListsController < ApplicationController
   end
 
   def new
-
     @list = current_user.created_lists.new
   end
 
   def edit
-
     render layout: 'modal'
   end
 
