@@ -18,7 +18,7 @@ class TasksController < ApplicationController
 
   def new
     if (params[:type].present? || params[:type]=="blocker")
-       @t_blockers = @task.t_blockers.new
+       @t_blocker = @task.t_blockers.new
      else
        @task = Task.new
     end
@@ -30,7 +30,11 @@ class TasksController < ApplicationController
   end
 
   def edit
-     render layout: 'modal'
+    # if (params[:type].present? || params[:type]=="blocker")
+    #    render partial: "edit_form_t_blocker"
+    # else
+      render layout: 'modal'
+    # end
   end
 
   def create
@@ -94,8 +98,11 @@ class TasksController < ApplicationController
      end
 
      def set_task
-       id = (params[:type]== 'blocker') ? params[:task_id] : params[:id]
-       @task= Task.find(id)
+       if (params[:id].blank?) && (params[:type]== 'blocker')
+          @task= Task.find(params[:task_id])
+        else
+          @task= Task.find(params[:id])
+        end
 
      end
 
