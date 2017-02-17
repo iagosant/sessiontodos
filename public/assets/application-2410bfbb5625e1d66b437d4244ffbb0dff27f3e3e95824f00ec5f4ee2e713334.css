@@ -11249,7 +11249,7 @@ select{
       font-size:36px
     }
 
-    ul.side-nav.leftside-navigation{
+    .navigationbar .bar-content>ul{
       top:100px !important}
 
     #ms-login, #ms-reset-password {
@@ -11390,22 +11390,22 @@ select{
   background-color:rgba(0,0,0,0.04)}
 .side-nav .collapsible-body li a{
     margin:0 1rem 0 3rem}
-ul.side-nav.leftside-navigation{
+.navigationbar .bar-content>ul{
   top:150px;overflow:hidden}
-ul.side-nav.leftside-navigation hr{
+.navigationbar .bar-content>ul hr{
   display:block;height:1px;
   border:0;
   border-top:1px solid #e0e0e0;
   margin:1em 0;padding:0}
-ul.side-nav.leftside-navigation li{
+.navigationbar .bar-content>ul li{
   line-height:48px}
-ul.side-nav.leftside-navigation li:hover{
+.navigationbar .bar-content>ul li:hover{
   background-color:rgba(0,0,0,0.04)}
-ul.side-nav.leftside-navigation li.active{
+.navigationbar .bar-content>ul li.active{
   background-color:rgba(0,0,0,0.04)}
-ul.side-nav.leftside-navigation li a{
+.navigationbar .bar-content>ul li a{
   font-size:14px;font-weight:400}
-ul.side-nav.leftside-navigation li.user-details{
+.navigationbar .bar-content>ul li.user-details{
   background:url("../images/user-bg.jpg") no-repeat center center;
   -webkit-background-size:cover;
   -moz-background-size:cover;
@@ -11413,16 +11413,16 @@ ul.side-nav.leftside-navigation li.user-details{
   background-size:cover;
   margin-bottom:15px;
   padding:15px 0 0 15px}
-ul.side-nav.leftside-navigation li.user-details #profile-dropdown a{
+.navigationbar .bar-content>ul li.user-details #profile-dropdown a{
   padding:8px 15px}
-ul.side-nav.leftside-navigation .profile-btn{
+.navigationbar .bar-content>ul .profile-btn{
   margin:0;
   text-transform:capitalize;
   padding:0;
   color:#444!important;
   /*text-shadow:1px 1px 1px #444;*/
   font-size:15px}
-ul.side-nav.leftside-navigation ul.collapsible-accordion{
+.navigationbar .bar-content>ul ul.collapsible-accordion{
   background-color:#fff}
 ul.side-nav li{padding:0}
 ul.side-nav .collapsible-header{margin:0}
@@ -11922,7 +11922,7 @@ tr.group:hover{background-color:#ddd !important}
 #polar-chart-holder{padding-top:20px}
 
 
-ul.side-nav.leftside-navigation .profile-btn i{
+.navigationbar .bar-content>ul .profile-btn i{
   position: absolute;
 }
 /********* Collection *************/

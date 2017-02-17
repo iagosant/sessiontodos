@@ -1,38 +1,21 @@
-<aside id="left-sidebar-nav" class="user_lists navigation-lists">
-        <ul id="slide-out" class="side-nav fixed leftside-navigation ps-container ps-active-y" style="width: 240px;">
-                  <li><div class="userView user-details">
-                        <div class="background">
-                          <!-- <img src="images/office.jpg"> -->
-                        </div>
-                        <a href="#!user" class="center"><%= image_tag(current_user.avatar(:medium), class: 'circle responsive-img center valign profile-image',alt: current_user.first_name, title:current_user.first_name) %></a>
-                        <a href="#!name" class="center profile-btn"><span class="center name"><%= current_user.first_name %></span></a>
-                    </div>
-                  </li>
-                    <!-- <li class="user-details">
-                      <div class="row">
-                          <div class="col col s4 m4 l4">
-                               <%= image_tag(current_user.avatar(:medium), class: 'circle responsive-img valign profile-image',alt: current_user.first_name, title:current_user.first_name) %>
-                          </div>
-                          <div class="col col s8 m8 l8">
-                            <ul id="profile-dropdown" class="dropdown-content">
-                                <li><a href="#"><i class="mdi-action-face-unlock"></i> Profile</a></li>
-                                <li><a href="#!"><i class="mdi-action-settings"></i> Settings</a></li>
-                                <li><a href="#"><i class="mdi-communication-live-help"></i> Help</a></li>
-                                <li class="divider"></li>
-                                <li><a href="#"><i class="mdi-action-lock-outline"></i> Lock</a></li>
-                                <li><a href="#"><i class="mdi-hardware-keyboard-tab"></i> Logout</a></li>
-                             </ul>
-                            <a class="btn-flat dropdown-button waves-effect waves-light white-text profile-btn" href="#" data-activates="profile-dropdown"><%= current_user.first_name %><i class="material-icons right">arrow_drop_down</i></a>
-                              <p class="user-roal">Administrator</p>
-                          </div>
-                      </div>
-                  </li> -->
+<aside id="left-sidebar-nav" class="navigationbar">
+  <!--class  /*user_lists navigation-lists */ -->
+  <div class="bar">
+    <div class="bar-content">
+        <ul id="slide-out">
+            <li class="bar-user-info">
+              <a href="">
+                <%= image_tag(current_user.avatar(:medium), class: 'circle responsive-img center valign profile-image',alt: current_user.first_name, title:current_user.first_name) %>
+                <h3 class="bar-user-info-name"><%= current_user.first_name %></h3>
+                <div class="bar-user-email"><%=current_user.email%></div>
+              </a>
+            </li>
                 <li class="bold active avatar" data-name="<%=current_all_tasks.name %>">
                   <a href="#" class="waves-effect waves-cyan" id="<%=current_all_tasks.id %>" data-remote="true" data-href= "<%=list_path(current_all_tasks) %>">
                     <!-- <i class="material-icons">view_list</i>
                     <%=current_all_tasks.name %> -->
                     <%= render "lists/nav_list_name", :current_list => current_all_tasks %>
-                    <span class="badge"><%= current_user.num_incompleted_tasks(current_all_tasks) %></span>
+                    <span class="bar-number-task right"><%= current_user.num_incompleted_tasks(current_all_tasks) %></span>
                   </a>
                 </li>
                 <% current_created_lists.each do |list| %>
@@ -41,10 +24,12 @@
                         <a href="#"  id="<%=list.id %>" class="waves-effect waves-cyan" data-href= "<%=list_path(list) %>" data-remote="true">
                           <!-- <i class="material-icons"><%= image_tag(list.avatar(:medium), class: 'circle', size: "28x28") %></i><%=list.name %> -->
                               <%= render "lists/nav_list_name", :current_list => list%>
-                          <% if list.collaborations? %>
-                            <i class="material-icons collaboration right people secondary-content md-18 md-dark">group</i>
-                          <%end %>
-                          <span class="badge"><%= current_user.num_incompleted_tasks(list)%></span>
+                              <div class="right">
+                                <% if list.collaborations? %>
+                                  <i class="material-icons bar-collaboration-icon">group</i>
+                                <%end %>
+                                <span class="bar-number-task"><%= current_user.num_incompleted_tasks(list)%></span>
+                              </div>
                         </a>
                       </li>
                   <% end %>
@@ -64,13 +49,17 @@
                                 <%= render "lists/nav_list_name", :current_list => collection_list%>
                                 <!-- <i class="material-icons "><%= image_tag(collection_list.avatar(:medium), class: 'circle', size: "28x28") %></i><%= collection_list.name %> -->
                                 <!-- <p>By <%= collection_list.owner.first_name %></p> -->
-                                <% if collection_list.collaborations? %>
-                                    <i class="material-icons collaboration people right secondary-content md-18 md-dark">group</i>
-                                <% end %>
-                                <span class="badge"><%=current_user.num_incompleted_tasks(collection_list)%></span>
+                                <div class="right">
+                                  <% if collection_list.collaborations? %>
+                                      <i class="material-icons bar-collaboration-icon">group</i>
+                                  <% end %>
+                                  <span class="bar-number-task"><%=current_user.num_incompleted_tasks(collection_list)%></span>
+                               </div>
                             </a>
                           </li>
                       <% end %>
                   <% end %>
         </ul>
+     </div>
+   </div>
 </aside>

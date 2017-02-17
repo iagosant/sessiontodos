@@ -23,10 +23,12 @@
     <% if logged_in? %>
         <%= render 'layouts/navigation' %>
     <% end %>
-    <main id="content"  class="<% if current_user.nil? %>toggled<% end %> container" >
+    <main>
+      <div  id="content"  class="<% if current_user.nil? %>toggled<% end %> container">
         <div id="page-content">
             <%= yield %>
         </div>
+      </div>
     </main>
     <!-- Footer -->
     <%= render 'layouts/footer' %>

@@ -34735,14 +34735,14 @@ $(document).on('turbolinks:load',function(){
   $('.modal-trigger').modal();
   // $(".sidebar-collapse").sideNav();
 
-  var $navItem = $("ul.side-nav.leftside-navigation li");
+  var $navItem = $(".navigationbar .bar-content>ul li");
 
   $navItem.on('click', function(){
     event.preventDefault();
-    $("ul.side-nav.leftside-navigation li.active").removeClass('active');
+    $(".navigationbar .bar-content>ul li.active").removeClass('active');
     $(this).addClass('active');
     $('#nav-list').html($(this).attr("data-name"));
-    var id = $('ul.side-nav.leftside-navigation li.active a').attr('id');
+    var id = $('.navigationbar .bar-content>ul li.active a').attr('id');
     $("#form_date").attr('action', '/lists/' + id);
     var date = $('#form_date').val() ? $('#form_date').val(): new Date();
     $.ajax({
@@ -34750,7 +34750,7 @@ $(document).on('turbolinks:load',function(){
       data:'date='+ date,
       dataType:'script',
       type:'get',
-      url: $('ul.side-nav.leftside-navigation li.active a').attr('data-href')
+      url: $('.navigationbar .bar-content>ul li.active a').attr('data-href')
     })
 
   });
