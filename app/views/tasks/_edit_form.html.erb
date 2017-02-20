@@ -1,3 +1,4 @@
+
 <%= form_for(@task, :remote => true,:html => {:"data-behavior" => 'modal-form'}) do |f| %>
 	<div class="input-field col">
 		<%= f.text_field :detail, id: "detail" %>

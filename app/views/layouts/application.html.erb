@@ -7,6 +7,9 @@
   <%= javascript_include_tag "application", "data-turbolinks-track" => "reload" %>
   <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => "reload" %>
   <%= stylesheet_link_tag "https://fonts.googleapis.com/icon?family=Material+Icons", media: "all", "data-turbolinks-track" => "reload" %>
+
+  <script src="assets/javascripts/jquery.nanoscroller.js" type="text/javascript"></script>
+
   <style>
     /*<%= yield :stylesheets %>*/
   </style>
@@ -23,10 +26,12 @@
     <% if logged_in? %>
         <%= render 'layouts/navigation' %>
     <% end %>
-    <main id="content"  class="<% if current_user.nil? %>toggled<% end %> container" >
+    <main>
+      <div  id="content"  class="<% if current_user.nil? %>toggled<% end %> container">
         <div id="page-content">
             <%= yield %>
         </div>
+      </div>
     </main>
     <!-- Footer -->
     <%= render 'layouts/footer' %>

@@ -4,12 +4,12 @@ body{
 article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
   display: block;
 }
-#main{
+/*#main{
   padding-left:240px
 }
 #main.toggled{
   padding-left:0px
-}
+}*/
 html body .wrapper main {
   min-height: calc(100vh - 64px);
 }
@@ -18,23 +18,70 @@ main {
 }
 main, nav .wrapper{
   padding-left:240px;
-  padding-right:240px;
+  /*padding-right:240px;*/
 }
 
-header nav .nav-main{
+/*header nav .nav-main{
   padding-right:240px;
-}
-header nav .nav-logo{
-  height: 150px;
-  width: 230px;
-  float: left;
-  padding-right: 10px;
-}
-header nav .nav-logo a{
-  display: inline-table;
+}*/
+.nav-main h1.logo{
+  display: inline-block;
+  width: 170px;
+  text-indent: -1000px;
+  background-image: url('<%= asset_path("sessions-logo-nav.png") %>');
+  background-repeat: no-repeat;
+  background-position: right;
+  margin:0;
+  height: 40px;
   vertical-align: middle;
+  margin-right: 20px;
+}
+
+.nav-main h1.logo ~.divider{
+  content: "";
+  height: 33px;
+  width: 1px;
+  display: inline-block;
+  background-color: #dadcde;
+  margin: 0;
+  vertical-align: middle;
+}
+.nav-main #application-date {
+  border-left: 1px solid #444;
+  border-right: 1px solid #444;
+  max-width: 180px;
+  text-align: center;
+  padding: 0 20px;
+  margin-right: 10px;
+}
+.nav-main #application-date{
+  display: inline-block;
+}
+.nav-main .right .settings{
+  display: inline-block;
+  padding-right: 20px;
+}
+#my-add-task .add-button input{
   width: 100%;
-  text-align: right;
+  height: 100%;
+  position: absolute;
+  top: 0;
+}
+#my-add-task .add-button i.material-icons{
+  position: absolute;
+  top: 0;
+}
+.hamburger-menu{
+  display: inline-block;
+  vertical-align: middle;
+  padding: 0px 10px;
+}
+input.datepicker{
+  text-align: center;
+}
+.nav-main .avatar-list{
+  display: inline-block;
+  padding-left: 22px;
 }
 .nav-belt ul.nav-belt-left li{
   padding-left: 20px;
@@ -61,7 +108,7 @@ nav {
   padding-left: 20px;
   font-family: 'ProximaNova-Light';*/
 }
-.avatar-list .chip,.navigation-lists .chip{
+.avatar-list .chip,.navigationbar .chip{
   background: none;
   font-weight: 100;
 }
@@ -86,7 +133,7 @@ nav {
     line-height: 40px!important;
     padding: 0;
 }
-.nav-main .avatar-list .chip i, .navigation-lists .chip i, .chip i.add-user{
+.nav-main .avatar-list .chip i, .navigationbar .chip i, .chip i.add-user{
   float: left;
   border-radius: 50%;
   background-color: #fff;
@@ -94,7 +141,7 @@ nav {
   color: #7F7F7F;
   border: 1px solid #7F7F7F;
 }
-.navigation-lists .chip, .ms-add-list{
+.navigationbar .chip, .ms-add-list{
   letter-spacing: 0.025em;
   color: #636363;
 }
@@ -106,19 +153,13 @@ nav {
   min-height: calc(100vh - 150px);
   width: 100%;
 }
-#slide-out li a.ms-add-list{
-  padding: 0 15px 0 50px;
-}
-#slide-out li a.ms-add-list i{
-  margin: 0;
-  font-size: 30px;
-}
-.nav-main .avatar-list .chip img, .navigation-lists .chip img{
+
+.nav-main .avatar-list .chip img, .navigationbar .chip img{
   background: white;
   border: 1px solid #7F7F7F;
   /*padding: 5px;*/
 }
-.navigation-lists .chip i, .chip i.add-user{
+.navigationbar .chip i, .chip i.add-user{
   font-size: 22px;
   margin: 0 8px 0 -12px!important;
   height: 32px;
@@ -142,7 +183,7 @@ header nav .nav-belt, header nav .nav-belt ul a{
 .z-depth-1, .card-panel, .card, .toast, .btn, .btn-large, .btn-floating, .dropdown-content, .collapsible {
     box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
 }
-.side-nav, nav {
+nav {
   box-shadow: none;
   /*//  box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);*/
 }
@@ -170,32 +211,6 @@ nav .nav-wrapper {
 #ms-tabsSetting ul.tabs{
   background: none;
 }
-@media only screen and (min-width: 601px){
- nav .nav-main,.nav-main i, nav-main a.button-collapse, nav-main a.button-collapse i {
-      height: 100px!important;
-      line-height: 90px!important;
-  }
-  nav .nav-belt, .wrapper .nav-belt i, .nav-belt a.button-collapse, .nav-belt a.button-collapse i,.nav-belt a{
-      height: 50px!important;
-      line-height: 50px!important;
-  }
-  nav {
-      height: 150px;
-      line-height: 150px;
-  }
-  header nav .nav-main{
-    padding-right:240px;
-  }
-  header{
-    min-height: 150px;
-  }
-}
-
-@media only screen and (max-width: 1024px){
-   main{padding-left:0}
-   main{padding-right:0}
- }
-
 footer{
   padding-left:240px;
 }
@@ -214,39 +229,155 @@ select{
 #sidenav-overlay{
   background-color:transparent
 }
-.container{
-    padding: 0 0.5rem 0 2rem;
-    margin:0 auto;
-    /*max-width:100% !important;*/
-  /*//  width:98%*/
-}
-#left-sidebar-nav{
-  position:fixed;
-  width:100px;
-  left:180px;
-  z-index:999;
-  height:auto}
-#left-sidebar-nav span.badge.new{
+
+/*.navigationbar span.badge.new{
     line-height:20px;
-    margin-top:11px}
+    margin-top:11px
+  }*/
 #content .header-search-wrapper{
   width:100%;
   margin:0 auto;
   height:40px;
   display:inline-block;
-  position:relative}
+  position:relative
+}
 #content .container .row{
   margin-bottom:0}
+
+@media only screen and (min-width: 601px){
+
+  .navbar-fixed {
+      height: 110px;
+  }
+ nav .nav-main {
+      height: 100px!important;
+      line-height: 90px!important;
+  }
+  /*.nav-main i, nav-main a.button-collapse, nav-main a.button-collapse i {
+       height: 100px!important;
+       line-height: 90px!important;
+   }*/
+  nav .nav-belt, .wrapper .nav-belt i, .nav-belt a.button-collapse, .nav-belt a.button-collapse i,.nav-belt a{
+      height: 50px!important;
+      line-height: 50px!important;
+  }
+  nav {
+      height: 150px;
+      line-height: 150px;
+  }
+
+  header{
+      min-height: 150px;
+  }
+}
+
+@media only screen and (min-width: 1200px){
+  header nav .nav-main {
+   padding-right: 240px;
+}
+}
+ @media only screen and (max-width: 1024px){
+
+  }
+
 
 @media only screen and (min-width: 601px){
   /*.container{width:98%}*/
   }
 @media only screen and (min-width: 993px){
-  /*.container{width:98%}*/
+
+  .container {
+    width: 85%;
+    }
+
   }
 @media only screen and (max-width: 993px){
-  #main{padding-left:0}
-  footer{padding-left:0}}
+  .nav-belt.wrapper {
+    padding-left: 0px;
+}
+  main{
+    padding-left:0
+  }
+
+  .navigationbar{
+    display: none;
+  }
+  footer{padding-left:0}
+
+  nav .nav-wrapper{text-align:center}
+
+  nav .nav-wrapper a.page-title{
+    font-size:36px
+  }
+
+
+  #ms-login, #ms-reset-password {
+        margin-top: 2vh;
+    }
+ #ms-login .card, #ms-reset-password .card {
+    width: 100%;
+  }
+}
+@media screen and (max-width: 2200px){
+  .blog-sizer{width:20%}
+  .blog{width:20%}
+  .doughnut-chart-status{top:-100px}
+  .product-sizer{width:20%}
+  .product{width:20%}
+  .gallary-sizer{width:20%}
+  .gallary-item img{width:20%}
+  }
+
+@media screen and (max-width: 1800px){
+  .blog-sizer{width:30%}
+  .blog{width:30%}
+  .product-sizer{width:30%}
+  .product{width:30%}
+  .gallary-sizer{width:30%}
+  .gallary-item img{width:30%}
+  }
+
+@media screen and (max-width: 1600px)
+{.blog-sizer{width:33.33%}
+.doughnut-chart-status{top:-75px}
+.blog{width:33.33%}
+.product-sizer{width:25%}
+.product{width:25%}
+.gallary-sizer{width:25%}
+.gallary-item img{width:25%}}
+
+@media screen and (max-width: 1224px){
+  .blog-sizer{width:33.33%}
+  .doughnut-chart-status{top:-75px}
+  .doughnut-chart-status{top:-100px}
+  .blog{width:33.33%}
+  .product-sizer{width:33.33%}
+  .product{width:33.33%}
+  .gallary-sizer{width:33.33%}
+  .gallary-item img{width:33.33%}}
+
+@media screen and (max-width: 980px){
+  .blog-sizer{width:50%}
+.blog{width:50%}
+.product-sizer{width:50%}
+.product{width:50%}
+.gallary-sizer{width:50%}
+.gallary-item img{width:50%}}
+@media screen and (max-width: 720px){
+  .blog-sizer{width:50%}
+  .blog{width:50%}
+  .product-sizer{width:50%}
+  .product{width:50%}
+  .gallary-sizer{width:50%}
+  .gallary-item img{width:50%}}
+@media screen and (max-width: 480px){
+  .blog-sizer{width:100%}
+  .blog{width:100%}
+  .product-sizer{width:100%}
+  .product{width:100%}
+  .gallary-sizer{width:100%}
+  .gallary-item img{width:100%}}
+
   .ps-scrollbar-x-rail{
     z-index:9999}
   .ps-scrollbar-y-rail{
@@ -387,24 +518,6 @@ select{
     padding: 0;
     margin: 10px 0px 0px 90px;}
   header .brand-logo img{width:140px}
-
-  @media only screen and (max-width: 992px){
-    nav .nav-wrapper{text-align:center}
-
-    nav .nav-wrapper a.page-title{
-      font-size:36px
-    }
-
-    ul.side-nav.leftside-navigation{
-      top:100px !important}
-
-    #ms-login, #ms-reset-password {
-          margin-top: 2vh;
-      }
-   #ms-login .card, #ms-reset-password .card {
-      width: 100%;
-    }
-  }
     .header-search-wrapper{
       margin:10px auto 0 240px;
       width:calc(100% - 600px);
@@ -526,64 +639,192 @@ select{
     font-size:48px}
   nav ul li.no-hover:hover{
     background:none}
-  .side-nav a{
+
+/* NAVEGATION BAR */
+.navigationbar{
+    transition: transform .3s ease,width .3s ease;
+  }
+.navigationbar{
+    position: fixed;
+    top: 150px;
+    left: 0;
+    bottom: 0;
+    width: 240px;
+    font-size: 1rem;
+    z-index: 1000;
+    transform: translate3d(0,0,0);
+    background-color: #fff;
+  }
+
+.navigationbar ul {
+    margin: 0;
+    padding: 0;
+}
+.navigationbar .nano {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+.navigationbar .nano>.nano-content {
+    position: absolute;
+    overflow: scroll;
+    overflow-x: hidden;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+.navigationbar .nano-content>ul {
+      width: 100%;
+      min-width: 240px;
+}
+
+.navigationbar .nano-content>ul li .divider{
+    margin: 0px;
+}
+.navigationbar ul>li.bar-user-info>a .bar-user-email {
+    font-size: .75rem;
+}
+.navigationbar .nano-content>ul li a .bar-user-email i{
+  margin: 0 0 0 5px;
+  vertical-align: middle;
+  width: 1.4em;
+  display: inline-block;
+  font-size: .5rem;
+}
+
+.navigationbar .nano-content>ul li a .chip{
+  margin-bottom: 0;
+}
+/*.navigationbar a:not(){
     line-height:48px;
     height:48px;
-    padding: 0 14px}
-.side-nav.leftside-navigation .collapsible-body li.active{
+    padding: 0 14px}*/
+
+.navigationbar .nano-content>ul li>a {
+    display: block;
+    cursor: pointer;
+    padding: 10px 15px 10px;
+    line-height: 20px;
+    border-bottom: none;
+    background: 0 0;
+    text-decoration: none;
+    z-index: auto;
+    transition: none;
+}
+
+.navigationbar ul>li.bar-user-info>a {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    padding-top: 1.53846rem;
+    padding-bottom: 1.53846rem;
+    padding-left: 65px!important;
+}
+
+.navigationbar ul>li.bar-user-info>a>img {
+    position: absolute;
+    top: 1.73846rem;
+    left: 15px;
+    width: 45px;
+}
+.navigationbar ul>li.bar-user-info>a h3.bar-user-info-name {
+    font-weight: 700;
+    font-size: 1rem;
+    text-transform: capitalize;
+    line-height: 1.7rem;
+    margin-top: 0!important;
+    margin-bottom: 0!important;
+}
+
+ .navigationbar span.bar-number-task{
+   line-height: 32px;
+   width: 2rem;
+   text-align: right;
+   display: inline-block;
+ }
+
+.navigationbar .nano-content>ul li a i.bar-collaboration-icon{
+    line-height: 30px;
+    margin-right: 0rem;
+    font-size: 1.3rem!important;
+    color: #9e9e9e !important;
+    display: inline-block;
+    float: left;
+   }
+.navigationbar .nano-content>ul .collapsible-body li.active{
   background-color:rgba(0,0,0,0.04)}
-.side-nav.fixed.leftside-navigation .collapsible-body li.active{
+.navigationbar .nano-content>ul .collapsible-body li.active{
   background-color:rgba(0,0,0,0.04)}
-.side-nav .collapsible-body li a{
+.navigationbar .collapsible-body li a{
     margin:0 1rem 0 3rem}
-ul.side-nav.leftside-navigation{
-  top:150px;overflow:hidden}
-ul.side-nav.leftside-navigation hr{
-  display:block;height:1px;
+
+.navigationbar .nano-content>ul hr{
+  display:block;
+  height:1px;
   border:0;
   border-top:1px solid #e0e0e0;
   margin:1em 0;padding:0}
-ul.side-nav.leftside-navigation li{
+.navigationbar .nano-content>ul li{
   line-height:48px}
-ul.side-nav.leftside-navigation li:hover{
+.navigationbar .nano-content>ul li:hover{
   background-color:rgba(0,0,0,0.04)}
-ul.side-nav.leftside-navigation li.active{
+.navigationbar .nano-content>ul li.active{
   background-color:rgba(0,0,0,0.04)}
-ul.side-nav.leftside-navigation li a{
+.navigationbar .nano-content>ul li a{
   font-size:14px;font-weight:400}
-ul.side-nav.leftside-navigation li.user-details{
+.navigationbar .nano-content>ul li.user-details{
   background:url("../images/user-bg.jpg") no-repeat center center;
   -webkit-background-size:cover;
   -moz-background-size:cover;
   -o-background-size:cover;
   background-size:cover;
   margin-bottom:15px;
-  padding:15px 0 0 15px}
-ul.side-nav.leftside-navigation li.user-details #profile-dropdown a{
+  padding:15px 0 0 15px
+}
+.navigationbar .nano-content>ul li.user-details #profile-dropdown a{
   padding:8px 15px}
-ul.side-nav.leftside-navigation .profile-btn{
+.navigationbar .nano-content>ul .profile-btn{
   margin:0;
   text-transform:capitalize;
   padding:0;
   color:#444!important;
   /*text-shadow:1px 1px 1px #444;*/
   font-size:15px}
-ul.side-nav.leftside-navigation ul.collapsible-accordion{
+.navigationbar .nano-content>ul ul.collapsible-accordion{
   background-color:#fff}
-ul.side-nav li{padding:0}
-ul.side-nav .collapsible-header{margin:0}
-#slide-out li a i.people{
-  line-height:inherit;
-  width:2rem;
-  font-size:1.6rem;
-  display:block;float:left;
-  text-align:center;
-  margin-right:0rem}
-#slide-out li a i{
+
+.navigationbar .nano-content>ul .collapsible-header{margin:0}
+
+.navigationbar .nano-content>ul li a i{
   margin:0 15px 0;
 }
-#slide-out ul.side-nav li{
-  padding:0 !important}
+
+.navigationbar .nano-content>ul .profile-btn i{
+  position: absolute;
+}
+/********* Collection *************/
+.navigationbar .nano-content>ul li.collection-item.avatar{
+  min-height: 24px!important;
+  padding-left: 52px!important;
+}
+.navigationbar .nano-content>ul li.collection-item.avatar,
+.navigationbar .nano-content>ul li.collection-item.avatar {
+    border-bottom: none!important;
+    padding:0!important;
+}
+
+.navigationbar .nano-content>ul li a.ms-add-list{
+    padding: 0 5px 0 50px;
+    line-height: 52px;
+}
+.navigationbar .nano-content>ul li a.ms-add-list i{
+  margin: 0;
+  font-size: 30px;
+  line-height: 52px;
+}
+
 .caption{
   font-size:1.25rem;
   font-weight:300;
@@ -593,23 +834,13 @@ ul.side-nav .collapsible-header{margin:0}
   font-weight:300;
   margin-bottom:30px;
   text-transform:uppercase}
-.sidebar-collapse{
-  position:absolute;
-  width: 50px;
-  text-align: center;
-  /*left:-170px;
-  top:-75px*/}  /*-45*/
-.sidebar-collapse i{
-  vertical-align: middle;
-  display: inline-table!important;
-}
+
 .user-task,
 .user-time{
   margin:0;
   font-size:13px;
   color:#fff}
 .user-roal{
-  /*color:#fff;*/
   margin-top:-16px;
   font-size:13px}
 .user-details .row{
@@ -917,61 +1148,7 @@ tr.group:hover{background-color:#ddd !important}
 .blog ul.card-action-buttons{margin:-26px 10px 0 0;text-align:right}
 .blog ul.card-action-buttons li{display:inline-block;padding-left:5px}
 .blog-sizer{width:20%}.blog-post-content{padding-bottom:10px}
-@media screen and (max-width: 2200px){
-  .blog-sizer{width:20%}
-  .blog{width:20%}
-  .doughnut-chart-status{top:-100px}
-  .product-sizer{width:20%}
-  .product{width:20%}
-  .gallary-sizer{width:20%}
-  .gallary-item img{width:20%}
-  }
-@media screen and (max-width: 1800px){
-  .blog-sizer{width:30%}
-  .blog{width:30%}
-  .product-sizer{width:30%}
-  .product{width:30%}
-  .gallary-sizer{width:30%}
-  .gallary-item img{width:30%}
-  }
-@media screen and (max-width: 1600px)
-{.blog-sizer{width:33.33%}
-.doughnut-chart-status{top:-75px}
-.blog{width:33.33%}
-.product-sizer{width:25%}
-.product{width:25%}
-.gallary-sizer{width:25%}
-.gallary-item img{width:25%}}
-@media screen and (max-width: 1224px){
-  .blog-sizer{width:33.33%}
-  .doughnut-chart-status{top:-75px}
-  .doughnut-chart-status{top:-100px}
-  .blog{width:33.33%}
-  .product-sizer{width:33.33%}
-  .product{width:33.33%}
-  .gallary-sizer{width:33.33%}
-  .gallary-item img{width:33.33%}}
-@media screen and (max-width: 980px){
-  .blog-sizer{width:50%}
-.blog{width:50%}
-.product-sizer{width:50%}
-.product{width:50%}
-.gallary-sizer{width:50%}
-.gallary-item img{width:50%}}
-@media screen and (max-width: 720px){
-  .blog-sizer{width:50%}
-  .blog{width:50%}
-  .product-sizer{width:50%}
-  .product{width:50%}
-  .gallary-sizer{width:50%}
-  .gallary-item img{width:50%}}
-@media screen and (max-width: 480px){
-  .blog-sizer{width:100%}
-  .blog{width:100%}
-  .product-sizer{width:100%}
-  .product{width:100%}
-  .gallary-sizer{width:100%}
-  .gallary-item img{width:100%}}
+
 #blog-post-full .card-title{
   text-shadow:1px 1px 4px #000;
   font-weight:300;
@@ -1068,38 +1245,15 @@ tr.group:hover{background-color:#ddd !important}
 #polar-chart-holder{padding-top:20px}
 
 
-ul.side-nav.leftside-navigation .profile-btn i{
-  position: absolute;
-}
-/********* Collection *************/
-ul.side-nav li.collection-item.avatar{
-  min-height: 24px!important;
-  padding-left: 52px!important;
-}
-ul.side-nav li.collection-item.avatar,
-ul.side-nav li.collection-item.avatar {
-    border-bottom: none!important;
-    padding:0!important;
-}
 img.center{
   margin: 0 auto;
 }
-ul.side-nav .material-icons.collaboration{
-  font-size: 1.3rem!important;
-  color: #9e9e9e !important;
-  line-height: 2.6rem;
-  width: 30px!important;
-  margin: 0 38px 0 0;
-}
-span.badge {
+
+/*span.badge {
   min-width: 1rem;
-    /*right: 2px!important;*/
-  }
-@media only screen and (min-width: 601px){
-  .navbar-fixed {
-      height: 110px;
-  }
-}
+    /*right: 2px!important;
+  }*/
+
 .btn-floating {
     background: none;
   }

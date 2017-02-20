@@ -2,21 +2,24 @@
 <div class="navbar navbar-fixed">
  <nav class="navbar-color">
     <div class="nav-wrapper row">
-          <div class="nav-belt wrapper hide-on-med-and-down">
+          <div class="nav-belt wrapper hide-on-small-only">
             <div class="col s12">
               <ul class="nav-belt-left">
                  <li>List</li>
                  <li>Guest Users</li>
               </ul>
-              <ul class="right hide-on-med-and-down nav-setting">
+              <ul class="right hide-on-small-only nav-setting">
                     <li>
-                       <ul id="notifications-dropdown" class="dropdown-content">
+                      <a href="#" class=" waves-block waves-light notification-button dropdown-button" data-activates="notifications-dropdown">
+                         <i class="material-icons md-18 md-light">notifications<extra-small class="notification-badge">5</sextra-small></i>
+                      </a>
+                     <ul  class="dropdown-content" style="min-width:250px">    <!--id="notifications-dropdown" -->
                            <li>
                               <h5>NOTIFICATIONS<span class="new badge">5</span></h5>
                            </li>
                            <li class="divider"></li>
                            <li>
-                              <a href="#!"><i class="mdi-action-add-shopping-cart"></i> A new order has been placed!</a>
+                              <a href="#!"><i class="mdi-action-add-shopping-cart"></i> A new task has been created!</a>
                               <time class="media-meta" datetime="2015-06-12T20:50:48+08:00">2 hours ago</time>
                            </li>
                            <li>
@@ -28,17 +31,15 @@
                               <time class="media-meta" datetime="2015-06-12T20:50:48+08:00">4 days ago</time>
                            </li>
                            <li>
-                              <a href="#!"><i class="mdi-editor-insert-invitation"></i> Director meeting started</a>
+                              <a href="#!"><i class="mdi-editor-insert-invitation"></i> New List has been created</a>
                               <time class="media-meta" datetime="2015-06-12T20:50:48+08:00">6 days ago</time>
                            </li>
                            <li>
-                              <a href="#!"><i class="mdi-action-trending-up"></i> Generate monthly report</a>
+                              <a href="#!"><i class="mdi-action-trending-up"></i> New invitation was sent</a>
                               <time class="media-meta" datetime="2015-06-12T20:50:48+08:00">1 week ago</time>
                            </li>
                          </ul>
-                         <a href="#" class="waves-effect waves-block waves-light notification-button dropdown-button" data-activates="notifications-dropdown">
-                            <i class="material-icons md-18 md-light">notifications<extra-small class="notification-badge">5</sextra-small></i>
-                        </a>
+
                      </li>
                      <li><a href="badges.html" >
                        <i class="material-icons md-18 md-light">view_module</i></a>
@@ -50,30 +51,30 @@
             </div>
           </div>
           <div class="nav-main">
-                <div class="row">
-                    <a href="#" data-activates="slide-out" class="sidebar-collapse btn-medium waves-effect waves-light">
-                      <i class="material-icons">menu</i>
-                    </a>
-                    <div class="nav-logo valign-wrapper">
-                        <a href="#!" class="darken-1"><%= image_tag "sessions-logo-nav.png", :size => "130x40", :alt => "StandUp", :title => "StandUp Logo"%></a>
-                    </div>
-                    <div class="col s3 left uppercase avatar-list" id="nav-list">
-                        <%= render "lists/nav_list_name"%>
-                    </div>
-                    <ul class="right hide-on-med-and-down nav-setting">
-                        <li><div id='application_date'>
-                             <%= form_for current_list, method: :get,remote: true do |f| %>
-                                <input type="hidden" name="date" id="form_date">
-                                <input type="date" class="datepicker right-align">
-                             <% end %>
-                           </div>
-                        </li>
-                     </ul>
-                       <div class="col s1 text-right right" id="ms-link-listSetting">
-                          <%= render partial: 'lists/link_listSetting',  locals:{list: current_list}%>
-                       </div>
+            <div class="left">
+              <a href="#" data-activates="slide-out" class="sidebar-collapse btn-medium waves-light hamburger-menu">
+                <i class="material-icons">menu</i>
+              </a>
+              <h1 class="logo">Sessions</h1>
+              <div class="divider"></div>
+              <div class="uppercase avatar-list" id="nav-list">
+                  <%= render "lists/nav_list_name"%>
+              </div>
+            </div>
+            <div class="right">
+                <div id="ms-link-listSetting" class="settings">
+                   <%= render partial: 'lists/link_listSetting',  locals:{list: current_list}%>
+                </div>
+                <div id='application-date'>
+                       <%= form_for current_list, method: :get,remote: true do |f| %>
+                          <input type="hidden" name="date" id="form_date">
+                          <input type="date" class="datepicker right-align">
+                       <% end %>
                  </div>
-                 <div id="ms-tabsSetting" class="row"></div>
+                 <div class="divider"></div>
+
+                 <!-- <div id="ms-tabsSetting" class="row"></div> -->
+              </div>
             </div>
      </div>
   </nav>

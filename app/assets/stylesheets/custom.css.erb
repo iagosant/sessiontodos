@@ -51,7 +51,9 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
-
+.show_blockers label{
+      cursor: pointer;
+}
 
 /*#user_nav_partial {
 padding-left: 0px !important;
@@ -74,7 +76,7 @@ body{
 h1, h2, h3, h4, h5, h6 {
   font-weight: lighter!important;
   color: #808080 !important;
-  margin: 0.82rem 0 2rem!important;
+  margin: 0.82rem 0 2rem;
 }
 /*#content{
    padding-top: 60px;
@@ -195,7 +197,7 @@ div .card{
 }
 /* END STYLE FOR CARD ELEMENT */
 /* STYLE FOR BUTTON*/
-.btn, .btn-large {
+.btn, .btn-large, .btn-floating.btn-medium {
   background-color: #55C2B9!important;
   color: #fff!important;
   }
@@ -316,15 +318,6 @@ i.small {
   color: #f77f5f;
 }
 
-
-/* MEDIA SCREEN */
-@media only screen and (min-width: 601px){
- /*#stand-up nav, #stand-up nav .nav-wrapper i, #stand-up nav a.button-collapse, #stand-up nav a.button-collapse i {
-   height: 85px;
-   line-height: 85px;
- }*/
-}
-/********* END ******/
 /********* HELPER **********/
 .uppercase{
   text-transform: uppercase;
@@ -373,7 +366,6 @@ i.small {
 .divider{
   background-color: #d3d3d5;
   height: 1px;
-  /*width: 95%;*/
   margin: 15px 0 30px;
 }
 /********* material-icons ***************/
@@ -411,6 +403,10 @@ a{
 .input-field label,
 .card .card-content p {
   color: #848994;
+}
+.btn-floating.btn-medium {
+    width: 36px;
+    height: 36px;
 }
 /*******collection ***********/
 /*.collection .collection-item.active,

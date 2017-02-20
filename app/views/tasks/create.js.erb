@@ -3,6 +3,7 @@
    $('#show_blockers_<%= @task.id%>').append('<%= j render partial: "t_blocker", object: @t_blocker %>');
    $('#edit_task_<%= @t_blocker.id %>').submitOnCheck();
    $('.show_blockers #detail').val('');
+
 <% else %>
    <% @date= Date.today %>
    $('#list_user_<%=@user.id%> #incomplete_tasks').append('<%= j render partial: "task", layout: "incompleted", locals: {task: @task}  %>');

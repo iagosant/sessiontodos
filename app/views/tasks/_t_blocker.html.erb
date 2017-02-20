@@ -1,12 +1,13 @@
 <ul id='blocker_<%= t_blocker.id %>'>
 	 <li class="col s10">
-		<%= label_tag "blocker_#{t_blocker.id}", t_blocker.detail %>
+		  <%= link_to edit_task_t_blocker_path(id: t_blocker.id, task_id: t_blocker.parent_task_id), remote: true, data: {behavior: 'modal'} do %>
+			  <%= label_tag "blocker_#{t_blocker.id}", t_blocker.detail %>
+			<% end %>
 	 </li>
-	 <li>
-		 	<% if !permitted_user?(@user,@list) %>
-				<%= link_to t_blocker, method: :delete, data: {confirm: "Are you sure?"}, remote: true do %>
-					<i class="material-icons">delete</i>
-				<% end %>
+	 <li class="col">
+			<%= link_to t_blocker, method: :delete, data: {confirm: "Are you sure?"}, remote: true  do %>
+				 <i class="material-icons md-18 md-dark md-inactive">cancel</i>
 			<% end %>
 		</li>
+
 </ul>
