@@ -13,6 +13,7 @@ $(document).on('turbolinks:load',function(){
 
 
     // $(this).attr("data-name")
+
     var id = $('.navigationbar .nano-content>ul li.active a').attr('id');
     $("#form_date").attr('action', '/lists/' + id);
     var date = $('#form_date').val() ? $('#form_date').val(): new Date();
@@ -21,7 +22,9 @@ $(document).on('turbolinks:load',function(){
       data:'date='+ date,
       dataType:'script',
       type:'get',
+
       url: $('.navigationbar .nano-content>ul li.active a').attr('data-href')
+
     })
 
   });
