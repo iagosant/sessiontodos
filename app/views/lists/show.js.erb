@@ -1,8 +1,17 @@
 var $form =  $('#application-date form')
-
-$('#new-list').remove();
-$('#ms-user-edit').remove();
-$('#main_center').show();
+if($('#new-list').length){
+  $('#new-list').remove();
+}
+if($('#ms-user-edit').length){
+  $('#ms-user-edit').remove();
+}
+if($('#ms-tabsSetting').length){
+    $('#ms-tabsSetting').remove();
+}
+if($('body').hasClass('expand-header')){
+    $('body').removeClass('expand-header');
+}
+$('#page-content').html("<%= j render partial: 'list' %>");
 $('#collaboration_users').html("<%= j render partial: 'list_users' %>");
 $('#show_collaboration_users').html("");
 $("div#ms-link-listSetting").html("<%= j render partial: 'lists/link_listSetting', locals:{list: @list} %>");

@@ -17,7 +17,10 @@
     <div class="col s12">
       <div class="valign-wrapper ms-upload-avatar">
         <%= f.file_field :avatar %>
-        <label for="user_avatar"> <i class="material-icons">camera_alt</i><%= (current_user.nil?)? "Upload": "Change" %> your Avatar</label>
+        <label for="user_avatar">
+          <div class="mousehover <%= (current_user.nil?)? 'hover': '' %> ">
+            <i class="material-icons">camera_alt</i><%= (current_user.nil?)? "Upload": "Change" %> your Avatar</label>
+          </div>
       </div>
       <div class="input-field">
         <% if @token != nil %>

@@ -33,7 +33,8 @@
 }
 #ms-login .card .card-action a:not(.btn):not(.btn-large):not(.btn-floating),
 #ms-reset-password .card .card-action a:not(.btn):not(.btn-large):not(.btn-floating),
-#ms-user-new .card .card-action a:not(.btn):not(.btn-large):not(.btn-floating) {
+#ms-user-new .card .card-action a:not(.btn):not(.btn-large):not(.btn-floating),
+.ms-form a:not(.btn):not(.btn-large):not(.btn-floating){
   margin-right: 0px;
   text-transform: none;
 }
@@ -44,20 +45,23 @@
   }
 #ms-login .input-field .prefix ~ input, #ms-login .input-field .prefix ~ textarea,
 #ms-reset-password .input-field .prefix ~ input, #ms-login .input-field .prefix ~ textarea,
-#ms-user-new .input-field .prefix ~ input, #ms-user-new .input-field .prefix ~ textarea, {
+#ms-user-new .input-field .prefix ~ input, #ms-user-new .input-field .prefix ~ textarea,
+.ms-form .input-field .prefix ~ input, .input-field .prefix ~ textarea, {
     padding-left: 3rem;
     margin-left: 0rem;
   }
 #ms-login .su-btn input[type=submit],
 #ms-reset-password .su-btn input[type=submit],
-#ms-user-new .su-btn input[type=submit] {
+#ms-user-new .su-btn input[type=submit],
+.ms-form .su-btn input[type=submit] {
     width: 214px;
     text-transform: none;
     padding: 10px 0px;
   }
 #ms-login .input-field label,
 #ms-reset-password .input-field label,
-#ms-user-new .input-field label {
+#ms-user-new .input-field label,
+.ms-form .input-field label{
   font-size: 1.11rem;
   letter-spacing: .6px;
   }
@@ -67,7 +71,8 @@
 }
 #ms-login .su-btn.btn-flat.submit,
 #ms-reset-password .su-btn.btn-flat.submit,
-#ms-user-new .su-btn.btn-flat.submit{
+#ms-user-new .su-btn.btn-flat.submit,
+.ms-form .su-btn.btn-flat.submit{
   margin-top: 25px;
 }
 #ms-login [type="checkbox"]+label {

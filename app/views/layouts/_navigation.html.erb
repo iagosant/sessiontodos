@@ -2,7 +2,7 @@
   <!--class  /*user_lists navigation-lists */ -->
   <div class="nano">
     <div class="nano-content">
-        <ul id="slide-out">
+        <ul id="slide-out" class="side-nav fixed">
             <li class="bar-user-info">
               <a href="">
                 <%= image_tag(current_user.avatar(:medium), class: 'circle responsive-img center valign profile-image',alt: current_user.first_name, title:current_user.first_name) %>
@@ -41,8 +41,8 @@
                   </a>
                 </li>
                 <% if !current_collaboration_lists.empty? %>
-                      <li class="li-hover"><div class="divider"></div></li>
-                      <li class="li-hover"><p class="ultra-small center margin more-text">Collaboration lists</p></li>
+                      <!-- <li class="li-hover"><div class="divider"></div></li> -->
+                      <li class="li-hover"><p class="ultra-small margin more-text">Collaboration lists</p></li>
                       <% @current_collaboration_lists.each do |collection_list| %>
                           <li class="bold" data-name="<%=collection_list.name %>">
                             <a id="<%= collection_list.id %>" href="#" data-href= "<%=list_path(collection_list) %>" data-remote="true">

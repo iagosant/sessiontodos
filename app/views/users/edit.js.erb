@@ -1,8 +1,11 @@
+if(!$('#ms-tabsSetting').length){
+    $('header .nav-wrapper').append('<div id="ms-tabsSetting"></div>');
+}
 $('#ms-tabsSetting').html('<%= j render partial: 'users/tabsSetting' %>');
-$('.navbar .navbar-fixed').css('min-height','200px');
-$('nav').css('min-height','200px');
-$('header').css('min-height','200px');
+$('body').addClass('expand-header');
+$('nav a.button-collapse').css('display','block');
+$('.navigationbar ul#slide-out').css({transform:'translateX(-100%)'});
 $('#page-content').html('<%= j render partial: 'users/edit' %>');
-// $('#ms-modal-applications').modal('open');
-$('.navigation-lists').hide();
 $('ul.tabs').tabs();
+// $('#ms-modal-applications').modal('open');
+// $('.side-nav').hide();

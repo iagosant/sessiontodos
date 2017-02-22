@@ -14,6 +14,17 @@ $(document).on('turbolinks:load',function(){
   //   alert($(this).val());
   //   $("#ms-upload-avatar").css('background-image','url('+$(this).val()+')');
   // });
+  $("label[for='user_avatar']")
+  .mouseout(function() {
+    if ($('div.mousehover',this).hasClass('active'))
+      {$('div.mousehover',this).toggleClass('hover');}
+
+  })
+  .mouseover(function() {
+    if (!$('div.mousehover', this ).hasClass('hover')){
+      $( 'div.mousehover', this).toggleClass( 'hover' );
+    }
+  });
 
   $("input[id='user_avatar']").on("change", function(){
 
@@ -35,6 +46,8 @@ $(document).on('turbolinks:load',function(){
         reader.onloadend = function(){
 
             $(".ms-upload-avatar").css("background-image", "url(" + this.result + ")");
+            $(".ms-upload-avatar").find('div.mousehover').addClass('active').toggleClass('hover');
+
         }
     }
 });
@@ -124,6 +137,9 @@ $('.leftside-navigation').perfectScrollbar();
     }, function(){
       change_img_nav(this)
    });
+
+   // Initialize collapse button
+  $(".button-collapse").sideNav();
 
   // $( "#datepicker" ).datepicker({
   //   dateFormat: 'yy-mm-dd',
