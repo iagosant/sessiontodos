@@ -27,6 +27,7 @@ main{
   display: inline-block;
   width: 130px;
   text-indent: -1000px;
+  background-image: url("<%= asset_path('sessions-main-logo.png')%>");
   background-repeat: no-repeat;
   background-position: right;
   margin:0;
@@ -227,21 +228,6 @@ header nav .nav-wrapper .nav-belt{
 nav .nav-wrapper {
     position: relative;
     height: 100%;
-}
-#ms-tabsSetting{
-  position: absolute;
-  bottom: 0;
-}
-.ms-tabsSetting-content{
-  max-width: 450px;
-  padding: 75px 0;
-}
-#ms-tabsSetting ul.tabs{
-  background: none;
-}
-
-#ms-tabsSetting ul.tabs li{
-  padding: 0 23px;
 }
 
 footer{
@@ -1511,9 +1497,7 @@ extra-small.notification-badge {
   width: 90px;
   height: 90px;
 }
-.ms-tabsSetting-content .ms-upload-avatar{
-  background-image: url('<% %>');
-}
+
 .ms-tabsSetting-content .ms-upload-avatar{
   margin: 0 27px 61px 0px;
   display: inline-block;
@@ -1535,9 +1519,16 @@ extra-small.notification-badge {
   height: 100px;
   width: 100px;
 }
+.ms-upload-avatar label[for="user_avatar"]> div.mousehover,
+.ms-tabsSetting-content .ms-upload-avatar label[for="user_avatar"]> div.mousehover{
+    transition: all 1s;
+}
+
 .ms-upload-avatar label[for="user_avatar"]> div.mousehover{
     padding: 20px 0;
-    transition: all 1s;
+}
+.ms-tabsSetting-content .ms-upload-avatar label[for="user_avatar"]> div.mousehover{
+    padding: 0.8rem 0;
 }
 
 .ms-upload-avatar label[for="user_avatar"]> div.mousehover:not(.hover){
@@ -1585,3 +1576,169 @@ extra-small.notification-badge {
 .ms-tabsSetting-content .ms-upload-avatar label .material-icons{
 
 }
+
+/* STYLE FOR LOGIN AND MS-FORM*/
+#ms-login, #ms-reset-password{
+  padding-top: 0px;
+  margin-top: 15vh;
+}
+#ms-login > div{
+  height: 100%;
+}
+#ms-login .card, #ms-reset-password .card,
+#ms-user-new .card{
+  color:#aeb0b4;
+  margin: 0 auto;
+  padding: 0px;
+  width: 100%;
+  max-width: 500px;
+}
+#ms-login .card .card-title, #ms-reset-password .card .card-title,
+#ms-user-new .card .card-title{
+  background-color: #081729;
+  border-top-right-radius: 2px;
+  border-top-left-radius: 2px;
+}
+#ms-login .card .card-content, #ms-reset-password .card .card-content,
+#ms-user-new .card .card-content{
+  border-radius: 0px !important;
+  padding-top: 25px;
+}
+#ms-login .card .card-action, #ms-reset-password .card .card-action,
+#ms-user-new .card .card-action{
+  background-color: #fff;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+  padding-bottom: 5px;
+}
+#ms-login .card .card-action a:not(.btn):not(.btn-large):not(.btn-floating),
+#ms-reset-password .card .card-action a:not(.btn):not(.btn-large):not(.btn-floating),
+#ms-user-new .card .card-action a:not(.btn):not(.btn-large):not(.btn-floating),
+.ms-form a:not(.btn):not(.btn-large):not(.btn-floating){
+  margin-right: 0px;
+  text-transform: none;
+}
+#ms-login .card .card-title img,
+#ms-reset-password .card .card-title img,
+#ms-user-new .card .card-title img{
+  margin: 0 auto;
+  }
+#ms-login .input-field .prefix ~ input, #ms-login .input-field .prefix ~ textarea,
+#ms-reset-password .input-field .prefix ~ input, #ms-login .input-field .prefix ~ textarea,
+#ms-user-new .input-field .prefix ~ input, #ms-user-new .input-field .prefix ~ textarea,
+.ms-form .input-field .prefix ~ input, .input-field .prefix ~ textarea, {
+    padding-left: 3rem;
+    margin-left: 0rem;
+  }
+#ms-login .su-btn input[type=submit],
+#ms-reset-password .su-btn input[type=submit],
+#ms-user-new .su-btn input[type=submit],
+.ms-form .su-btn input[type=submit] {
+    width: 214px;
+    text-transform: none;
+    padding: 10px 0px;
+  }
+#ms-login .input-field label,
+#ms-reset-password .input-field label,
+#ms-user-new .input-field label,
+.ms-form .input-field label{
+  font-size: 1.11rem;
+  letter-spacing: .6px;
+  }
+#ms-login .form,
+#ms-reset-password .form{
+  padding-top: 20px;
+}
+#ms-login .su-btn.btn-flat.submit,
+#ms-reset-password .su-btn.btn-flat.submit,
+#ms-user-new .su-btn.btn-flat.submit,
+.ms-form .su-btn.btn-flat.submit{
+  margin-top: 25px;
+}
+.ms-form{
+  color: #aeb0b4;
+}
+.ms-form a.btn-large{
+  width: 100%;
+}
+.ms-tabsSetting-content .ms-form a.btn-large{
+    margin-top: 17px;
+  }
+.ms-tabsSetting-content .ms-form{
+  max-width: 415px;
+}
+.ms-tabsSetting-content .ms-form input{
+  margin-bottom: 26px;
+}
+.ms-form .input-field .prefix ~ input, .ms-form .input-field .prefix ~ textarea {
+    padding-left: 3rem;
+    margin-left: 0rem;
+}
+
+#ms-login [type="checkbox"]+label {
+    padding-left: 30px;
+    line-height: 20px;
+    font-size: 1rem;
+}
+#ms-login [type="checkbox"]+label:before,
+#ms-login [type="checkbox"]:not(.filled-in)+label:after {
+    width: 15px;
+    height: 15px;
+}
+#ms-login [type="checkbox"]:checked+label:before {
+    width: 12px;
+  }
+@media only screen and (max-width: 1200px){
+  #ms-login .card, #ms-reset-password .card,
+  #ms-user-new .card {
+    width: 90%;
+  }
+}
+@media only screen and (max-width: 600px){
+  #ms-login .card-content h5 {
+    margin: 0.82rem 0 0.8rem!important;
+  }
+  #ms-login .card .card-title img,
+  #ms-user-new .card .card-title img{
+    max-width: 150px;
+    max-height: 48px;
+  }
+  #ms-login .card .card-title, #ms-reset-password .card .card-title,
+  #ms-user-new .card .card-title{
+    min-height: 90px;
+  }
+}
+/* STYLE FOR AVATAR FORM IN USER */
+
+#ms-tabsSetting{
+  position: absolute;
+  bottom: 0;
+}
+.ms-tabsSetting-content {
+  max-width: 450px;
+  padding: 75px 0;
+}
+#ms-tabsSetting ul.tabs{
+  background: none;
+}
+
+#ms-tabsSetting ul.tabs li {
+  padding: 0 23px;
+}
+
+.ms-update-avatar{
+  height: 90px;
+}
+
+.ms-update-avatar label {
+  font-size: 0.75rem;
+}
+
+.ms-update-avatar label, .ms-update-avatar a.su-btn.btn-flat {
+  font-size: 0.75rem;
+}
+.ms-update-avatar a.su-btn.btn-flat {
+  padding-left: 1.3rem;
+  padding-right: 1.3rem;
+  border: 1px solid #6F737E!important;
+  }

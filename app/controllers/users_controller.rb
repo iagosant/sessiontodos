@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   include ApplicationHelper
   before_action :require_logged_in, only: [:index,:show, :edit, :update, :destroy]
   # helper_method :get_current_date
-  before_action :set_user, only: [:show, :update, :list_user]
+  before_action :set_user, only: [:show, :update, :update_avatar, :list_user]
   before_action :set_list,  if: -> { !params[:type].blank? }
   # before_action :set_task_per_user, only: [:show]
   attr_accessor :email, :name, :password, :password_confirmation
@@ -91,20 +91,30 @@ class UsersController < ApplicationController
   end
 
   def update
-
-    current_user.current_step = (user_params[:current_step].present?)? user_params[:current_step] : steps.first
+  # steps.first ==> ""
+    current_user.current_step = (user_params[:current_step].present?)? user_params[:current_step] : ""
     if current_user.current_step == "security"
       update_password(user_params)
     end
+
     respond_to do |format|
       if current_user.update(user_params)
-        format.html { redirect_to :back, notice: 'User was successfully updated.' }
-        format.json { render :show, status: :ok, location: @user }
-      else
-        format.html { render :edit }
-        format.json { render json: current_user.errors, status: :unprocessable_entity }
+          format.html{  render '_edit' }
+          format.js
       end
     end
+
+  end
+
+  def update_avatar
+
+    respond_to do |format|
+      if current_user.update(avatar: user_params[:avatar])
+          format.html{  render '_edit' }
+          format.js
+      end
+    end
+
   end
 
   def destroy

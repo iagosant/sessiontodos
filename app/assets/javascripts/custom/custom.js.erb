@@ -6,52 +6,8 @@ jQuery.fn.submitOnCheck = function() {
   return this;
 };
 
-
 $(document).on('turbolinks:load',function(){
 
-  // CHANGE IMAGE IN USER NEW FILE UPLOAD
-  // $("input[id*='user_avatar']").change(function(){
-  //   alert($(this).val());
-  //   $("#ms-upload-avatar").css('background-image','url('+$(this).val()+')');
-  // });
-  $("label[for='user_avatar']")
-  .mouseout(function() {
-    if ($('div.mousehover',this).hasClass('active'))
-      {$('div.mousehover',this).toggleClass('hover');}
-
-  })
-  .mouseover(function() {
-    if (!$('div.mousehover', this ).hasClass('hover')){
-      $( 'div.mousehover', this).toggleClass( 'hover' );
-    }
-  });
-
-  $("input[id='user_avatar']").on("change", function(){
-
-    // Get a reference to the fileList
-    var files = !!this.files ? this.files : [];
-
-    // If no files were selected, or no FileReader support, return
-    if ( !files.length || !window.FileReader ) return;
-
-    // Only proceed if the selected file is an image
-    if ( /^image/.test( files[0].type ) ) {
-        // Create a new instance of the FileReader
-        var reader = new FileReader();
-
-        // Read the local file as a DataURL
-        reader.readAsDataURL( files[0] );
-
-        // When loaded, set image data as background of page
-        reader.onloadend = function(){
-
-            $(".ms-upload-avatar").css("background-image", "url(" + this.result + ")");
-            $(".ms-upload-avatar").find('div.mousehover').addClass('active').toggleClass('hover');
-
-        }
-    }
-});
-  // END
 /* Modal for view*/
 var modal_holder_selector;
  modal_holder_selector = "#modal-holder";
@@ -80,8 +36,6 @@ $(".sidebar-collapse").sideNav();
 
 // $('.leftside-navigation').perfectScrollbar();
 
-
-
 // $('#detail').triggeredAutocomplete({
 //     hidden: '#hidden_inputbox',
 //     source: "/lists/28/complete_users",
@@ -104,10 +58,8 @@ $(".sidebar-collapse").sideNav();
   $('select').material_select();
   $('.modal-trigger').modal();
 
-
   var pgurl = window.location.href.substr(window.location.href.lastIndexOf("/")+1);
   $("#stand-up ul li a").each(function(){
-      //  alert($(this).attr("href") );
          if($(this).attr("href") == pgurl || $(this).attr("href") == '' )
          $(this).addClass("active");
     });
@@ -140,16 +92,6 @@ $(".sidebar-collapse").sideNav();
 
    // Initialize collapse button
   $(".button-collapse").sideNav();
-
-  // $( "#datepicker" ).datepicker({
-  //   dateFormat: 'yy-mm-dd',
-  //   disabled: false
-  //  });
-  //  $( "#datepicker2" ).datepicker({
-  //    dateFormat: 'yy-mm-dd',
-  //    disabled: false
-  //   });
-
 });
 function change_img_nav(e){
   var img = $(e).find("img#icon-change"),

@@ -12,16 +12,8 @@
       </div>
     </div>
   <% end %>
-    <%= form_for(@user, method: :PUT) do |f| %>
-      <div class="valign-wrapper ms-upload-avatar" style="<% if (!current_user.nil?) %>background-image: url('<%= current_user.avatar('thumb') %>');<% end %>">
-        <%= f.file_field :avatar %>
-        <label for="user_avatar">
-          <div class="mousehover <%= (current_user.nil?)? 'hover': '' %> ">
-            <i class="material-icons">camera_alt</i><%= (current_user.nil?)? "Upload": "Change" %> your Avatar</label>
-          </div>
-      </div>
-    <% end %>
-    <%= form_for(@user) do |f| %>
+    <%= render 'form_avatar' %>
+    <%= form_for(@user, :remote => true) do |f| %>
     <div class="section ms-form">
         <div class="input-field capitalize">
           <i class="material-icons prefix">person_outline</i>

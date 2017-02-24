@@ -1,4 +1,4 @@
-<%= form_for(@user, url: password_reset_path(params[:id])) do |f| %>
+<%= form_for(@user, url: password_reset_path(params[:id]), :remote => true) do |f| %>
 <%= f.hidden_field :current_step, :value => "security" %>
 <% if @user.errors.any? %>
 <div class="row">
