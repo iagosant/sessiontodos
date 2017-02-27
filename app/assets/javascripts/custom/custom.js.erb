@@ -7,7 +7,11 @@ jQuery.fn.submitOnCheck = function() {
 };
 
 $(document).on('turbolinks:load',function(){
-
+$(document).on("click", 'ul.tabs li a',function(e){
+  console.log($(this).data("current-step"));
+  // e.preventDefault;
+  // $("input:hidden[id=user_current_step]").val($(this).data("current-step"));
+})
 /* Modal for view*/
 var modal_holder_selector;
  modal_holder_selector = "#modal-holder";
@@ -50,7 +54,6 @@ $(".sidebar-collapse").sideNav();
      startingTop: '4%', // Starting top style attribute
      endingTop: '150px', // Ending top style attribute
      ready: function(modal, trigger) { // Callback for Modal open. Modal and trigger parameters available.
-       alert("Ready");
        console.log(modal, trigger);
      },
      complete: function() { alert('Closed'); } // Callback for Modal close

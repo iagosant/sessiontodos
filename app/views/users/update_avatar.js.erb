@@ -5,7 +5,7 @@ $('#ms-tabsSetting').html('<%= j render partial: 'users/tabsSetting' %>');
 $('body').addClass('expand-header');
 $('nav a.button-collapse').css('display','block');
 $('.navigationbar ul#slide-out').css({transform:'translateX(-100%)'});
-$('#page-content').html('<%= j render "edit" %>');
+$('#page-content').html('<%= j render 'users/edit' %>');
 $('ul.tabs').tabs();
 // $('#ms-modal-applications').modal('open');
 // $('.side-nav').hide();

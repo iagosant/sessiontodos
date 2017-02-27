@@ -4,5 +4,7 @@ module UsersHelper
      ['Admin', 'Manager', 'Employee']
   end
 
-  
+  def set_step(step_index)
+    current_user.current_step = steps[step_index]
+  end
 end

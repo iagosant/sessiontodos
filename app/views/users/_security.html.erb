@@ -1,20 +1,7 @@
-<%= form_for(@user, url: password_reset_path(params[:id]), :remote => true) do |f| %>
-<%= f.hidden_field :current_step, :value => "security" %>
-<% if @user.errors.any? %>
+
+
 <div class="row">
-  <div class="col s12">
-    <div id="error_explanation">
-      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
-      <ul>
-        <% @user.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
-  </div>
-</div>
-<% end %>
-<div class="row">
+  <%= f.hidden_field :current_step, :value => "security" %>
   <div class="input-field">
     <i class="material-icons prefix">lock_outline</i>
     <%= f.label :current_password %>
@@ -36,4 +23,3 @@
   </div>
 </div>
 </div>
-<% end %>

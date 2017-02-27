@@ -3,10 +3,11 @@ class UsersController < ApplicationController
   include ApplicationHelper
   before_action :require_logged_in, only: [:index,:show, :edit, :update, :destroy]
   # helper_method :get_current_date
-  before_action :set_user, only: [:show, :update, :update_avatar, :list_user]
+  before_action :set_user, only: [:show, :update, :updateAvatar, :list_user]
   before_action :set_list,  if: -> { !params[:type].blank? }
   # before_action :set_task_per_user, only: [:show]
   attr_accessor :email, :name, :password, :password_confirmation
+  skip_before_action :verify_authenticity_token
 
   def index
     # this_user = User.find(session[:user_id])
@@ -23,6 +24,7 @@ class UsersController < ApplicationController
     update_this_user = User.find(user_id)
     update_this_user.update(role: new_role)
   end
+
 
   def show
     # authorize @user
@@ -91,30 +93,18 @@ class UsersController < ApplicationController
   end
 
   def update
-  # steps.first ==> ""
-    current_user.current_step = (user_params[:current_step].present?)? user_params[:current_step] : ""
-    if current_user.current_step == "security"
-      update_password(user_params)
-    end
-
+    @user.current_step = (user_params[:current_step].present?)? user_params[:current_step] : ""
     respond_to do |format|
-      if current_user.update(user_params)
-          format.html{  render '_edit' }
-          format.js
-      end
+        if @user.current_step == "security"
+          # update_password(user_params)
+        elsif (@user.current_step == "personal")
+          @user.update(first_name: user_params[:first_name],last_name: user_params[:last_name])
+        else
+          @user.update(avatar: user_params[:avatar])
+        end
+       format.html{ render edit}
+        format.js
     end
-
-  end
-
-  def update_avatar
-
-    respond_to do |format|
-      if current_user.update(avatar: user_params[:avatar])
-          format.html{  render '_edit' }
-          format.js
-      end
-    end
-
   end
 
   def destroy
