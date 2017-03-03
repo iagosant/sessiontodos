@@ -1,4 +1,4 @@
-class List < ActiveRecord::Base
+class List < ApplicationRecord
 
   attr_accessor :num_incompleted_tasks
   has_attached_file :avatar,

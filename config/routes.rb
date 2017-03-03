@@ -163,4 +163,7 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+
+  # Serve websocket cable requests in-process
+  mount ActionCable.server => '/cable'
 end

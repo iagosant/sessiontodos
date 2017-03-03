@@ -1,5 +1,4 @@
-
-
+<%= form_for(@user, :remote => true) do |f| %>
 <div class="row">
   <%= f.hidden_field :current_step, :value => "security" %>
   <div class="input-field">
@@ -23,3 +22,4 @@
   </div>
 </div>
 </div>
+<% end%>

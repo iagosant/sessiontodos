@@ -1,4 +1,4 @@
-class Invitation < ActiveRecord::Base
+class Invitation < ApplicationRecord
   # attr_accessor :sender_id, :list_id, :recipient_email, :token, :sent_at
 
   belongs_to :list

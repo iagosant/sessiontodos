@@ -7,7 +7,9 @@ gem 'aws-sdk', '~> 2'
 
 gem 'rails-erd'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.6'
+gem 'rails', '>= 5.0.0.beta3', '< 5.1'
+gem 'puma'
+gem 'redis', '~> 3.0'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 gem 'materialize-sass'

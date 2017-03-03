@@ -1,4 +1,4 @@
-class Team < ActiveRecord::Base
+class Team < ApplicationRecord
   has_many :users
   has_many :sessions
   validates :team_name, presence: true

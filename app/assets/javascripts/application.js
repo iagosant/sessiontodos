@@ -18,4 +18,5 @@
 //= require custom/custom
 //= require materialize-sprockets
 //= require perfect-scrollbar
+//= require_tree ./channels
 //= require_tree .

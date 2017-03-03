@@ -1,4 +1,4 @@
-class Task < ActiveRecord::Base
+class Task < ApplicationRecord
   attr_accessor :t_blocker_attributes, :completed
   belongs_to :list
   belongs_to :user

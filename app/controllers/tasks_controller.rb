@@ -22,6 +22,11 @@ class TasksController < ApplicationController
      else
        @task = Task.new
     end
+    WebNotificationsChannel.broadcast_to(
+      current_user,
+      title: 'New Task!',
+      body: '#{current_user.name} created a new task'
+    )
      render layout: 'modal'
     # respond_to do |format|
     #   format.html { redirect_to @list  }

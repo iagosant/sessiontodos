@@ -96,14 +96,18 @@ class UsersController < ApplicationController
     @user.current_step = (user_params[:current_step].present?)? user_params[:current_step] : ""
     respond_to do |format|
         if @user.current_step == "security"
-          # update_password(user_params)
+           update_password(user_params)
         elsif (@user.current_step == "personal")
-          @user.update(first_name: user_params[:first_name],last_name: user_params[:last_name])
+          # @user.update_attribute(user_params[:first_name],user_params[:last_name],user_params[:avatar])
+          @user.update(user_params)
+          format.html
+          format.js
         else
-          @user.update(avatar: user_params[:avatar])
+          @user.update(:avatar => user_params[:avatar])
+          format.html
+          format.js
         end
-       format.html{ render edit}
-        format.js
+
     end
   end
 

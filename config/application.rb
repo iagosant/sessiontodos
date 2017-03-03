@@ -28,5 +28,8 @@ module StandupLogs
 
     config.active_record.raise_in_transactional_callbacks = true
 
+    # added after upgrading from rails 4.2 to Rails 5.0 
+    ActiveSupport.halt_callback_chains_on_return_false = false
+
   end
 end
