@@ -2,26 +2,17 @@ module LoginHelper
 
   def log_in(user)
     session[:user_id] = user.id
+    cookies.signed[:id] = user.id
     all_task_list = current_user.created_lists.find_by(name: 'All Tasks')
     all_task_list = (all_task_list.nil?) ? current_user.created_lists.create(name: "All Tasks") : all_task_list
     session[:all_tasks_id] = all_task_list.id
     session[:list_id] = all_task_list.id
-    set_current_date
+    session[:current_date]= Date.today
     # $date = Date.today
     # session[:team_id] = user.team_id
   end
 
-  def current_user
-    if (user_id = session[:user_id])
-      @current_user ||= User.find_by(id: user_id)
-    elsif (user_id = cookies.signed[:user_id])
-      user = User.find_by(id: user_id)
-      if user && user.authenticated?(:remember,cookies[:remember_token])
-        log_in user
-        @current_user = user
-      end
-    end
-  end
+
 
   def current_user?(user)
     return true if (current_user == user)
@@ -51,6 +42,18 @@ module LoginHelper
     end
   end
 
+  def current_user
+    if (user_id = session[:user_id])
+      @current_user ||= User.find_by(id: user_id)
+    elsif (user_id = cookies.signed[:user_id])
+      user = User.find_by(id: user_id)
+      if user && user.authenticated?(:remember,cookies[:remember_token])
+        log_in user
+        @current_user = user
+      end
+    end
+  end
+
   def current_list
     if (!@list.nil?)
       @current_list ||= @list
@@ -66,20 +69,21 @@ module LoginHelper
   end
 
   #date
-  def set_current_date
+  def current_date
+
     if (params[:date].blank?) && (session[:current_date].nil?)
       session[:current_date] =  Date.today
     else
       session[:current_date] = (params[:date].present?) ? params[:date].to_date : session[:current_date]
     end
-
+    @current_date = session[:current_date].to_date
   end
 
-  def get_current_date
-
-     @get_current_date = (session[:current_date].nil?) ? Date.today : session[:current_date].to_date
-
-  end
+  # def current_date
+  #
+  #    @current_date = (session[:current_date].nil?) ? Date.today : session[:current_date].to_date
+  #
+  # end
   # Remembers a user in a persistent session.
   def remember(user)
     user.remember
@@ -98,6 +102,8 @@ module LoginHelper
     # sessions.delete(:team_id)
     @current_user = nil
     # @current_team = nil
+    cookies.signed[:id] = nil
+    session.delete(:current_date)
 
   end
 

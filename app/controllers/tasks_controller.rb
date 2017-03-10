@@ -1,10 +1,11 @@
 class TasksController < ApplicationController
   include TasksHelper
+  include ApplicationHelper
   before_action :require_logged_in
   before_action :set_list, only: [:new, :create, :edit, :complete ], if: -> { params[:type].blank? }
   before_action :set_task,  if: -> { !params[:type].blank? || !params[:id].blank? }
   before_action :set_user, only: [:create, :index ]
-  skip_before_filter :verify_authenticity_token
+  # skip_before_filter :verify_authenticity_token
 
   def index
     if (params[:type].present? || params[:type]=="blocker")
@@ -22,11 +23,7 @@ class TasksController < ApplicationController
      else
        @task = Task.new
     end
-    WebNotificationsChannel.broadcast_to(
-      current_user,
-      title: 'New Task!',
-      body: '#{current_user.name} created a new task'
-    )
+
      render layout: 'modal'
     # respond_to do |format|
     #   format.html { redirect_to @list  }
@@ -47,12 +44,25 @@ class TasksController < ApplicationController
     if params[:type].present?
        @t_blocker = @task.t_blockers.create(task_params)
      else
-       @task = @list.tasks.create(task_params)
+       @task = @list.tasks.build(task_params)
+
+       if @task.save
+         #
+        #  ActionCable.server.broadcast 'list_channel',{
+        #     task: TasksController.render(
+        #       partial: 'task',
+        #       locals: {task: @task},
+        #       layout: "incompleted"
+        #     ).squish
+        #   }
+
+        end
+
      end
-     respond_to do |format|
-       format.html{ redirect_to @list, :locals => {:task => @task}}
-       format.js {  }
-     end
+    #  respond_to do |format|
+    #    format.html{ redirect_to @list, :locals => {:task => @task}}
+    #    format.js {  }
+    #  end
   end
 
   def update

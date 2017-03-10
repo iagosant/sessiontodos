@@ -8,13 +8,15 @@ module ApplicationHelper
     first_names
   end
 
-  def is_today?(date)
-    (date == Date.today)
-  end
+  # def is_today?(date)
+  #   (date == Date.today)
+  # end
 
   def today(date)
-    (is_today?(date))? 'today' : 'before'
+    (date.today?)? 'today' : 'before'
   end
+
+
   # date
 
   # def is_active_controller(controller_name)

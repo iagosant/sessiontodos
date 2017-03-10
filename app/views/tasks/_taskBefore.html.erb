@@ -12,7 +12,7 @@
 		 </li>
 </ul>
 <% else %>
-	<ul id='task_<%= task.id%>' class="menu-option 	<%= (is_today?((task.created_at.to_date )))? 'today' : 'before'  %>">
+	<ul id='task_<%= task.id%>' class="menu-option 	<%= (task.created_at.to_date.today?)? 'today' : 'before'  %>">
 		<li class="col s9"><%= "#{task.detail} #{task.completed_at} created_at: #{task.created_at.strftime('%m:%d:%Y')} "%>
 	 	</li>
 		<li>

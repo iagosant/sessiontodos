@@ -6,6 +6,7 @@ class Task < ApplicationRecord
   has_many :t_blockers, class_name: "Task", foreign_key: "parent_task_id"
   accepts_nested_attributes_for :t_blockers
 
+   after_create_commit { TaskBroadcastJob.perform_later self}
   def completed?
     # byebug
     !completed_at.blank?

@@ -5,8 +5,8 @@
    </i>
 </div>
 <div class="col s11">
-  <% @date = get_current_date %>
-  <% if permitted_user?(user,list) && is_today?(@date) %>
+  <% @date = current_date %>
+  <% if permitted_user?(user,list) && (@date.today?) %>
     <div class="new-task">
       <%= render partial: 'tasks/form' %>
     </div>
@@ -22,5 +22,5 @@
         <!-- <%= render(partial: "tasks/task", collection: user.completed_tasks(list,@date))  %> -->
     </div>
   </div>
-  </div>
+</div>
 </div>

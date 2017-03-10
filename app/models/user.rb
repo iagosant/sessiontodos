@@ -106,8 +106,8 @@ class User < ApplicationRecord
 
   # Returns user's task
   def completed_tasks(list,date)
-
-    if helpers.is_today?(date)
+# helpers.is_today?(date)
+    if date.today?
       self.tasks.where(["list_id=? and completed_at IS NOT ? and DATE(completed_at) BETWEEN ? AND ?",list.id,nil, date - 1.day , date] ).order('completed_at')
     else
       self.tasks.where(["list_id=? and completed_at IS NOT ? and DATE(completed_at) =?",list.id,nil, date - 1.day] ).order('completed_at')
@@ -127,7 +127,7 @@ class User < ApplicationRecord
   end
 
   def incompleted_tasks(list,date)
-    if helpers.is_today?(date)
+    if date.today?
       self.tasks.where(["list_id=? and completed_at IS ? ",list.id,nil]).order("created_at DESC")
     else
     # self.tasks.where(completed_at: nil).order("updated_at DESC")

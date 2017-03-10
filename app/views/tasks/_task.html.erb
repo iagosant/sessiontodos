@@ -1,7 +1,7 @@
 <p id="<%= task.id%>"><%= "#{task.detail} #{task.completed_at}" %></p>
 <% if (!task.is_blocker?) && (!task.completed?) %>
 	<ul class="menu-option menu-information">
-	<% if (all_task?(@list) ) %>
+	<% if (all_task?(task.list_id) ) %>
 		<li><p><%= "#{task.list_belonging}"%></p></li>
 		<li>/</li>
 	<% end %>

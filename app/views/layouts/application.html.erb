@@ -4,8 +4,10 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>StandupLogs</title>
-  <%= javascript_include_tag "application", "data-turbolinks-track" => "reload" %>
-  <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => "reload" %>
+  <%= csrf_meta_tags %>
+  <%= action_cable_meta_tag %>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   <%= stylesheet_link_tag "https://fonts.googleapis.com/icon?family=Material+Icons", media: "all", "data-turbolinks-track" => "reload" %>
   <!-- <script src="assets/javascripts/jquery.nanoscroller.js" type="text/javascript"></script> -->
   <style>

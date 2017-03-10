@@ -1,12 +1,12 @@
  <% if params[:type].present? %>
   var $user = $('#collaboration_users div#<%= @user.id %>');
-  console.log($user);
+  // console.log($user);
   if ($user.hasClass('active')) {
       $user.removeClass('active');
       $('#show_collaboration_users #list_user_<%= @user.id %>').remove();
-      console.log('remove active');
+      // console.log('remove active');
   } else {
-      console.log($('#application-date .datepicker').val());
+      // console.log($('#application-date .datepicker').val());
       $user.addClass('active');
       $('#show_collaboration_users').append("<%= j render partial: 'users/list_user', locals:{user: @user, list: @list } %>");
       $('#show_collaboration_users #list_user_<%= @user.id %> input[id="task_user_id"]').val("<%= @user.id %>");

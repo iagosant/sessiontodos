@@ -1,54 +1,5 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
-  # config.action_mailer.delivery_method = :smtp
-  # # SMTP settings for gmail
-  # config.action_mailer.smtp_settings = {
-  #  :address              => "smtp.gmail.com",
-  #  :port                 => 587,
-  #  :user_name            => ENV['gmail_username'],
-  #  :password             => ENV['gmail_password'],
-  #  :authentication       => "plain",
-  # :enable_starttls_auto => true
-  # }
-  config.paperclip_defaults = {
-    :storage => :s3,
-    :s3_credentials => {
-      :bucket => ENV['AWS_BUCKET_NAME'],
-      :access_key_id => ENV['AWS_ACCESS_KEY_ID'],
-      :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY']
-    },
-    :s3_region => ENV['AWS_REGION']
-  }
-
-
-  config.active_record.dump_schema_after_migration = false
-  # added by Misley
-  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
-  config.action_mailer.delivery_method = :smtp
-  config.action_mailer.perform_deliveries = true
-  config.action_mailer.raise_delivery_errors = false
-  config.action_mailer.default :charset => "utf-8"
-  config.action_mailer.smtp_settings = {
-    address: "smtp.gmail.com",
-    port: 587,
-    domain: "localhost:3000",
-    authentication: "plain",
-    enable_starttls_auto: true,
-    user_name: ENV["gmail_username"],
-    password: ENV["gmail_password"]
-  }
-
-  config.paperclip_defaults = {
-    storage: :s3,
-    s3_credentials: {
-      access_key_id: ENV.fetch('AWS_ACCESS_KEY_ID'),
-      secret_access_key: ENV.fetch('AWS_SECRET_ACCESS_KEY'),
-      bucket: ENV.fetch('S3_BUCKET_NAME'),
-      s3_region: ENV.fetch('AWS_REGION')
-    }
-  }
-
-  config.action_mailer.perform_deliveries = true
 
   # In the development environment your application's code is reloaded on
   # every request. This slows down response time but is perfect for development
@@ -58,12 +9,27 @@ Rails.application.configure do
   # Do not eager load code on boot.
   config.eager_load = false
 
-  # Show full error reports and disable caching.
-  config.consider_all_requests_local       = true
-  config.action_controller.perform_caching = false
+  # Show full error reports.
+  config.consider_all_requests_local = true
+
+  # Enable/disable caching. By default caching is disabled.
+  if Rails.root.join('tmp/caching-dev.txt').exist?
+    config.action_controller.perform_caching = true
+
+    config.cache_store = :memory_store
+    config.public_file_server.headers = {
+      'Cache-Control' => 'public, max-age=172800'
+    }
+  else
+    config.action_controller.perform_caching = false
+
+    config.cache_store = :null_store
+  end
 
   # Don't care if the mailer can't send.
-  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.raise_delivery_errors = false
+
+  config.action_mailer.perform_caching = false
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
@@ -76,20 +42,18 @@ Rails.application.configure do
   # number of complex assets.
   config.assets.debug = true
 
-  # Asset digests allow you to set far-future HTTP expiration dates on all assets,
-  # yet still be able to expire them through the digest params.
-  config.assets.digest = true
+  # Suppress logger output for asset requests.
+  config.assets.quiet = true
 
-  # Adds additional error checking when serving assets at runtime.
-  # Checks for improperly declared sprockets dependencies.
-  # Raises helpful error messages.
-  config.assets.raise_runtime_errors = true
+  config.action_cable.allowed_request_origins = true
+  ActionCable.server.config.disable_request_forgery_protection = true
+  ActionCable.server.config.allowed_request_origins = %w( http://localhost:3000/ )
+  config.action_cable.url = "http://localhost:3000/cable/"
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 
-  # config/development.rb
-
-  # config.action_cable.url = "ws://localhost:3001/cable"
-
-  end
+  # Use an evented file watcher to asynchronously detect changes in source code,
+  # routes, locales, etc. This feature depends on the listen gem.
+  # config.file_watcher = ActiveSupport::EventedFileUpdateChecker
+end

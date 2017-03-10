@@ -12,11 +12,10 @@
     <label for="detail">New Task</label>
   </div>
 	<div class="col s2 input-field">
+			<%= button_tag type: 'submit', class: "btn-floating btn-medium waves-effect waves-light add-button", id: "create_task_button" do %>
+      	<i class="material-icons">add</i>
+    	<% end %>
 
-		 <a class="btn-floating btn-medium waves-effect waves-light add-button">
-
-			<%= f.submit " "%>
-			<i class="material-icons">add</i></a>
 	</div>
 	<% end %>
 </div>
