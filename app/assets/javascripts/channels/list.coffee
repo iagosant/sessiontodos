@@ -7,13 +7,35 @@ App.list = App.cable.subscriptions.create "ListChannel",
 
   received: (data) ->
     # Called when there's incoming data on the websocket for this channel
+    $list = $('[data-list-id = "' + data.list_id + '"]')
+    $user = $('[data-user-id = "' + data.user + '"]', $list)
+    # $('#list_user_' + data['user'] + ' #incomplete_tasks')
+    $task = $('[data-task-id = "' + data.id + '"]', $user)
 
-    unless data['task'].blank
-      div = $('#list_user_' + data['user'] + ' #incomplete_tasks')
-      alert '#edit_task_' + data['task_id']
-      div.prepend data['task']
-      $('#edit_task_' + data['task_id']).submitOnCheck()
+    if $task.length > 0
+      switch data.status
+        when 'saved'
+          $task.replaceWith data.html
+          $('#edit_task_' + data['id'], $task).submitOnCheck()
+        when 'deleted'
+          $task.remove()
+        when 'completed'
+          $task.remove()
+          alert data['html']
+          $('#complete_tasks', $user).prepend data['html']
+          $('#edit_task_' + data['id'], $task).submitOnCheck()
+
+    else
+
+      $('#incomplete_tasks', $user).prepend data['html']
+      $('#edit_task_' + data['id'], $task).submitOnCheck()
       $('#list_user_' + data['user'] + ' .new_task #detail').val('');
+    #
+    #
+    # unless data['task'].blank
+    #
+    #   alert data['status']
+    #   div.prepend data['task']
     # num = $('#' + data.task.list_id + ' .secondary-content span#num')
 
       # $num_incompleted_tasks.html '<%= current_user.num_incompleted_tasks(@list)%>'

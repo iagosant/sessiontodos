@@ -1,12 +1,11 @@
 <% if @task.completed? %>
- $('#task_<%= @task.id %>').remove();
+ // $('#task_<%= @task.id %>').remove();
  <% @date= Date.today %>
   <% @user= current_user %>
- $('#list_user_<%=@task.user_id%> #complete_tasks').append('<%= j render partial: "tasks/task", layout: "tasks/completed",  locals: {task: @task} %>');
-  // $('#task_<%= @task.id %>').appendTo('#list_user_<%=@task.user_id%> #complete_tasks');
+  $('#edit_task_<%= @task.id %>').submitOnCheck();
   $('input#completed_<%= @task.id %>').attr('disabled','disabled');
   var $num_incompleted_tasks= $('#<%= @list.id%> .secondary-content span#num');
   $num_incompleted_tasks.html('<%= current_user.num_incompleted_tasks(@list)%>');
 <% else %>
-  $('#task_<%= @task.id %>').appendTo('#list_user_<%=@task.user_id%> #incomplete_tasks');
+  // $('#task_<%= @task.id %>').appendTo('#list_user_<%=@task.user_id%> #incomplete_tasks');
 <% end %>

@@ -4,8 +4,19 @@ class ApplicationController < ActionController::Base
   include Pundit
   protect_from_forgery with: :exception
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
-  before_filter -> { flash.now[:notice] = flash[:notice].html_safe if flash[:html_safe] && flash[:notice] }
+  before_action -> { flash.now[:notice] = flash[:notice].html_safe if flash[:html_safe] && flash[:notice] }
   # before_filter :get_current_datebre
+  before_action :set_current_user
+  #before_action :set_current_list
+
+  def set_current_user
+    User.current = current_user
+  end
+
+  def set_current_list
+
+    List.current = current_list
+  end
 
   def require_logged_in
     unless logged_in?

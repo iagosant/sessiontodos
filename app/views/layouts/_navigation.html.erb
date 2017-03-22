@@ -11,20 +11,20 @@
                 <div class="bar-user-email"><%=current_user.email%></div>
               </a>
             </li>
-                <li class="bold active avatar" data-name="<%=current_all_tasks.name %>">
+                <li class="bold avatar <%= current_list?(current_all_tasks.id)? 'active' : '' %>" data-name="<%=current_all_tasks.name %>">
                   <a href="#" class="waves-effect waves-cyan" id="<%=current_all_tasks.id %>" data-remote="true" data-href= "<%=list_path(current_all_tasks) %>">
                     <!-- <i class="material-icons">view_list</i>
                     <%=current_all_tasks.name %> -->
-                    <%= render "lists/nav_list_name", :current_list => current_all_tasks %>
+                    <%= render partial: "lists/nav_list_name", locals: {list: current_all_tasks} %>
                     <span class="bar-number-task right"><%= current_user.num_incompleted_tasks(current_all_tasks) %></span>
                   </a>
                 </li>
                 <% current_created_lists.each do |list| %>
                   <% if (current_all_tasks.id != list.id)  %>
-                      <li class="bold" data-name="<%=list.name %>">
+                      <li class="bold <%= current_list?(list.id)? 'active' : '' %>" data-name="<%=list.name %>">
                         <a href="#"  id="<%=list.id %>" class="waves-effect waves-cyan" data-href= "<%=list_path(list) %>" data-remote="true">
                           <!-- <i class="material-icons"><%= image_tag(list.avatar(:medium), class: 'circle', size: "28x28") %></i><%=list.name %> -->
-                              <%= render "lists/nav_list_name", :current_list => list%>
+                            <%= render partial: "lists/nav_list_name", locals: {list: list} %>
                               <div class="right">
                                 <% if list.collaborations? %>
                                   <i class="material-icons bar-collaboration-icon">group</i>
@@ -45,9 +45,9 @@
                       <!-- <li class="li-hover"><div class="divider"></div></li> -->
                       <li class="li-hover"><p class="ultra-small margin more-text">Collaboration lists</p></li>
                       <% @current_collaboration_lists.each do |collection_list| %>
-                          <li class="bold" data-name="<%=collection_list.name %>">
+                          <li class="bold <%= current_list?(collection_list.id)? 'active' : '' %>" data-name="<%=collection_list.name %>">
                             <a id="<%= collection_list.id %>" href="#" data-href= "<%=list_path(collection_list) %>" data-remote="true">
-                                <%= render "lists/nav_list_name", :current_list => collection_list%>
+                                <%= render partial: "lists/nav_list_name", locals: {list: collection_list} %>
                                 <!-- <i class="material-icons "><%= image_tag(collection_list.avatar(:medium), class: 'circle', size: "28x28") %></i><%= collection_list.name %> -->
                                 <!-- <p>By <%= collection_list.owner.first_name %></p> -->
                                 <div class="right">

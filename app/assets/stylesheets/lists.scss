@@ -65,22 +65,30 @@
 .secondary-content {
     color: #9e9e9e!important;
 }
-#collaboration_users .chip a img{
+#collaboration-users .chip a img{
   border-radius: 50%;
   border: 1px solid #039be5!important;
   padding: 5px!important;
   height: 32px;
   width: 32px;
 }
-#collaboration_users .chip.active:after{
-  text-decoration: none;
-  content: '.';
-  font-size: 46pt;
-  color: red;
+#collaboration-users a{
   position: relative;
-  top: -25px;
-  left: -20px;
 }
-#collaboration_users .chip{
+
+#collaboration-users .chip.active a:after{
+  text-decoration: none;
+content: '.';
+font-size: 46pt;
+color: red;
+position: absolute;
+top: -25px;
+left: -20px;
+padding: 0;
+height: 3px;
+}
+
+.list-collaboration-users #collaboration-users,
+.list-collaboration-users .ms-add {
   padding: 0px 4px 0px!important;
-}
+  display: inline-block;}

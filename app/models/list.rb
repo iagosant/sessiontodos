@@ -18,4 +18,14 @@ class List < ApplicationRecord
     !self.collaborations.blank?
   end
 
+  # Methods for set current list for access from model
+  def self.current
+    Thread.current[:list]
+  end
+
+  def self.current=(list)
+    Thread.current[:list] = list
+  end
+  # END Methods for set current list for access from model
+
 end

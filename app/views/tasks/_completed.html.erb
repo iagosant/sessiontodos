@@ -1,9 +1,26 @@
-<div id='task_<%= task.id%>' class="menu-option">
+<div id='task_<%= task.id%>' class="menu-option row" data-task-id = "<%= task.id%>">
 	<div class="col s10 md-dark" style="text-decoration: line-through;">
-	  <%= yield %>
+		<!-- <%= yield %> -->
+		<p id="<%= task.id%>"><%= "#{task.detail} #{task.completed_at}" %></p>
+		<% if (!task.is_blocker?) && (!task.completed?) %>
+			<ul class="menu-option menu-information">
+			<% if (all_task?(task.list_id) ) %>
+				<li><p><%= "#{task.list_belonging}"%></p></li>
+				<li>/</li>
+			<% end %>
+				<li><p><%= "#{distance_of_time_in_words(task.created_at, Time.now, include_seconds: true)} ago" %></p></li>
+				<li>/</li>
+				<li><p> created_at: <%= "#{task.created_at.strftime('%m:%d:%Y')} " %></p></li>
+				<% if (task.deadline?) %>
+					<li>/</li>
+					<li><i class="material-icons md-18 md-red">&#xE858;</i><p><%= "#{task.deadline}" %></p></li>
+				<% end %>
+			</ul>
+		<% end%>
+<!-- End <%= yield %>  -->
 	</div>
 	<div class="col s2">
-			 <% if permitted_user?(@user,current_list) %>
+			 <% if permitted_user?(task.user_id, User.current, List.current) %>
 				 <%= link_to task, method: :delete, data: {confirm: "Are you sure?"}, remote: true do %>
 						<i class="material-icons md-dark md-inactive md-18">cancel</i>
 				 <% end %>

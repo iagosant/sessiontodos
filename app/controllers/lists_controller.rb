@@ -3,16 +3,16 @@ class ListsController < ApplicationController
   include ApplicationHelper
   before_action :require_logged_in
   before_action :current_date,  if: -> { !params[:date].blank? }
-  before_action :set_user, only: [:index, :show, :edit, :update, :destroy]
-  before_action :set_list, only: [:index, :show, :showList, :edit, :update, :destroy, :complete_users]
+  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_list, only: [:show, :showList, :edit, :update, :destroy, :complete_users]
 
   def index
     @all_tasks   = current_user.tasks.where(:completed_at => nil).order('created_at')
 
-    @collaborators = @list.collaboration_users
+    # @collaborators = @list.collaboration_users
     respond_to do |format|
       format.html
-      format.json { render json: @collaborators }
+      format.json
     end
 
   end
@@ -88,11 +88,16 @@ class ListsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_list
+      byebug
       if params[:id].blank?
-        @list = current_all_tasks
+        @list = current_list
       else
-        @list = List.find(params[:id])
+        session[:list_id] = nil
+        session[:list_id] = params[:id]
+        @list = List.find(session[:list_id])
+
       end
+      set_current_list
       @lists = current_user.created_lists.all.order('created_at')
       @collaboration_lists = current_user.collaboration_lists.all
       # set_task_per_user

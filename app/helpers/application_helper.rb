@@ -16,6 +16,9 @@ module ApplicationHelper
     (date.today?)? 'today' : 'before'
   end
 
+  def permitted_user?(user_id, current_user, current_list)
+    return true if (current_user.id == user_id)|| current_user.owner?(current_list)
+  end
 
   # date
 

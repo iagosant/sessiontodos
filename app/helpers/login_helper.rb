@@ -7,6 +7,7 @@ module LoginHelper
     all_task_list = (all_task_list.nil?) ? current_user.created_lists.create(name: "All Tasks") : all_task_list
     session[:all_tasks_id] = all_task_list.id
     session[:list_id] = all_task_list.id
+    set_current_list
     session[:current_date]= Date.today
     # $date = Date.today
     # session[:team_id] = user.team_id
@@ -14,12 +15,12 @@ module LoginHelper
 
 
 
-  def current_user?(user)
-    return true if (current_user == user)
+  def current_user?(id)
+    return true if (current_user.id == id)
   end
 
-  def permitted_user?(user,list)
-    return true if current_user?(user)|| current_user.owner?(list)
+  def current_list?(id)
+    return true if (current_list.id == id)
   end
 
   def current_all_lists
@@ -43,9 +44,10 @@ module LoginHelper
   end
 
   def current_user
+
     if (user_id = session[:user_id])
       @current_user ||= User.find_by(id: user_id)
-    elsif (user_id = cookies.signed[:user_id])
+    elsif (user_id = cookies.signed[:id])
       user = User.find_by(id: user_id)
       if user && user.authenticated?(:remember,cookies[:remember_token])
         log_in user
@@ -55,11 +57,11 @@ module LoginHelper
   end
 
   def current_list
-    if (!@list.nil?)
-      @current_list ||= @list
-    elsif (list_id = session[:list_id])
-      @current_list ||= List.find_by(id: list_id)
+
+    if (list_id = session[:list_id])
+       @current_list = List.find(list_id)
     end
+
   end
 
   def current_team
@@ -101,9 +103,11 @@ module LoginHelper
     session.delete(:user_id)
     # sessions.delete(:team_id)
     @current_user = nil
+    @current_list = nil
     # @current_team = nil
     cookies.signed[:id] = nil
-    session.delete(:current_date)
+    session[:current_date]=nil
+    session[:list_id]=nil
 
   end
 

@@ -61,6 +61,16 @@ class User < ApplicationRecord
     validates_presence_of :shipping_name, :if => lambda { |o| o.current_step == "shipping" }
     validates_presence_of :billing_name, :if => lambda { |o| o.current_step == "billing" }
 
+    # Methods for set current user for access from model
+    def self.current
+      Thread.current[:user]
+    end
+
+    def self.current=(user)
+      Thread.current[:user] = user
+    end
+    # END Methods for set current user for access from model
+
     def steps
       %w[personal avatar security]
     end

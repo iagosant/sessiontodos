@@ -153,6 +153,7 @@ class UsersController < ApplicationController
   end
 
   def set_list
+    byebug
     @list = List.find(params[:list_id])
   end
   # Never trust parameters from the scary internet, only allow the white list through.

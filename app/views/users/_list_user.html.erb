@@ -1,26 +1,27 @@
-<div id="list_user_<%= @user.id%>">
-<div class="col s1">
-   <i class="list-user-avatar left circle" style="1px solid #12AAED!important">
-     <%= image_tag(user.avatar(:medium), height: '42', width: '42',class: 'circle',alt: "#{user.first_name}#{user.id}", title:user.first_name) %>
-   </i>
-</div>
-<div class="col s11">
-  <% @date = current_date %>
-  <% if permitted_user?(user,list) && (@date.today?) %>
-    <div class="new-task">
-      <%= render partial: 'tasks/form' %>
+<!-- <p>@list:<%= @list.id %> </p>
+<p>current_list:<%= current_list.id %> </p> -->
+<div id="list_user_<%= user.id%>" data-user-id = "<%= user.id%>">
+    <div class="col s1">
+       <i class="list-user-avatar left circle" style="1px solid #12AAED!important">
+         <%= image_tag(user.avatar(:medium), height: '42', width: '42',class: 'circle',alt: "#{user.first_name}#{user.id}", title:user.first_name) %>
+       </i>
     </div>
-  <% end %>
-  <div class="tasks table-of-task" id="incomplete_tasks">
-     <%= render partial: "tasks/task", layout: "tasks/incompleted", collection: user.incompleted_tasks(list,@date) %>
-      <!-- <%= render(partial: "tasks/task", collection: user.incompleted_tasks(list,@date))%> -->
-  </div>
-  <div>
-    <div class="divider"></div>
-    <div class="tasks" id="complete_tasks">
-      <%= render partial: "tasks/task", layout: "tasks/completed", collection: user.completed_tasks(list,@date) %>
-        <!-- <%= render(partial: "tasks/task", collection: user.completed_tasks(list,@date))  %> -->
+    <div class="col s11">
+      <% @date = current_date %>
+      <% if permitted_user?(user.id, current_user,@list) && (@date.today?) %>
+        <div class="new-task">
+          <%= render partial: 'tasks/form' %>
+        </div>
+      <% end %>
+      <div class="tasks table-of-task" id="incomplete_tasks">
+         <%= render partial: "tasks/task", layout: "tasks/incompleted", collection: user.incompleted_tasks(@list,@date) %>
+          <!-- <%#= render(partial: "tasks/task", collection: user.incompleted_tasks(list,@date))%> -->
+      </div>
+      <div class="divider"></div>
+      <div class="tasks" id="complete_tasks">
+        <%= render partial: "tasks/task", layout: "tasks/completed", collection: user.completed_tasks(@list,@date) %>
+          <!-- <%#= render(partial: "tasks/task", collection: user.completed_tasks(list,@date))  %> -->
+      </div>
+
     </div>
-  </div>
-</div>
 </div>

@@ -2,13 +2,15 @@ class TaskBroadcastJob < ApplicationJob
   queue_as :default
 
   def perform(task)
-    ActionCable.server.broadcast "list_channel", { task: render_task(task),user: task.user_id, task_id: task.id }
-
+    status = (task.completed?) ? 'completed' : 'saved'
+    partial = (task.completed?) ? 'completed' : 'incompleted'
+    ActionCable.server.broadcast "list_channel", { html: render_task(task,partial),user: task.user_id, id: task.id, status: status,list_id: task.list_id, completed: task.completed?, partial: partial }
   end
 
   private
 
-  def render_task(task)
-    TasksController.render(partial: 'tasks/incompleted', locals: {task: task }).squish
+  def render_task(task,partial)
+
+     TasksController.render(partial: "tasks/#{partial}", locals: {task: task}).squish
   end
 end

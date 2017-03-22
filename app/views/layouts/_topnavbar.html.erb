@@ -57,7 +57,7 @@
               <h1 class="logo">Sessions</h1>
               <div class="divider"></div>
               <div class="uppercase avatar-list" id="nav-list">
-                  <%= render "lists/nav_list_name"%>
+                <%= render partial: "lists/nav_list_name", locals: {list: current_list} %>
               </div>
             </div>
             <div class="right">

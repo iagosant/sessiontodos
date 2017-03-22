@@ -1,6 +1,6 @@
 <% cache task do %>
 
-<div id='task_<%= task.id%>' class="menu-option row	<%= (task.created_at.to_date.today?)? 'today' : 'before'  %>">
+<div id='task_<%= task.id%>' class="menu-option row	<%= (task.created_at.to_date.today?)? 'today' : 'before'  %>" data-task-id = "<%= task.id%>">
 	<div class="col s6">
 
 		<!-- <%= yield %> -->

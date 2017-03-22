@@ -4,7 +4,7 @@
 			 <p style="text-decoration: line-through;"><%= "#{task.detail} #{task.completed_at} created_at: #{task.created_at.strftime('%m:%d:%Y')} " %></p>
 		 </li>
 		 <li class="col s2">
-			 <% if permitted_user?(@user,@list) %>
+			 <% if permitted_user?(@user.id) %>
 				 <%= link_to task, method: :delete, data: {confirm: "Are you sure?"}, remote: true do %>
 						<i class="material-icons">cancel</i>
 				 <% end %>
@@ -25,7 +25,7 @@
 
 	</ul>
 		<div class='show_blockers row' id="show_blockers_<%= task.id%>" style="display:none">
-		 <% if permitted_user?(@user,@list) %>
+		 <% if permitted_user?(@user.id) %>
 				<div id= "new_blocker_<%= task.id%>"></div>
 		  <% end%>
 			<div id= "blockers_task<%= task.id%>">

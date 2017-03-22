@@ -1,14 +1,20 @@
 module ListsHelper
-  def owner?
-    current_list.owner == current_user
+  # def owner?(list)
+  #   list.owner == User.current
+  # end
+
+  def has_collaborations?(list)
+    !list.collaboration_users.empty?
   end
 
-  def has_collaborations?
-    !current_list.collaboration_users.empty?
-  end
+  def collaboration_users(list)
+    byebug
+    collaboration = list.collaboration_users.where.not(:id=> User.current.id)
+    if !current_user.owner?(list)
+      collaboration.merge(list.owner)
+    end
+    @collaboration_users = collaboration
 
-  def list_users
-    @list_users = current_list.collaboration_users.where.not(:id=> current_user.id)
   end
 
   def all_task?(id)
